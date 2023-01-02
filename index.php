@@ -34,7 +34,7 @@
                 Vaihe 2:
             </h4>
             <p class="list">
-                - Kasvin kuvan väriin perustuva rajaus
+                - Kasvien kukkien väriin perustuva rajaus
             </p>
 
             <h4 class="subheadline">
@@ -48,7 +48,7 @@
             </p>
             
             <h3 class="description">
-                Tämä sivu ei kuitenkaan etene, ennen kuin allekirjoittanut on käynyt kuvaamassa ja tunnistanut kasan kasveja sivua varten. Nyt kasassa on monen kymmenen kasvin kuvat, mutta tärkeitä yleisiä kasveja puuttuu! Tämä sivun luonnonkasvikirjo on ainakin aluksi painottunut hyvinkin paljon Pohjanmaalta löytyviin lajeihin.
+                Tämä sivu ei kuitenkaan etene ennen kuin allekirjoittanut on käynyt kuvaamassa ja tunnistanut kasan kasveja sivua varten. Nyt kasassa on monen kymmenen kasvin kuvat, mutta tärkeitä yleisiä kasveja puuttuu! Tämän sivun luonnonkasvikirjo on ainakin aluksi painottunut hyvinkin paljon Pohjanmaalta löytyviin lajeihin.
             </h3>
 
         </div>

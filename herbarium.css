@@ -1,13 +1,14 @@
 body {
-	background: url(img/Valkomesikkä.jpg);
+	background: url(img/bg.jpg);
 	background-size: cover;
-	font-family: Times New Roman, Serif;
+	background-attachment: fixed;
+	font-family: Georgia, Times New Roman, Serif;
 }
 
 .page_background {
 	margin: auto;
 	width: 60%;
-	opacity: 0.8;
+	opacity: 0.7;
 	background: rgb(228,228,228);
 	background: linear-gradient(90deg, rgba(228,228,228,1) 0%, rgba(255,255,255,1) 50%, rgba(228,228,228,1) 100%);
 	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
@@ -43,3 +44,22 @@ body {
 	margin-right: 100px;
 }
 
+@media(max-width: 576px) {
+
+    body {
+        margin: 0px;
+    }
+
+    .page_background {
+    	width: 100%;
+    }
+
+    .general {
+    	margin-right: 10px;
+    	margin-left: 10px;
+    }
+
+    .main_headline_box {
+    	margin-right: 10px;
+    	margin-left: 10px;
+    }
