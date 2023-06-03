@@ -1,10 +1,24 @@
 body {
 	background: url(img/bg.jpg);
-	background-size: cover;
+	background-size: 100%;
 	background-attachment: fixed;
 	font-family: Georgia, Times New Roman, Serif;
 }
 
+:root {
+	--general_margin: 100px;
+	--black_colour: #1A1A1A;
+	--dark_text_colour: #262626;
+	--green_colour: #498519;
+}
+
+/*
+
+General page stuff
+
+*/
+
+/* Main content box */
 .page_background {
 	margin: auto;
 	width: 60%;
@@ -15,33 +29,70 @@ body {
 	border-radius: 4px;
 }
 
+/* Headline box */
 .main_headline_box {
 	background: #8ca764;
 	border: 2px solid #7a9254;
 	border-radius: 4px;
 	box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
 	margin: auto;
-	margin-left: 100px;
-	margin-right: 100px;
+	margin-left: 200px;
+	margin-right: 200px;
 }
 
+/* Main headline for the page */
 .main_headline {
 	font-weight: 900;
 	text-align: center;
-	color: #1A1A1A;
+	color: var(--black_colour);
 	padding: 10px;
 }
 
-.subheadline, .description, .list {
-	color: #262626;
+
+/*
+
+Navigator stuff
+
+*/
+
+.navi {
+	margin-left: var(--general_margin);
+	margin-right: var(--general_margin);
+	margin-top: 40px;
 }
 
-.general {
+.navi_table {
+	width: 100%;
+}
+
+.headline_border {
+	border-right: 2px solid rgba(73, 133, 25, 0.3)
+}
+
+.table_headline:hover {
+	color: var(--green_colour);
+	transition: 0.2s ease-out;
+}
+
+/*
+
+Page specific stuff
+
+*/
+
+/* Area under the table/navi */
+.content_area {
 	text-align: left;
 	margin-left: 100px;
 	margin-right: 100px;
 	line-height: 1.5;
 }
+
+/* Text area */
+.subheadline, .description, .list {
+	color: var(--dark_text_colour);
+}
+
 
 @media(max-width: 576px) {
 

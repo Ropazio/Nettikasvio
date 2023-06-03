@@ -15,40 +15,57 @@
                 KASVIO
             </h1>
         </div>
-        <div class="general">
+
+        <div class="navi">
+            <table class="navi_table">
+                <tr>
+                    <th class="table_headline headline_border">
+                        <h3>Kasvilista</h3>
+                    </th>
+                    <th class="table_headline headline_border">
+                        <h3>Lajintunnistus</h3>
+                    </th>
+                    <th class="table_headline">
+                        <h3>Muuta kivaa</h3>
+                    </th>
+                </tr>
+            </table>
+        </div>
+
+        <div class="content_area">
             <h3 class="description">
                 Hei, olet löytänyt tiesi nettikasvioon! Tämä nettikasvio on vielä materiaalinkeräysvaiheessa, mutta saanee tuulta alleen auringon ja lämmön taas löytäessä tiensä pohjolaan! Tämän sivuston tarkoituksena on auttaa luonnon helmassa kulkevaa samoilijaa tunnistamaan yleisimmät kasvilajit, joita löytää Suomen luonnosta. Sivusto tulee sisältämään seuraavat:
             </h3>
 
             <h4 class="subheadline">
-                Vaihe 1:
+                Vaiheet:
             </h4>
             <p class="list">
-                - Kasvien nimet
-            </p>
-            <p class="list">
+                <ul>
+                    - Kasvien nimet
+                </ul>
+                <ul>
                 - Kuvat kasveista (kameralla taltioitu)
-            </p>
-
-            <h4 class="subheadline">
-                Vaihe 2:
-            </h4>
-            <p class="list">
+                </ul>
+                <ul>
                 - Kasvien kukkien väriin perustuva rajaus
-            </p>
-
-            <h4 class="subheadline">
-                Vaihe 3:
-            </h4>
-            <p class="list">
+                </ul>
+                <ul>
+                - Nimihaku, joka perustuu kuvien metadatatietoihin
+                </ul>
+                <ul>
+                - Kasviopas lajintunnistukseen ja muuta tietoa kasveista
+                </ul>
+                <ul>
                 - Käyttäjien luonti + kirjautuminen (vain jos käyttäjä lisää kuvia, kaikilla sivun käyttäjillä lukuoikeudet)
-            </p>
-            <p class="list">
-                - Kuvien ja lajien lisäys käyttäjällä   
+                </ul>
+                <ul>
+                - Kuvien ja lajien lisäys käyttäjällä
+                </ul>
             </p>
             
             <h3 class="description">
-                Tämä sivu ei kuitenkaan etene ennen kuin allekirjoittanut on käynyt kuvaamassa ja tunnistanut kasan kasveja sivua varten. Nyt kasassa on monen kymmenen kasvin kuvat, mutta tärkeitä yleisiä kasveja puuttuu! Tämän sivun luonnonkasvikirjo on ainakin aluksi painottunut hyvinkin paljon Pohjanmaalta löytyviin lajeihin.
+                Tämä sivu ei kuitenkaan juurikaan etene kuvien osalta ennen kuin allekirjoittanut on käynyt kuvaamassa ja tunnistanut kasan kasveja sivua varten. Teen kuitenkin valmiiksi vähän pohjatyötä sivua varten; opiskelen lisää kasveista ja edistän sivun ominaisuuksia. Nyt kasassa on monen kymmenen kasvin kuvat, mutta tärkeitä yleisiä kasveja puuttuu! Tämän sivun luonnonkasvikirjo on ainakin aluksi painottunut hyvinkin paljon Pohjanmaalta löytyviin lajeihin.
             </h3>
 
         </div>
