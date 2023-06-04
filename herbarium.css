@@ -9,7 +9,8 @@ body {
 	--general_margin: 100px;
 	--black_colour: #1A1A1A;
 	--dark_text_colour: #262626;
-	--green_colour: #498519;
+	--green_colour: #4f8d1b;
+	--dark_green_colour: #325a11;
 }
 
 /*
@@ -22,7 +23,7 @@ General page stuff
 .page_background {
 	margin: auto;
 	width: 60%;
-	background-color: rgba(228, 228, 228, 0.8);
+	background-color: rgba(240, 240, 240, 0.8);
 	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -44,10 +45,13 @@ General page stuff
 .main_headline {
 	font-weight: 900;
 	text-align: center;
-	color: var(--black_colour);
 	padding: 10px;
 }
 
+.link_main {
+	text-decoration: none;
+	color: var(--black_colour);
+}
 
 /*
 
@@ -69,7 +73,12 @@ Navigator stuff
 	border-right: 2px solid rgba(73, 133, 25, 0.3)
 }
 
-.table_headline:hover {
+.link {
+	text-decoration: none;
+	color: var(--dark_green_colour);
+}
+
+.link:hover {
 	color: var(--green_colour);
 	transition: 0.2s ease-out;
 }
