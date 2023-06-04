@@ -11,10 +11,6 @@
             get_main_headline_box();
             get_navi();
         ?>
-        <?php
-            require_once "filter_and_search.php";
-            get_filter();
-        ?>
     </div>
 </body>
 </html>
