@@ -130,9 +130,11 @@ Filter and search
 .filter_table_headline {
 	width: 50%;
 	color: #444;
+	text-align: left;
 }
 
 #search {
+	margin-left: 20px;
 	border: none;
 	width: 200px;
 	height: 24px;
@@ -148,7 +150,12 @@ Filter and search
 }
 
 .dropdown {
-
+	margin-left: 50px;
+	border: none;
+	background-color: var(--green_colour);
+	color: #EEE;
+	width: 200px;
+	height: 24px;
 }
 
 .dropdown_content {
@@ -157,6 +164,13 @@ Filter and search
 
 .show_dropdown {
 	display: block;
+}
+
+.colour_option {
+	display: block;
+	text-decoration: none;
+	text-align: left;
+	margin-left: 50px;
 }
 
 
