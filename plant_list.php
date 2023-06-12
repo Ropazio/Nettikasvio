@@ -16,5 +16,6 @@
             get_filter();
         ?>
     </div>
+<script type="text/javascript" src="operation.js"></script>
 </body>
 </html>

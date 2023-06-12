@@ -147,6 +147,18 @@ Filter and search
 
 }
 
+.dropdown {
+
+}
+
+.dropdown_content {
+	display: none;
+}
+
+.show_dropdown {
+	display: block;
+}
+
 
 @media(max-width: 576px) {
 

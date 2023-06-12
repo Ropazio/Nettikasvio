@@ -13,8 +13,14 @@ function get_filter() {
 	echo 			'</th>';
 	echo 			'<th class="filter_table_headline">';
 	echo 				'<h3>';
-	echo 					'<label for="Kukan_väri">Kukan väri:</label>';
-	echo 					'<input type="text" id="search" name="fname">';
+	echo 					'<button class="dropdown" onclick="activate_dropdown()">Kukan väri';
+    echo 						'<i class="fa fa-caret-down"></i>';
+  	echo 					'</button>';
+  	echo 					'<div class="dropdown_content" id="colour_dropdown"';
+    echo 						'<a href="#">Punainen</a>';
+    echo 						'<a href="#">Sininen</a>';
+    echo 						'<a href="#">Keltainen</a>';
+  	echo 					'</div>';
 	echo				'</h3>';
 	echo 			'</th>';
 	echo 		'</tr>';
