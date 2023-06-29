@@ -2,6 +2,7 @@ var colour_dropdown = document.getElementById("colour_dropdown");
 
 function activate_dropdown() {
 	colour_dropdown.classList.toggle("show_dropdown");
+	colour_dropdown.classList.toggle("arrow_down");
 }
 
 window.onclick = function(misclick) {

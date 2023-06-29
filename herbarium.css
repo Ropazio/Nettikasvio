@@ -11,6 +11,7 @@ body {
 	--dark_text_colour: #262626;
 	--green_colour: #4f8d1b;
 	--dark_green_colour: #325a11;
+	--light_gray_colour: #ededea;
 }
 
 /*
@@ -123,7 +124,7 @@ Filter and search
 
 .filter_table {
 	width: 100%;
-	background-color: #ededea;
+	background-color: var(--light_gray_colour);
 	border-radius: 4px;
 }
 
@@ -142,7 +143,7 @@ Filter and search
 
 #search_button {
 	border: none;
-	background-color: #ededea;
+	background-color: var(--light_gray_colour);
 }
 
 #search_button:hover {
@@ -156,10 +157,17 @@ Filter and search
 	color: #EEE;
 	width: 200px;
 	height: 24px;
+	position: relative;
+	z-index: 10;
 }
 
 .dropdown_content {
 	display: none;
+	background-color: #FFF;
+	margin-left: 50px;
+	width: 200px;
+	position: fixed;
+	z-index: 100;
 }
 
 .show_dropdown {
@@ -171,6 +179,23 @@ Filter and search
 	text-decoration: none;
 	text-align: left;
 	margin-left: 50px;
+	padding: 5px;
+}
+
+.arrow_right {
+	position: absolute;
+	transform: scale(1.2);
+	margin-left: 10px;
+	margin-top: 5px;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-left: 5px solid white;
+}
+
+.arrow_down {
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid white;
 }
 
 
