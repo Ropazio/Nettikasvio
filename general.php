@@ -28,7 +28,7 @@ function get_navi() {
 	echo 		'<tr>';
 	echo 			'<th class="table_headline headline_border">';
 	echo 				'<h2>';
-	echo 					'<a class="link" href="http://localhost:8080/Nettikasvio/plant_list.php">Kasvilista</a>';
+	echo 					'<a class="link" href="https://ropaz.dev/Nettikasvio/plant_list.php">Kasvilista</a>';
 	echo 				'</h2>';
 	echo 			'</th>';
 	echo 			'<th class="table_headline headline_border">';
