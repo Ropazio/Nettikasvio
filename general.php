@@ -1,5 +1,9 @@
 <?php
 
+require_once "database.php";
+
+
+
 function get_header() {
 
 	echo '<head>';
@@ -44,6 +48,23 @@ function get_navi() {
 	echo 		'</tr>';
 	echo 	'</table>';
 	echo '</div>';
+}
+
+function print_plants_list() {
+
+	$rows = get_plants();
+
+	if (empty($rows)) {
+		echo "<p>Ei kasveja.</p>";
+	}
+	else {
+		foreach ($rows as $row) {
+			echo "<p>" . $row['id'] . "</p>";
+			echo "<p>" . $row['name'] . "</p>";
+			echo "<p>" . $row['colour'] . "</p>";
+		}
+
+	}
 }
 
 ?>

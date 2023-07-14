@@ -38,8 +38,8 @@ function get_plants() {
 
         $plant = [
             'id'        => $plant['id'],
-            'name'      => $name['name'],
-            'colour'    => $colour['colour'],
+            'name'      => $plant['name'],
+            'colour'    => $plant['colour'],
         ];
     }
 
