@@ -16,7 +16,7 @@ $pdo = new PDO(
     $dbConfig['options']
 );
 
-// Avaa tietokantayhteys
+// Open connection to database
 $pdo->exec('SET NAMES utf8');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 
@@ -28,7 +28,7 @@ function get_plants() {
     global $pdo;
 
     // Fetch plants
-    $query = "SELECT * FROM plants;
+    $query = "SELECT * FROM plants";
     $sth = $pdo->prepare($query);
     $sth->execute();
 
@@ -45,12 +45,10 @@ function get_plants() {
 
     return $plants;
 }
-}
+
 
 function filter_by_colour() {
 	// code...
 }
-
-
 
 ?>
