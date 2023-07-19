@@ -61,7 +61,6 @@ function print_plants_list() {
 		foreach ($rows as $row) {
 			echo "<p>" . $row['id'] . "</p>";
 			echo "<p>" . $row['name'] . "</p>";
-			echo "<p>" . $row['colour'] . "</p>";
 		}
 
 	}
