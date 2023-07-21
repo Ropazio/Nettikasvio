@@ -72,7 +72,7 @@ function apply_filters_and_get_plants_list($colour_id, $type_id) {
 		array_push($filter_selections, "plants.colour_id = $colour_id");
 	}
 	
-	$query_construction = "$query_plants_name_and_type WHERE ${implode("AND", $filter_selections)}";
+	$query_construction = "{$query_plants_name_and_type} WHERE ${implode("AND", $filter_selections)}";
 	
 	
 	$query = 	"SELECT
@@ -124,6 +124,26 @@ function count_list_length($filter_name) {
 				FROM plants_type";
 		}
 	}
+}
+
+function get_colour_names_from_database() {
+	$query = "SELECT plants_colour.colour_name FROM plants_colour";
+	$sth = $pdo->prepare($query);
+    $sth->execute();
+
+    $colours = $sth->fetchAll();
+
+    return $colours;
+}
+
+function get_type_names_from_database() {
+	$query = "SELECT plants_type.type FROM plants_type";
+	$sth = $pdo->prepare($query);
+    $sth->execute();
+
+    $types = $sth->fetchAll();
+
+    return $types;
 }
 
 ?>

@@ -18,9 +18,10 @@ function get_filter() {
     echo                '<div>';
     echo                    '<div class="dropdown_content" id="colour_dropdown"</a>';
                                 $colour_and_type_lengths = get_filter_lists_lengths();
+
                                 // get colour filter list length and enumerate colours
-                                for ($i, $colour_and_type_lengths[0],$i++) {
-    echo                                '<a class="colour_option" style="color:red" href="#">'                                  . get_colour_name($i) . '</a>';
+                                for ($i = 0; $colour_and_type_lengths[0]; $i++) {
+    echo                                '<a class="colour_option" href="#">'                                  . get_colour_name($i) . '</a>';
                                 }
     echo                    '</div>';
     echo                '</div>';

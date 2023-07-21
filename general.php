@@ -79,4 +79,24 @@ function get_filter_lists_lengths() {
 	return $colour_and_type_list_lengths;
 }
 
+function get_colour_name($index) {
+	$colours = get_colour_names_from_database();
+
+	if (empty($colours)) {
+		return "Virhe filtterissä :(";
+	}
+
+	return $colours[$index];
+}
+
+function get_type_name($index) {
+	$types = get_type_names_from_database();
+
+	if (empty($types)) {
+		return "Virhe filtterissä :(";
+	}
+
+	return $types[$index];
+}
+
 ?>
