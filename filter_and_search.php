@@ -1,4 +1,6 @@
 <?php
+require_once "general.php";
+
 
 function get_filter() {
 
@@ -15,9 +17,11 @@ function get_filter() {
     echo                '</button>';
     echo                '<div>';
     echo                    '<div class="dropdown_content" id="colour_dropdown"</a>';
-    echo                        '<a class="colour_option" style="color:red" href="#">Punainen</a>';
-    echo                        '<a class="colour_option" style="color:blue" href="#">Sininen</a>';
-    echo                        '<a class="colour_option" style="color:yellow" href="#">Keltainen</a>';
+                                $colour_and_type_lengths = get_filter_lists_lengths();
+                                // get colour filter list length and enumerate colours
+                                for ($i, $colour_and_type_lengths[0],$i++) {
+    echo                                '<a class="colour_option" style="color:red" href="#">'                                  . get_colour_name($i) . '</a>';
+                                }
     echo                    '</div>';
     echo                '</div>';
     echo            '</th>';

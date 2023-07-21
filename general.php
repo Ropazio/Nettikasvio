@@ -59,11 +59,24 @@ function print_plants_list() {
 	}
 	else {
 		foreach ($rows as $row) {
-			echo "<p>" . $row['id'] . "</p>";
-			echo "<p>" . $row['name'] . "</p>";
+			echo "<p>" . $row . "</p>";
+			//echo "<p>" . $row['id'] . "</p>";
+			//echo "<p>" . $row['name'] . "</p>";
 		}
 
 	}
+}
+
+function get_filter_lists_lengths() {
+
+	$colour_and_type_list_lengths = [];
+
+	$query_colour_length = count_filter_list_length(0);
+	$query_type_length = count_filter_list_length(1);
+
+	array_push($colour_and_type_list_lengths, $query_colour_length, $query_type_length);
+
+	return $colour_and_type_list_lengths;
 }
 
 ?>
