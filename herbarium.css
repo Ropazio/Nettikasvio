@@ -130,13 +130,13 @@ Filter and search
 }
 
 .filter_table_search {
-	width: 55%;
+	width: 40%;
 	color: #444;
 	text-align: left;
 }
 
 .filter_table_dropdown {
-	width: 40%;
+	width: 25%;
 }
 
 .filter_table_dropdown > div {
@@ -144,7 +144,7 @@ Filter and search
 }
 
 .filter_table_button {
-	width: 15%;
+	width: 10%;
 }
 
 #search {
@@ -188,7 +188,7 @@ Filter and search
 	display: block;
 }
 
-.colour_option {
+.filter_option {
 	display: block;
 	text-decoration: none;
 	text-align: left;

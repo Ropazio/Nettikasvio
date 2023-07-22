@@ -23,8 +23,8 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 ///////////////////////////////////////////////////////////////////////////////
 
 
-function get_plants() {
-
+//function get_plants() {
+//
 //    global $pdo;
 //
 //    // Fetch plants
@@ -72,7 +72,7 @@ function apply_filters_and_get_plants_list($colour_id, $type_id) {
 		array_push($filter_selections, "plants.colour_id = $colour_id");
 	}
 	
-	$query_construction = "{$query_plants_name_and_type} WHERE ${implode("AND", $filter_selections)}";
+	$query_construction = "{$query_plants_name_and_type} WHERE {${implode("AND", $filter_selections)}}";
 	
 	
 	$query = 	"SELECT
@@ -113,20 +113,30 @@ function apply_filters_and_get_plants_list($colour_id, $type_id) {
 	//	$query_colour_and_type_intersect = $query_plant_colour . "INTERSECT" . $query_plant_type;
 	}
 
-function count_list_length($filter_name) {
+function count_filter_list_length($filter_name) {
+
+	global $pdo;
 	
 	if ($filter_name == 0) {
-		return "SELECT COUNT(*)
-		 		FROM plants_colour";
+		$query = "SELECT COUNT(*) AS colour_count
+		 		  FROM plants_colour";
 		}
 	if ($filter_name == 1) {
-		return "SELECT COUNT(*)
-				FROM plants_type";
+		$query = "SELECT COUNT(*) AS type_count
+				  FROM plants_type";
 		}
-	}
+	
+	$sth = $pdo->prepare($query);
+    $sth->execute();
+    $count = $sth->fetchColumn();
+
+	return $count;
 }
 
 function get_colour_names_from_database() {
+
+	global $pdo;
+
 	$query = "SELECT plants_colour.colour_name FROM plants_colour";
 	$sth = $pdo->prepare($query);
     $sth->execute();
@@ -137,6 +147,9 @@ function get_colour_names_from_database() {
 }
 
 function get_type_names_from_database() {
+
+	global $pdo;
+
 	$query = "SELECT plants_type.type FROM plants_type";
 	$sth = $pdo->prepare($query);
     $sth->execute();

@@ -3,7 +3,6 @@
 require_once "database.php";
 
 
-
 function get_header() {
 
 	echo '<head>';

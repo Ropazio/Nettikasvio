@@ -14,7 +14,8 @@
         <?php
             require_once "filter_and_search.php";
             get_filter();
-            print_plants_list();
+            //apply_filters_and_get_plants_list();
+            //print_plants_list();
         ?>
     </div>
 <script type="text/javascript" src="operation.js"></script>
