@@ -18,9 +18,10 @@ function get_filter() {
     echo                '</button>';
     echo                '<div>';
     echo                    '<div class="filter_dropdown dropdown_content"</a>';
-    echo                           '<a class="filter_option" href="#">kaka</a>';
+    echo                        '<a class="filter_option" href="#">kaka</a>';
                                 // get colour filter list length and enumerate colours
-                                for ($i = 0; $colour_and_type_lengths[0]; $i++) {
+                                for ($i = 0; $i < $colour_and_type_lengths[0]; $i++) {
+                                    echo "string";
     echo                                '<a class="filter_option" href="#">'                                  . get_colour_name($i) . '</a>';
                                 }
     echo                    '</div>';
@@ -34,7 +35,8 @@ function get_filter() {
     echo                    '<div class="filter_dropdown dropdown_content"</a>';
 
                                 // get type filter list length and enumerate colours
-                                for ($i = 0; $colour_and_type_lengths[1]; $i++) {
+                                for ($i = 0; $i < $colour_and_type_lengths[1]; $i++) {
+                                    echo "string";
     echo                                '<a class="filter_option" href="#">'                                  . get_type_name($i) . '</a>';
                                 }
     echo                    '</div>';

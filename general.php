@@ -79,6 +79,7 @@ function get_filter_lists_lengths() {
 }
 
 function get_colour_name($index) {
+	echo "string";
 	$colours = get_colour_names_from_database();
 
 	if (empty($colours)) {
