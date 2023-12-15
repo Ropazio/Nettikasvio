@@ -9,28 +9,30 @@ function get_filter() {
     echo    '<table class="filter_table">';
     echo        '<tr>';
     echo            '<form action="search.php">';
-    echo            '<th class="filter_table_search filter_headline_border">';
-    echo                '<input type="text" id="search">';
-    echo            '</th>';
-    echo            '<th class=filter_dropdown_frame>';
-    echo                '<select name="colours" class="filter_button">';
+    echo                '<th class="filter_table_search filter_headline_border">';
+    echo                    '<input type="text" id="search">';
+    echo                '</th>';
+    echo                '<th class=filter_dropdown_frame>';
+    echo                    '<select name="colours" class="filter_button">';
                                 // get colour filter list length and enumerate colours
                                 for ($i = 0; $i < $colour_and_type_lengths[0]; $i++) {
-    echo                            '<option value="<?=get_colour_name($i); ?>">' . get_colour_name($i) . '</option>';
+                                    $colour = get_colour_name($i);
+    echo                            '<option value="<? $colour; ?>">' . $colour . '</option>';
                                 }
-    echo                '</select>';
-    echo            '</th>';
-    echo            '<th class=filter_dropdown_frame>';
-    echo                '<select name="types" class="filter_button">';
+    echo                    '</select>';
+    echo                '</th>';
+    echo                '<th class=filter_dropdown_frame>';
+    echo                    '<select name="types" class="filter_button">';
                                 // get type filter list length and enumerate colours
                                 for ($i = 0; $i < $colour_and_type_lengths[1]; $i++) {
-    echo                            '<option value="<?=get_type_name($i); ?>">' . get_type_name($i) . '</option>';
+                                    $type = get_type_name($i);
+    echo                            '<option value="<? $type; ?>">' . $type . '</option>';
                                 }
-    echo                '</select>';
-    echo            '</th>';
-    echo            '<th class="filter_button_frame">';
-    echo                '<input type="submit" id="search_button" value="Hae kasveja">';
-    echo            '</th>';
+    echo                    '</select>';
+    echo                '</th>';
+    echo                '<th class="filter_button_frame">';
+    echo                    '<input type="submit" id="search_button" value="Hae kasveja">';
+    echo                '</th>';
     echo            '</form>';
     echo        '</tr>';
     echo    '</table>';
