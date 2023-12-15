@@ -71,7 +71,7 @@ function apply_filters_and_get_plants_list($colour_id, $type_id) {
 	if (!empty($filter['colour'])) {
 		array_push($filter_selections, "plants.colour_id = $colour_id");
 	}
-	
+
 	$query_construction = "{$query_plants_name_and_type} WHERE {${implode("AND", $filter_selections)}}";
 	
 	

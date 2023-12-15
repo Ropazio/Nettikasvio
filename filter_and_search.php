@@ -12,42 +12,29 @@ function get_filter() {
     echo            '<th class="filter_table_search filter_headline_border">';
     echo                '<input type="text" id="search">';
     echo            '</th>';
-    echo            '<th class=filter_table_dropdown>';
-    echo                '<button type="button" class="dropdown" onclick="activate_dropdown(0)">Väri:';
-    echo                    '<i class="arrow_right"></i>';
-    echo                '</button>';
-    echo                '<div>';
-    echo                    '<div class="filter_dropdown dropdown_content"</a>';
-    echo                        '<a class="filter_option" href="#">kaka</a>';
+    echo            '<th class=filter_dropdown_frame>';
+    echo                '<select name="colours" class="filter_button">';
                                 // get colour filter list length and enumerate colours
                                 for ($i = 0; $i < $colour_and_type_lengths[0]; $i++) {
-                                    echo "string";
-    echo                                '<a class="filter_option" href="#">'                                  . get_colour_name($i) . '</a>';
+    echo                            '<option value="<?=get_colour_name($i); ?>">' . get_colour_name($i) . '</option>';
                                 }
-    echo                    '</div>';
-    echo                '</div>';
+    echo                '</select>';
     echo            '</th>';
-    echo            '<th class=filter_table_dropdown>';
-    echo                '<button type="button" class="dropdown" onclick="activate_dropdown(1)">Tyyppi:';
-    echo                    '<i class="arrow_right"></i>';
-    echo                '</button>';
-    echo                '<div>';
-    echo                    '<div class="filter_dropdown dropdown_content"</a>';
-
+    echo            '<th class=filter_dropdown_frame>';
+    echo                '<select name="types" class="filter_button">';
                                 // get type filter list length and enumerate colours
                                 for ($i = 0; $i < $colour_and_type_lengths[1]; $i++) {
-                                    echo "string";
-    echo                                '<a class="filter_option" href="#">'                                  . get_type_name($i) . '</a>';
+    echo                            '<option value="<?=get_type_name($i); ?>">' . get_type_name($i) . '</option>';
                                 }
-    echo                    '</div>';
-    echo                '</div>';
+    echo                '</select>';
     echo            '</th>';
-    echo            '<th class="filter_table_button">';
-    echo                '<input type="submit" id="search_button">';
+    echo            '<th class="filter_button_frame">';
+    echo                '<input type="submit" id="search_button" value="Hae kasveja">';
     echo            '</th>';
     echo            '</form>';
     echo        '</tr>';
     echo    '</table>';
     echo '</div>';
 }
+
 ?>

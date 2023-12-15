@@ -19,7 +19,7 @@ function get_main_headline_box() {
 
 	echo '<div class="main_headline_box">';
 	echo 	'<h1 class="main_headline">';
-	echo 		'<a class="link_main" href="https://ropaz.dev/Nettikasvio/index.php">KASVIO</a>';
+	echo 		'<a class="link_main" href="/Nettikasvio/index.php">KASVIO</a>';
 	echo 	'</h1>';
 	echo '</div>';
 }
@@ -31,17 +31,17 @@ function get_navi() {
 	echo 		'<tr>';
 	echo 			'<th class="table_headline headline_border">';
 	echo 				'<h2>';
-	echo 					'<a class="link" href="https://ropaz.dev/Nettikasvio/plant_list.php">Kasvilista</a>';
+	echo 					'<a class="link" href="/Nettikasvio/plant_list.php">Kasvilista</a>';
 	echo 				'</h2>';
 	echo 			'</th>';
 	echo 			'<th class="table_headline headline_border">';
 	echo 				'<h2>';
-	echo 					'<a class="link" href="https://ropaz.dev/Nettikasvio/identification.php">Lajintunnistus</a>';
+	echo 					'<a class="link" href="/Nettikasvio/identification.php">Lajintunnistus</a>';
 	echo 				'</h2>';
 	echo 			'</th>';
 	echo 			'<th class="table_headline">';
 	echo 				'<h2>';
-	echo 					'<a class="link" href="https://ropaz.dev/Nettikasvio/others.php">Muuta kivaa</a>';
+	echo 					'<a class="link" href="/Nettikasvio/others.php">Muuta kivaa</a>';
 	echo 				'</h2>';
 	echo 			'</th>';
 	echo 		'</tr>';
@@ -79,14 +79,13 @@ function get_filter_lists_lengths() {
 }
 
 function get_colour_name($index) {
-	echo "string";
 	$colours = get_colour_names_from_database();
 
 	if (empty($colours)) {
 		return "Virhe filtterissä :(";
 	}
 
-	return $colours[$index];
+	return $colours[$index]['colour_name'];
 }
 
 function get_type_name($index) {
@@ -96,7 +95,7 @@ function get_type_name($index) {
 		return "Virhe filtterissä :(";
 	}
 
-	return $types[$index];
+	return $types[$index]['type'];
 }
 
 ?>

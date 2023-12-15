@@ -9,9 +9,11 @@ body {
 	--general_margin: 100px;
 	--black_colour: #1A1A1A;
 	--dark_text_colour: #262626;
+	--light_green_colour: #8ca764;
 	--green_colour: #4f8d1b;
 	--dark_green_colour: #325a11;
-	--light_gray_colour: #ededea;
+	--natural_white_colour: #ededea;
+	--light_gray_colour: #e1e1dc;
 }
 
 /*
@@ -33,7 +35,7 @@ General page stuff
 
 /* Headline box */
 .main_headline_box {
-	background: #8ca764;
+	background: var(--light_green_colour);
 	border: 2px solid #7a9254;
 	border-radius: 4px;
 	box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
@@ -124,7 +126,7 @@ Filter and search
 
 .filter_table {
 	width: 100%;
-	background-color: var(--light_gray_colour);
+	background-color: var(--natural_white_colour);
 	border-radius: 4px;
 	padding: 6px 20px 6px 20px;
 }
@@ -135,16 +137,23 @@ Filter and search
 	text-align: left;
 }
 
-.filter_table_dropdown {
+.filter_dropdown_frame {
 	width: 25%;
 }
 
-.filter_table_dropdown > div {
+.filter_dropdown_frame > div {
 	position: relative;
 }
 
-.filter_table_button {
+.filter_button_frame {
 	width: 10%;
+}
+
+.filter_button {
+	padding: 4px;
+	border-color: var(--light_gray_colour);
+	border-radius: 1px;
+	width: 100%;
 }
 
 #search {
@@ -154,61 +163,12 @@ Filter and search
 	height: 24px;
 }
 
-#search_button {
+#search_button{
 	border: none;
-	background-color: white;
+	border-radius: 1px;
+	background-color: var(--light_green_colour);
 	width: 100%;
 	height: 24px;
-}
-
-#search_button:hover {
-
-}
-
-.dropdown {
-	border: none;
-	background-color: var(--green_colour);
-	color: #EEE;
-	width: 100%;
-	height: 24px;
-	position: relative;
-	z-index: 10;
-}
-
-.dropdown_content {
-	display: none;
-	background-color: #FFF;
-	width: 100%;
-	min-width: 160px;
-	position: absolute;
-	z-index: 100;
-}
-
-.show_dropdown {
-	display: block;
-}
-
-.filter_option {
-	display: block;
-	text-decoration: none;
-	text-align: left;
-	margin-left: 50px;
-	padding: 5px;
-}
-
-.arrow_right {
-	position: absolute;
-	transform: scale(1.2);
-	margin-left: 10px;
-	margin-top: 3px;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-left: 5px solid white;
-	transition: ease-in-out 0.1s all;
-}
-
-.turn_arrow {
-	transform: rotate(90deg);
 }
 
 
