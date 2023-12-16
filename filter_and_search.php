@@ -8,25 +8,25 @@ function get_filter() {
     echo '<div class="filter">';
     echo    '<table class="filter_table">';
     echo        '<tr>';
-    echo            '<form action="search.php">';
+    echo            '<form method="POST" action="search.php">';
     echo                '<th class="filter_table_search filter_headline_border">';
     echo                    '<input type="text" id="search">';
     echo                '</th>';
     echo                '<th class=filter_dropdown_frame>';
-    echo                    '<select name="colours" class="filter_button">';
+    echo                    '<select name="colour" class="filter_button">';
                                 // get colour filter list length and enumerate colours
                                 for ($i = 0; $i < $colour_and_type_lengths[0]; $i++) {
                                     $colour = get_colour_name($i);
-    echo                            '<option value="<? $colour; ?>">' . $colour . '</option>';
+    echo                            "<option value=\"{$colour}\">" . $colour . '</option>';
                                 }
     echo                    '</select>';
     echo                '</th>';
     echo                '<th class=filter_dropdown_frame>';
-    echo                    '<select name="types" class="filter_button">';
+    echo                    '<select name="type" class="filter_button">';
                                 // get type filter list length and enumerate colours
                                 for ($i = 0; $i < $colour_and_type_lengths[1]; $i++) {
                                     $type = get_type_name($i);
-    echo                            '<option value="<? $type; ?>">' . $type . '</option>';
+    echo                            "<option value=\"{$type}\">" . $type . '</option>';
                                 }
     echo                    '</select>';
     echo                '</th>';
