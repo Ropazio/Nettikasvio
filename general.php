@@ -51,16 +51,14 @@ function get_navi() {
 
 function print_plants_list() {
 
-	$rows = get_plants();
+	$rows = apply_filters_and_get_plants(null, null);
 
 	if (empty($rows)) {
 		echo "<p>Ei kasveja.</p>";
 	}
 	else {
 		foreach ($rows as $row) {
-			echo "<p>" . $row . "</p>";
-			//echo "<p>" . $row['id'] . "</p>";
-			//echo "<p>" . $row['name'] . "</p>";
+			echo "<p>" . $row['name'] . " - " . $row['type_name'] . "</p>";
 		}
 
 	}
@@ -95,7 +93,7 @@ function get_type_name($index) {
 		return "Virhe filtterissä :(";
 	}
 
-	return $types[$index]['type'];
+	return $types[$index]['type_name'];
 }
 
 ?>

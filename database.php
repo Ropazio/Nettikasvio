@@ -21,38 +21,16 @@ $pdo->exec('SET NAMES utf8');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 
 ///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 
-//function get_plants() {
-//
-//    global $pdo;
-//
-//    // Fetch plants
-//    $query = "SELECT id, name FROM plants";
-//    $sth = $pdo->prepare($query);
-//    $sth->execute();
-//
-//    $plants = $sth->fetchAll();
-//
-//    foreach ($plants as &$plant) {
-//
-//        $plant = [
-//            'id'        => $plant['id'],
-//            'name'      => $plant['name'],
-//            'colour_id' => $plant['colour_id'],
-//            'type_id'	=> $plant['type_id']
-//        ];
-//    }
-//
-//    return $plants;
-//}
-
-
-function apply_filters_and_get_plants_list($colour_id, $type_id) {
+function apply_filters_and_get_plants($colour_id, $type_id) {
 
 	global $pdo;
 
-	$query_plants_name_and_type = "SELECT plants.name, plants_type.type 
+	// Fetch plant name and type by joining plants_type - id with plants - type id.
+	$query_plants_name_and_type = "SELECT plants.name, plants_type.type_name 
 		    				      FROM plants 
 								  LEFT JOIN plants_type ON plants_type.id = plants.type_id";
 	
@@ -68,50 +46,28 @@ function apply_filters_and_get_plants_list($colour_id, $type_id) {
 		array_push($filter_selections, "plants.type_id = $type_id");
 	}
 	
-	if (!empty($filter['colour'])) {
+	//if (!empty($filter['colour'])) {
+	if (!empty($colour_id)) {
 		array_push($filter_selections, "plants.colour_id = $colour_id");
 	}
 
-	$query_construction = "{$query_plants_name_and_type} WHERE {${implode("AND", $filter_selections)}}";
+	// count == 0: 	$where_clause = "";
+	// count == 1: 	$where_clause = " WHERE plants.type_id = 2";
+	// count  > 1:	$where_clause = " WHERE plants.type_id = 2 AND plants.colour_id = 3";
+
+	$where_clause = count($filter_selections) > 0 ? " WHERE " . implode(" AND ", $filter_selections) : "";
+
+	$query_construction = "{$query_plants_name_and_type}{$where_clause}";
 	
-	
-	$query = 	"SELECT
-					plants.name AS plant_name,
-					plants_type.type AS plant_type,
-					plants_colours.colour_name AS plant_colour
-				FROM plants 
-				LEFT JOIN plants_type ON plants_type.id = plants.type_id
-				WHERE plants.type_id = $type_id AND plants.colour_id = $colour_id";
-	
-	$sth = $pdo->prepare($query);
+	$sth = $pdo->prepare($query_construction);
     $sth->execute();
 
     $plants = $sth->fetchAll();
 
+    // Plants is an array with plant name and plant type.
     return $plants;
-	
-	//	if ($colour_id = NULL) {
-	//		$query_plant_colour = "SELECT * FROM plants";
-	//	}
-	//	else {
-	//		$query_plant_colour =  "SELECT plants.name, plants_colour.colour_name
-	//								FROM plants 
-	//								LEFT JOIN plants_colour ON plants_colour.id = plants.colour_id
-	//								WHERE plants.colour_id = $colour_id";
-	//	}
-	//
-	//	if ($type_id = NULL) {
-	//		$query_plant_type = "SELECT * FROM plants";
-	//	}
-	//	else {
-	//		$query_plant_type =    "SELECT plants.name, plants_type.type 
-	//								FROM plants 
-	//								LEFT JOIN plants_type ON plants_type.id = plants.type_id 
-	//								WHERE plants.type_id = $type_id";
-	//	}
-	//
-	//	$query_colour_and_type_intersect = $query_plant_colour . "INTERSECT" . $query_plant_type;
-	}
+}
+
 
 function count_filter_list_length($filter_name) {
 
@@ -133,6 +89,7 @@ function count_filter_list_length($filter_name) {
 	return $count;
 }
 
+
 function get_colour_names_from_database() {
 
 	global $pdo;
@@ -146,11 +103,12 @@ function get_colour_names_from_database() {
     return $colours;
 }
 
+
 function get_type_names_from_database() {
 
 	global $pdo;
 
-	$query = "SELECT plants_type.type FROM plants_type";
+	$query = "SELECT plants_type.type_name FROM plants_type";
 	$sth = $pdo->prepare($query);
     $sth->execute();
 
