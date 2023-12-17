@@ -49,9 +49,9 @@ function get_navi() {
 	echo '</div>';
 }
 
-function print_plants_list() {
+function print_plants_list($search_string, $colour_id, $type_id) {
 
-	$rows = apply_filters_and_get_plants(null, null);
+	$rows = apply_filters_and_get_plants($search_string, $colour_id, $type_id);
 
 	if (empty($rows)) {
 		echo "<p>Ei kasveja.</p>";

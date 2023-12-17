@@ -10,14 +10,15 @@ function get_filter() {
     echo        '<tr>';
     echo            '<form method="POST" action="search.php">';
     echo                '<th class="filter_table_search filter_headline_border">';
-    echo                    '<input type="text" id="search">';
+    echo                    "<input type=\"text\" id=\"search\" name=\"search_string\" value=\"{$_SESSION['search_string']}\">";
     echo                '</th>';
     echo                '<th class=filter_dropdown_frame>';
     echo                    '<select name="colour" class="filter_button">';
                                 // get colour filter list length and enumerate colours
                                 for ($i = 0; $i < $colour_and_type_lengths[0]; $i++) {
                                     $colour = get_colour_name($i);
-    echo                            "<option value=\"{$colour}\">" . $colour . '</option>';
+                                    $selected_colour = $colour == $_SESSION['colour'] ? ' selected' : '';
+    echo                            "<option value=\"{$colour}\"{$selected_colour}>" . $colour . '</option>';
                                 }
     echo                    '</select>';
     echo                '</th>';
@@ -26,7 +27,8 @@ function get_filter() {
                                 // get type filter list length and enumerate colours
                                 for ($i = 0; $i < $colour_and_type_lengths[1]; $i++) {
                                     $type = get_type_name($i);
-    echo                            "<option value=\"{$type}\">" . $type . '</option>';
+                                    $selected_type = $type == $_SESSION['type'] ? ' selected' : '';
+    echo                            "<option value=\"{$type}\"{$selected_type}>" . $type . '</option>';
                                 }
     echo                    '</select>';
     echo                '</th>';
