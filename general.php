@@ -27,7 +27,7 @@ function get_main_headline_box() {
 function get_navi() {
 
     echo '<div id="navi">';
-    echo    '<div id="navi_grid">';
+    echo    '<div id="grid_navi">';
     echo        '<div class="navi_column_1 headline_border">';
     echo            '<h2>';
     echo                '<a class="link" href="/Nettikasvio/plant_list.php">Kasvilista</a>';

@@ -26,8 +26,18 @@ function get_filter() {
 }
 
 function get_plant_list($plant) {
-    echo '<div class="plant_list">';
-    echo    '<p>' . $plant['name'] . ' - ' . $plant['info'] . $plant['image'] . '</p>';
+    echo '<div id="plant_list">';
+    echo    '<div id="grid_plant_list">';
+    echo        '<div class="plant_list_column_1 headline_border">';
+    echo            '<p>' . $plant['name'] . '</p>';
+    echo        '</div>';
+    echo        '<div class="plant_list_column_2 headline_border">';
+    echo            '<p>' . $plant['info'] . '</p>';
+    echo        '</div>';
+    echo        '<div class="plant_list_column_3">';
+    echo            '<p>' . $plant['image'] . '</p>';
+    echo        '</div>';
+    echo    '</div>';
     echo '</div>';
 }
 

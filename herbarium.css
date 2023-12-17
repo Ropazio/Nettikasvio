@@ -68,7 +68,7 @@ Navigator stuff
 	margin-top: 40px;
 }
 
-#navi_grid {
+#grid_navi {
 	display: grid;
 	grid-template-columns: 33% 33% 33%;
     justify-content: center;
@@ -142,15 +142,16 @@ Filter and search
 	margin-left: var(--general_margin);
 	margin-right: var(--general_margin);
 	margin-top: 20px;
+	margin-bottom: 20px;
 	border: 2px solid rgba(73, 133, 25, 0.3);
 	border-radius: 4px;
+	background-color: var(--natural_white_colour);
 }
 
 #grid_filter {
 	display: grid;
 	grid-template-columns: 40% 25% 25% 15%;
     justify-content: center;
-	background-color: var(--natural_white_colour);
 	border-radius: 4px;
 	padding: 6px 20px 6px 20px;
 }
@@ -200,6 +201,39 @@ Filter and search
 	height: 26px;
 }
 
+/* search results */
+
+#plant_list {
+	margin-left: var(--general_margin);
+	margin-right: var(--general_margin);
+	border: 2px solid rgba(73, 133, 25, 0.3);
+	border-radius: 4px;
+	background-color: #FFF;
+}
+
+#grid_plant_list {
+	display: grid;
+	grid-template-columns: 33% 33% 33%;
+    justify-content: center;
+}
+
+.plant_list_column_1, .plant_list_column_2, .plant_list_column_3 {
+	display: inherit;
+	margin-left: 20px;
+	justify-content: left;
+}
+
+.plant_list_column_1 {
+	grid-column: 1;
+}
+
+.plant_list_column_2 {
+	grid-column: 2;
+}
+
+.plant_list_column_3 {
+	grid-column: 3;
+}
 
 /*
 
