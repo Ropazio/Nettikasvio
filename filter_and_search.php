@@ -6,24 +6,22 @@ $colour_and_type_lengths = get_filter_lists_lengths();
 function get_filter() {
 
     echo '<div class="filter">';
-    echo    '<table class="filter_table">';
-    echo        '<tr>';
-    echo            '<form method="POST" action="search.php">';
-    echo                '<th class="filter_table_search filter_headline_border">';
-                            add_text_search();
-    echo                '</th>';
-    echo                '<th class=filter_dropdown_frame>';
-                            add_colour_filter();
-    echo                '</th>';
-    echo                '<th class=filter_dropdown_frame>';
-                            add_type_filter();
-    echo                '</th>';
-    echo                '<th class="filter_button_frame">';
-    echo                    '<input type="submit" id="search_button" value="Hae kasveja">';
-    echo                '</th>';
-    echo            '</form>';
-    echo        '</tr>';
-    echo    '</table>';
+    echo    '<div>';
+    echo        '<form method="POST" action="search.php" class="grid_filter">';
+    echo            '<div class="filter_column_1">';
+                        add_text_search();
+    echo            '</div>';
+    echo            '<div class="filter_column_2">';
+                        add_colour_filter();
+    echo            '</div>';
+    echo            '<div class="filter_column_3">';
+                        add_type_filter();
+    echo            '</div>';
+    echo            '<div class="filter_column_4">';
+    echo                '<input type="submit" id="search_button" value="Hae kasveja">';
+    echo            '</div>';
+    echo        '</form>';
+    echo    '</div>';
     echo '</div>';
 }
 
@@ -37,7 +35,7 @@ function add_colour_filter() {
 
     global $colour_and_type_lengths;
 
-    echo                    '<select name="colour" class="filter_button">';
+    echo                    '<select name="colour" class="filter_dropdown">';
                                 // get colour filter list length and enumerate colours
                                 $colour = null;
                                 $selected_colour = $colour == $_SESSION['colour'] ? ' selected' : '';
@@ -55,7 +53,7 @@ function add_type_filter() {
 
     global $colour_and_type_lengths;
 
-    echo                    '<select name="type" class="filter_button">';
+    echo                    '<select name="type" class="filter_dropdown">';
                                 // get type filter list length and enumerate colours
                                 $type = null;
                                 $selected_type = $type == $_SESSION['type'] ? ' selected' : '';
@@ -70,7 +68,7 @@ function add_type_filter() {
 
 
 function add_text_search() {
-    echo                    "<input type=\"text\" id=\"search\" name=\"search_string\" value=\"{$_SESSION['search_string']}\">";
+    echo                    "<input type=\"text\" id=\"text_search\" name=\"search_string\" value=\"{$_SESSION['search_string']}\">";
 }
 
 ?>

@@ -49,12 +49,6 @@ function get_navi() {
     echo '</div>';
 }
 
-function get_plant_list($plant) {
-    echo '<div class="plant_list">';
-    echo    '<p>' . $plant['name'] . ' - ' . $plant['info'] . $plant['image'] . '</p>';
-    echo '</div>';
-}
-
 function print_plants_list($search_string, $colour_id, $type_id) {
 
     $rows = apply_filters_and_get_plants($search_string, $colour_id, $type_id);
