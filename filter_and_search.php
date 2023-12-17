@@ -27,6 +27,11 @@ function get_filter() {
     echo '</div>';
 }
 
+function get_plant_list($plant) {
+    echo '<div class="plant_list">';
+    echo    '<p>' . $plant['name'] . ' - ' . $plant['info'] . $plant['image'] . '</p>';
+    echo '</div>';
+}
 
 function add_colour_filter() {
 

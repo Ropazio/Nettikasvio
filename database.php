@@ -30,7 +30,7 @@ function apply_filters_and_get_plants($search_string, $colour_id, $type_id) {
     global $pdo;
 
     // Fetch plant name and type by joining plants_type - id with plants - type id.
-    $query_plants_name_and_type = "SELECT plants.name, plants_type.type_name
+    $query_plants_name_and_type = "SELECT plants.name AS name, plants.info AS info, plants.image AS image
                                    FROM plants
                                    LEFT JOIN plants_type ON plants_type.id = plants.type_id
                                    LEFT JOIN plants_colour ON plants_colour.id = plants.colour_id";
