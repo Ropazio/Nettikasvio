@@ -31,9 +31,9 @@ function apply_filters_and_get_plants($search_string, $colour_id, $type_id) {
 
     // Fetch plant name and type by joining plants_type - id with plants - type id.
     $query_plants_name_and_type = "SELECT plants.name, plants_type.type_name
-                                  FROM plants
-                                  LEFT JOIN plants_type ON plants_type.id = plants.type_id
-                                  LEFT JOIN plants_colour ON plants_colour.id = plants.colour_id";
+                                   FROM plants
+                                   LEFT JOIN plants_type ON plants_type.id = plants.type_id
+                                   LEFT JOIN plants_colour ON plants_colour.id = plants.colour_id";
 
     $filter_selections = [];
 
@@ -52,17 +52,17 @@ function apply_filters_and_get_plants($search_string, $colour_id, $type_id) {
         array_push($filter_selections, "plants_colour.colour_name = '$colour_id'");
     }
 
+    // Apply name search.
+    if (!empty($search_string)) {
+        array_push($filter_selections, "name LIKE '%{$search_string}%'");
+    }
+
     // count == 0:  $where_clause = "";
     // count == 1:  $where_clause = " WHERE plants.type_id = 2";
     // count  > 1:  $where_clause = " WHERE plants.type_id = 2 AND plants.colour_id = 3";
 
     // Apply filters.
     $where_clause = count($filter_selections) > 0 ? " WHERE " . implode(" AND ", $filter_selections) : "";
-
-    // Apply name search.
-    if (!empty($search_string)) {
-        $where_clause .= " AND name LIKE '%{$search_string}%'";
-    }
 
     $query_construction = "{$query_plants_name_and_type}{$where_clause}";
 
