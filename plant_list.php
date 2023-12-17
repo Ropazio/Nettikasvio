@@ -14,8 +14,7 @@ require_once "session.php";
         <?php
             get_main_headline_box();
             get_navi();
-        ?>
-        <?php
+
             require_once "filter_and_search.php";
             get_filter();
             print_plants_list($_SESSION['search_string'], $_SESSION['colour'], $_SESSION['type']);

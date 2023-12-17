@@ -5,9 +5,9 @@ $colour_and_type_lengths = get_filter_lists_lengths();
 
 function get_filter() {
 
-    echo '<div class="filter">';
+    echo '<div id="filter">';
     echo    '<div>';
-    echo        '<form method="POST" action="search.php" class="grid_filter">';
+    echo        '<form method="POST" action="search.php" id="grid_filter">';
     echo            '<div class="filter_column_1">';
                         add_text_search();
     echo            '</div>';

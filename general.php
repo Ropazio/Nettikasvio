@@ -17,35 +17,33 @@ function get_header() {
 
 function get_main_headline_box() {
 
-    echo '<div class="main_headline_box">';
-    echo    '<h1 class="main_headline">';
-    echo        '<a class="link_main" href="/Nettikasvio/index.php">KASVIO</a>';
+    echo '<div id="main_headline_box">';
+    echo    '<h1 id="main_headline">';
+    echo        '<a id="link_main" href="/Nettikasvio/index.php">KASVIO</a>';
     echo    '</h1>';
     echo '</div>';
 }
 
 function get_navi() {
 
-    echo '<div class="navi">';
-    echo    '<table class="navi_table">';
-    echo        '<tr>';
-    echo            '<th class="table_headline headline_border">';
-    echo                '<h2>';
-    echo                    '<a class="link" href="/Nettikasvio/plant_list.php">Kasvilista</a>';
-    echo                '</h2>';
-    echo            '</th>';
-    echo            '<th class="table_headline headline_border">';
-    echo                '<h2>';
-    echo                    '<a class="link" href="/Nettikasvio/identification.php">Lajintunnistus</a>';
-    echo                '</h2>';
-    echo            '</th>';
-    echo            '<th class="table_headline">';
-    echo                '<h2>';
-    echo                    '<a class="link" href="/Nettikasvio/others.php">Muuta kivaa</a>';
-    echo                '</h2>';
-    echo            '</th>';
-    echo        '</tr>';
-    echo    '</table>';
+    echo '<div id="navi">';
+    echo    '<div id="navi_grid">';
+    echo        '<div class="navi_column_1 headline_border">';
+    echo            '<h2>';
+    echo                '<a class="link" href="/Nettikasvio/plant_list.php">Kasvilista</a>';
+    echo            '</h2>';
+    echo        '</div>';
+    echo        '<div class="navi_column_2 headline_border">';
+    echo            '<h2>';
+    echo                '<a class="link" href="/Nettikasvio/identification.php">Lajintunnistus</a>';
+    echo            '</h2>';
+    echo        '</div>';
+    echo        '<div class="navi_column_3">';
+    echo            '<h2>';
+    echo                '<a class="link" href="/Nettikasvio/others.php">Muuta kivaa</a>';
+    echo            '</h2>';
+    echo        '</div>';
+    echo    '</div>';
     echo '</div>';
 }
 

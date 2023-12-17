@@ -34,7 +34,7 @@ General page stuff
 }
 
 /* Headline box */
-.main_headline_box {
+#main_headline_box {
 	background: var(--light_green_colour);
 	border: 2px solid #7a9254;
 	border-radius: 4px;
@@ -45,13 +45,13 @@ General page stuff
 }
 
 /* Main headline for the page */
-.main_headline {
+#main_headline {
 	font-weight: 900;
 	text-align: center;
 	padding: 10px;
 }
 
-.link_main {
+#link_main {
 	text-decoration: none;
 	color: var(--black_colour);
 }
@@ -62,18 +62,36 @@ Navigator stuff
 
 */
 
-.navi {
+#navi {
 	margin-left: var(--general_margin);
 	margin-right: var(--general_margin);
 	margin-top: 40px;
 }
 
-.navi_table {
-	width: 100%;
+#navi_grid {
+	display: grid;
+	grid-template-columns: 33% 33% 33%;
+    justify-content: center;
 }
 
-.table_headline {
-	width: 30%;
+.navi_column_1, .navi_column_2, .navi_column_3 {
+	display: inherit;
+	justify-content: center;
+}
+
+.navi_column_1 {
+	grid-column: 1;
+    grid-row: 1;
+}
+
+.navi_column_2 {
+	grid-column: 2;
+    grid-row: 1;
+}
+
+.navi_column_3 {
+	grid-column: 3;
+    grid-row: 1;
 }
 
 .headline_border {
@@ -120,7 +138,7 @@ Main page
 Filter and search
 */
 
-.filter {
+#filter {
 	margin-left: var(--general_margin);
 	margin-right: var(--general_margin);
 	margin-top: 20px;
@@ -128,7 +146,7 @@ Filter and search
 	border-radius: 4px;
 }
 
-.grid_filter {
+#grid_filter {
 	display: grid;
 	grid-template-columns: 40% 25% 25% 15%;
     justify-content: center;
