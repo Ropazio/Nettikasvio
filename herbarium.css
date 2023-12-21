@@ -150,7 +150,7 @@ Filter and search
 
 #grid_filter {
 	display: grid;
-	grid-template-columns: 40% 25% 25% 15%;
+	grid-template-columns: 30% 27.5% 27.5% 15%;
     justify-content: center;
 	border-radius: 4px;
 	padding: 6px 20px 6px 20px;
