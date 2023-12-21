@@ -18,7 +18,7 @@ function get_filter() {
                         add_type_filter();
     echo            '</div>';
     echo            '<div class="filter_column_4">';
-    echo                '<input type="submit" id="search_button" value="Hae kasveja">';
+                        add_submit_button();
     echo            '</div>';
     echo        '</form>';
     echo    '</div>';
@@ -48,11 +48,12 @@ function add_colour_filter() {
     echo                    '<select name="colour" class="filter_dropdown">';
                                 // get colour filter list length and enumerate colours
                                 $colour = null;
-                                $selected_colour = $colour == $_SESSION['colour'] ? ' selected' : '';
+                                $selected_colour = $colour == $_SESSION['colour'];
+    echo                        "<option value=\"{$type}\"{$selected_type} disabled hidden selected>" . "Valitse kasvin väri" . '</option>';
     echo                        "<option value=\"{$colour}\"{$selected_colour}>" . "ei valintaa" . '</option>';
                                 for ($i = 0; $i < $colour_and_type_lengths[0]; $i++) {
                                     $colour = get_colour_name($i);
-                                    $selected_colour = $colour == $_SESSION['colour'] ? ' selected' : '';
+                                    $selected_colour = $colour == $_SESSION['colour'];
     echo                            "<option value=\"{$colour}\"{$selected_colour}>" . $colour . '</option>';
                                 }
     echo                    '</select>';
@@ -66,11 +67,12 @@ function add_type_filter() {
     echo                    '<select name="type" class="filter_dropdown">';
                                 // get type filter list length and enumerate colours
                                 $type = null;
-                                $selected_type = $type == $_SESSION['type'] ? ' selected' : '';
+                                $selected_type = $type == $_SESSION['type'];
+    echo                        "<option value=\"{$type}\"{$selected_type} disabled hidden selected>" . "Valitse kasvin tyyppi" . '</option>';
     echo                        "<option value=\"{$type}\"{$selected_type}>" . "ei valintaa" . '</option>';
                                 for ($i = 0; $i < $colour_and_type_lengths[1]; $i++) {
                                     $type = get_type_name($i);
-                                    $selected_type = $type == $_SESSION['type'] ? ' selected' : '';
+                                    $selected_type = $type == $_SESSION['type'];
     echo                            "<option value=\"{$type}\"{$selected_type}>" . $type . '</option>';
                                 }
     echo                    '</select>';
@@ -79,6 +81,10 @@ function add_type_filter() {
 
 function add_text_search() {
     echo                    "<input type=\"text\" id=\"text_search\" name=\"search_string\" value=\"{$_SESSION['search_string']}\">";
+}
+
+function add_submit_button() {
+    echo                '<input type="submit" id="search_button" value="Hae kasveja">';
 }
 
 ?>
