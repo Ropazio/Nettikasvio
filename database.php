@@ -44,17 +44,16 @@ function apply_filters_and_get_plants($search_string, $colour_id, $type_id) {
     // If empty, no filter
 
     if (!empty($type_id)) {
-        array_push($filter_selections, "plants_type.type_name = '$type_id'");
+        array_push($filter_selections, "plants_type.type_name = :type_id");
     }
 
-    //if (!empty($filter['colour'])) {
     if (!empty($colour_id)) {
-        array_push($filter_selections, "plants_colour.colour_name = '$colour_id'");
+        array_push($filter_selections, "plants_colour.colour_name = :colour_id");
     }
 
     // Apply name search.
     if (!empty($search_string)) {
-        array_push($filter_selections, "name LIKE '%{$search_string}%'");
+        array_push($filter_selections, "name LIKE :search_string");
     }
 
     // count == 0:  $where_clause = "";
@@ -65,8 +64,20 @@ function apply_filters_and_get_plants($search_string, $colour_id, $type_id) {
     $where_clause = count($filter_selections) > 0 ? " WHERE " . implode(" AND ", $filter_selections) : "";
 
     $query_construction = "{$query_plants_name_and_type}{$where_clause}";
-
     $sth = $pdo->prepare($query_construction);
+
+    // Bind only when the variables are not empty.
+    if (!empty($type_id)) {
+        $sth->bindParam(':type_id', $type_id);
+    }
+    if (!empty($colour_id)) {
+        $sth->bindParam(':colour_id', $colour_id);
+    }
+    if (!empty($search_string)) {
+        $tmp = '%' . $search_string . '%';
+        $sth->bindParam(':search_string', $tmp);
+    }
+
     $sth->execute();
 
     $plants = $sth->fetchAll();
