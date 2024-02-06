@@ -7,6 +7,7 @@ body {
 
 :root {
 	--general_margin: 100px;
+	--mobile_margin: 10px;
 	--black_colour: #1A1A1A;
 	--dark_text_colour: #262626;
 	--light_green_colour: #8ca764;
@@ -241,7 +242,7 @@ Media
 
 */
 
-@media(max-width: 576px) {
+@media(max-width: 768px) {
 
     body {
         margin: 0px;
@@ -251,12 +252,13 @@ Media
     	width: 100%;
     }
 
-    .general {
-    	margin-right: 10px;
-    	margin-left: 10px;
+    #navi, .content_area, #filter, #plant_list {
+    	margin-right: var(--mobile_margin);
+    	margin-left: var(--mobile_margin);
     }
 
-    .main_headline_box {
-    	margin-right: 10px;
-    	margin-left: 10px;
+    #main_headline_box {
+    	margin-right: 0px;
+    	margin-left: 0px;
+    	border-radius: 0px;
     }
