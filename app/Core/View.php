@@ -35,4 +35,5 @@ class View {
 
         return $results;
     }
+}
 

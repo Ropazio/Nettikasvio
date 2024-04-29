@@ -1,24 +1,15 @@
 <!DOCTYPE html>
 <html>
-<?php
-require_once "session.php";
-?>
-
-<?php
-    require_once "general.php";
-    get_header();
-?>
+<?= $snippets["header"] ?>
 <body>
     <div class="page_background">
-
+        <?= $snippets["pageHeadline"] ?>
+        <?= $snippets["navi"] ?>
         <?php
-            get_main_headline_box();
-            get_navi();
-
             get_filter();
             print_plants_list($_SESSION['search_string'], $_SESSION['colour'], $_SESSION['type']);
         ?>
     </div>
-<script type="text/javascript" src="operation.js"></script>
+<script type="text/javascript" src="<?= siteUrl("js/operation.js") ?>"></script>
 </body>
 </html>

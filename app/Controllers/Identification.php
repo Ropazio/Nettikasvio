@@ -7,7 +7,7 @@ use app\{
 };
 
 
-class Home extends Controller {
+class Identification extends Controller {
 
     public function __construct() {
 
@@ -17,9 +17,8 @@ class Home extends Controller {
 
     public function index() : void {
 
-        $this->view->view("home/index", [
-            "title"         => "Nettikasvio"
+        $this->view->view("identification/index", [
+            "title"         => "Nettikasvio - lajintunnistus"
         ]);
     }
 }
-

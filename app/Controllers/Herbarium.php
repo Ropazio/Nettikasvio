@@ -47,6 +47,6 @@ class Herbarium extends Controller {
         $this->session->updateHerbariumSession();
     }
 
-    header("Location: plant_list.php");
+    header("Location: " . siteUrl("herbarium"));
 
 }

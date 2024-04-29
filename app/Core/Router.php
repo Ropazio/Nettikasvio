@@ -13,13 +13,14 @@ class Router {
     // ROUTING TABLE = ["page url" => [controller name, method name/function]]
     const ROUTING_TABLE = [
         "POST" => [
-            "hobby-delete_project"      => ["Hobby_project_controller", "delete"]
+            "herbarium"             => ["Herbarium", "add"]
         ],
         "GET" => [
-            ""                          => ["Home_controller", "index"],
-            "coding_projects"           => ["Coding_project_controller", "index"],
-            "hobby_projects"            => ["Hobby_project_controller", "index"],
-            "calendar"                  => ["Calendar_controller", "index"],
+            ""                      => ["Home", "index"],
+            "herbarium"             => ["Herbarium", "index"],
+            "other"                 => ["Other", "index"],
+            "identification"        => ["Identification", "index"],
+
         ]
     ];
 
@@ -96,7 +97,7 @@ class Router {
 
     protected function continueToPage( string $controllerName, string $methodName, string $params = "" ) : void {
 
-        Sessions::start_session();
+        Sessions::startSession();
 
         $controller = new ("app\Controllers\\" . $controllerName)();
 
