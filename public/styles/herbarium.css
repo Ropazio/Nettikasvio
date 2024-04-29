@@ -1,8 +1,13 @@
+@font-face {
+    font-family: Paprika;
+    src: url(../fonts/Paprika.regular.ttf);
+}
+
 body {
 	background: url(public/img/bg.jpg);
 	background-size: 100%;
 	background-attachment: fixed;
-	font-family: Georgia, Times New Roman, Serif;
+	font-family: Paprika, Serif;
 }
 
 :root {

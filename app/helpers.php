@@ -20,7 +20,8 @@ $folders = [
         "models"            => (ROOT . "/app/" . "Models/"),
         "views"             => (ROOT . "/app/" . "views/"),
         "snippets"          => (ROOT . "/app/" . "views/" . "_snippets/"),
-        "errors"            => (ROOT . "/app/" . "views/" . "_errors/")
+        "errors"            => (ROOT . "/app/" . "views/" . "_errors/"),
+        "libs"              => (ROOT . "/app/" . "views/" . "_libs/"),
 ];
 
 function siteUrl( string $url ) : string {

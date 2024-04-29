@@ -10,6 +10,9 @@ class View {
         $realPath = filePath("views") . $viewPath . ".phtml";
 
         $snippets = $this->loadSnippets($params);
+        if (isset($params["lib"])) {
+            $lib = $this->loadLib($params);
+        }
 
         require_once $realPath;
     }
@@ -31,6 +34,22 @@ class View {
             ob_start();
             require(filePath("snippets") . $snippetName . ".phtml");
             $results[$snippetName] = ob_get_clean();
+        }
+
+        return $results;
+    }
+
+
+    public function loadLib( string $libName, array $params = [] ) : array {
+
+        $files = scandir($libName);
+
+        $results = [];
+
+        foreach($files as $file) {
+            ob_start();
+            require(filePath("libs/{$lib}") . $file);
+            $results[$file] = ob_get_clean();
         }
 
         return $results;
