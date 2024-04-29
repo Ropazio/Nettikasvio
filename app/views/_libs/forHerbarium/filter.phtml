@@ -1,0 +1,48 @@
+<div id="filter">
+    <div>
+        <form method="POST" action="search.php" id="grid_filter">
+            <div class="filter_column_1">
+                <input type="text" id="text_search" name="search_string" value= <?= $params['search_string'] ?> >
+            </div>
+            <div class="filter_column_2">
+                <select name="colour" class="filter_dropdown">
+                    <?php
+                    // get colour filter list length and enumerate colours
+                    $colour = null;
+                    $selected_colour = $colour == $_SESSION['colour'];
+                    ?>
+                    <option value= <?= $colour . "\"" . $selected_colour ?> disabled hidden selected>Valitse kasvin väri</option>
+                    <option value= <?= $colour . "\"" . $selected_colour ?> >Ei valintaa</option>
+                    <?php
+                    for ($i = 0; $i < $colour_and_type_lengths[0]; $i++) {
+                        $colour = get_colour_name($i);
+                        $selected_colour = $colour == $_SESSION['colour'];
+                    ?>
+                    <option value= <?= $colour . "\"" . $selected_colour ?> ><?= $colour ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="filter_column_3">
+                <select name="type" class="filter_dropdown">';
+                    <?php
+                    // get type filter list length and enumerate colours
+                    $type = null;
+                    $selected_type = $type == $_SESSION['type'];
+                    ?>
+                    <option value= <?= $type}  . "\"" . $selected_type ?> disabled hidden selected>Valitse kasvin tyyppi</option>
+                    <option value= <?= $type}  . "\"" . $selected_type ?> >Ei valintaa</option>
+                    <?php
+                    for ($i = 0; $i < $colour_and_type_lengths[1]; $i++) {
+                        $type = get_type_name($i);
+                        $selected_type = $type == $_SESSION['type'];
+                    ?>
+                    <option value= <?= $colour . "\"" . $selected_colour ?> ><?= $type ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="filter_column_4">
+                <input type="submit" id="search_button" name="search_button" value="Hae kasveja">
+            </div>
+        </form>
+    </div>
+</div>

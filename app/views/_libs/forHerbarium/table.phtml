@@ -1,0 +1,12 @@
+<?php
+
+//$rows = applyAndGetPlants($search_string, $colour_id, $type_id);
+
+if (empty($rows)) {
+    echo '<p class="plant_list_column_2">Ei kasveja.</p>';
+} else {
+    $params["tableHeadlines"];
+    foreach ($rows as $row) {
+        $params["tableData"];
+    }
+}
