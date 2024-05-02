@@ -13,7 +13,7 @@ class Router {
     // ROUTING TABLE = ["page url" => [controller name, method name/function]]
     const ROUTING_TABLE = [
         "POST" => [
-            "herbarium"             => ["Herbarium", "add"]
+            "herbarium"             => ["Herbarium", "update"]
         ],
         "GET" => [
             ""                      => ["Home", "index"],

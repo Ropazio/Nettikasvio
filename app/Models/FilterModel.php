@@ -56,6 +56,8 @@ class FilterModel extends DatabaseModel {
         $queryConstruction = "{$query}{$whereClause}";
         $sth = $this->pdo->prepare($queryConstruction);
 
+        //die(print_r($queryConstruction));
+
         // Bind only when the variables are not empty.
         if (!empty($typeId)) {
             $sth->bindParam(':typeId', $typeId);
@@ -67,11 +69,13 @@ class FilterModel extends DatabaseModel {
             $tmp = '%' . $searchString . '%';
             $sth->bindParam(':searchString', $tmp);
         }
-    
+
+        //die(print_r($queryConstruction));
         $sth->execute();
     
         $plants = $sth->fetchAll();
-    
+        die(print_r($plants));
+
         // Plants is an array with plant name and plant type.
         return $plants;
     }
@@ -126,11 +130,11 @@ class FilterModel extends DatabaseModel {
                   FROM plantsColour, plantsType
                   WHERE plantsColour.colourName = '$colourName'
                   AND plantsType.typeName = '$typeName'";
-    
+
         $sth = $this->pdo->prepare($query);
         $sth->execute();
     
-        $ids = $sth->fetch();
+        $ids = $sth->fetch(\PDO::FETCH_ASSOC);
     
         // Id's is a list that contains id['colourId'] and id['typeId'].
         return $ids;

@@ -1,8 +1,8 @@
 <div id="filter">
     <div>
-        <form method="POST" action="search.php" id="gridFilter">
-            <div class="filterColumn_1">
-                <input type="text" id="textSearch" name="searchString" value= <?= $params["sessionParams"]["searchString"] ?> >
+        <form method="POST" action="<?= siteUrl("herbarium") ?>" id="gridFilter">
+            <div class="filterColumn1">
+                <input type="text" id="textSearch" name="searchString" value="<?= $params["sessionParams"]["searchString"] ?>">
             </div>
             <div class="filterColumn2">
                 <select name="colour" class="filterDropdown">
@@ -11,14 +11,14 @@
                     $colour = null;
                     $selectedColour = $colour == $params["sessionParams"]["colour"];
                     ?>
-                    <option value= <?= $colour . "\"" . $selectedColour ?> disabled hidden selected>Valitse kasvin väri</option>
-                    <option value= <?= $colour . "\"" . $selectedColour ?> >Ei valintaa</option>
+                    <option value="<?= $colour . "\"" . $selectedColour ?>" disabled hidden selected>Valitse kasvin väri</option>
+                    <option value="<?= $colour . "\"" . $selectedColour ?>" >ei valintaa</option>
                     <?php
                     for ($i = 0; $i < $params["filterData"]["coloursCount"]; $i++) {
                         $colour = $params["filterData"]["colours"][$i];
                         $selectedColour = $colour == $params["sessionParams"]["colour"];
                     ?>
-                    <option value= <?= $colour . "\"" . $selectedColour ?> ><?= $colour ?></option>
+                    <option value="<?= $colour . "\"" . $selectedColour ?>" ><?= $colour ?></option>
                     <?php } ?>
                 </select>
             </div>
@@ -29,14 +29,14 @@
                     $type = null;
                     $selectedType = $type == $params["sessionParams"]["type"];
                     ?>
-                    <option value= <?= $type . "\"" . $selectedType ?> disabled hidden selected>Valitse kasvin tyyppi</option>
-                    <option value= <?= $type . "\"" . $selectedType ?> >Ei valintaa</option>
+                    <option value="<?= $type . "\"" . $selectedType ?>" disabled hidden selected>Valitse kasvin tyyppi</option>
+                    <option value="<?= $type . "\"" . $selectedType ?>" >ei valintaa</option>
                     <?php
                     for ($i = 0; $i < $params["filterData"]["typesCount"]; $i++) {
                         $type = $params["filterData"]["types"][$i];
                         $selectedType = $type == $params["sessionParams"]["type"];
                     ?>
-                    <option value= <?= $colour . "\"" . $selectedColour ?> ><?= $type ?></option>
+                    <option value="<?= $type . "\"" . $selectedType ?>"><?= $type ?></option>
                     <?php } ?>
                 </select>
             </div>
