@@ -27,11 +27,14 @@ class Herbarium extends Controller {
         $this->session->setHerbariumSession();
         $sessionParams = $this->session->getSessionParams();
         $plants = $this->filter->applyAndGetPlants( null, null, null);
+        $filterData = $this->getFilterData();
+
         $this->view->view("herbarium/index", [
             "title"         => "Nettikasvio - kasvilista",
             "plants"        => $plants,
             "lib"           => "forHerbarium",
-            "sessionParams" => $sessionParams
+            "sessionParams" => $sessionParams,
+            "filterData"    => $filterData
         ]);
     }
 
@@ -77,24 +80,37 @@ class Herbarium extends Controller {
     }
 
 
-    public function getColourName( string $index) : string {
-        $colours = getColourNames();
+    public function getColourNames() : array {
+        $colours = $this->filter->getColourNames();
     
         if (empty($colours)) {
             return "Virhe filtterissä :(";
         }
     
-        return $colours[$index]['colourName'];
+        return $colours;
     }
 
 
-    public function getTypeName( string $index ) : string {
+    public function getTypeNames() : array {
         $types = $this->filter->getTypeNames();
     
         if (empty($types)) {
             return "Virhe filtterissä :(";
         }
     
-        return $types[$index]['typeName'];
+        return $types;
+    }
+
+
+    public function getFilterData() : array {
+
+        $data = [
+            "types"         => $this->getTypeNames(),
+            "colours"       => $this->getColourNames(),
+            "typesCount"    => $this->getCountTypes(),
+            "coloursCount"  => $this->getCountColours()
+        ];
+
+        return $data;
     }
 }

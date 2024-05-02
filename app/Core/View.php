@@ -50,6 +50,7 @@ class View {
         foreach($files as $file) {
             ob_start();
             require($folder . "/" . $file);
+            $file = basename($file, ".phtml");
             $results[$file] = ob_get_clean();
         }
 

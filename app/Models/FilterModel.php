@@ -102,7 +102,7 @@ class FilterModel extends DatabaseModel {
         $sth = $this->pdo->prepare($query);
         $sth->execute();
     
-        $colours = $sth->fetchAll();
+        $colours = $sth->fetchAll(\PDO::FETCH_COLUMN);
     
         return $colours;
     }
@@ -114,7 +114,7 @@ class FilterModel extends DatabaseModel {
         $sth = $this->pdo->prepare($query);
         $sth->execute();
     
-        $types = $sth->fetchAll();
+        $types = $sth->fetchAll(\PDO::FETCH_COLUMN);
     
         return $types;
     }

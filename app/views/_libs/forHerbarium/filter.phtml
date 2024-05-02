@@ -14,8 +14,8 @@
                     <option value= <?= $colour . "\"" . $selectedColour ?> disabled hidden selected>Valitse kasvin väri</option>
                     <option value= <?= $colour . "\"" . $selectedColour ?> >Ei valintaa</option>
                     <?php
-                    for ($i = 0; $i < $colour_and_type_lengths[0]; $i++) {
-                        $colour = getColourName($i);
+                    for ($i = 0; $i < $params["filterData"]["coloursCount"]; $i++) {
+                        $colour = $params["filterData"]["colours"][$i];
                         $selectedColour = $colour == $params["sessionParams"]["colour"];
                     ?>
                     <option value= <?= $colour . "\"" . $selectedColour ?> ><?= $colour ?></option>
@@ -32,8 +32,8 @@
                     <option value= <?= $type . "\"" . $selectedType ?> disabled hidden selected>Valitse kasvin tyyppi</option>
                     <option value= <?= $type . "\"" . $selectedType ?> >Ei valintaa</option>
                     <?php
-                    for ($i = 0; $i < $colour_and_type_lengths[1]; $i++) {
-                        $type = getTypeName($i);
+                    for ($i = 0; $i < $params["filterData"]["typesCount"]; $i++) {
+                        $type = $params["filterData"]["types"][$i];
                         $selectedType = $type == $params["sessionParams"]["type"];
                     ?>
                     <option value= <?= $colour . "\"" . $selectedColour ?> ><?= $type ?></option>
