@@ -2,11 +2,11 @@
 <html>
 <?= $snippets["header"] ?>
 <body>
-    <div class="page_background">
+    <div class="pageBackground">
         <?= $snippets["pageHeadline"] ?>
         <?= $snippets["navi"] ?>
         
-        <?= $lib["filter"] ?>
+        <?= die(print_r($lib)); ?>
         <?= $lib["table"] ?>
     </div>
 <script type="text/javascript" src="<?= siteUrl("js/operation.js") ?>"></script>

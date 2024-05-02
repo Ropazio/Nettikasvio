@@ -13,7 +13,7 @@ class FilterModel extends DatabaseModel {
     }
 
 
-    public function applyAndGetPlants( string $searchString, int $colourId, int $typeId) : array {
+    public function applyAndGetPlants( ?string $searchString, ?int $colourId, ?int $typeId) : array {
 
         // Fetch plant name and type by joining plantsType - id with plants - type id.
         $query =    "SELECT plants.name AS name, plants.info AS info, plants.image AS image
@@ -54,7 +54,7 @@ class FilterModel extends DatabaseModel {
         $whereClause = count($filterSelections) > 0 ? " WHERE " . implode(" AND ", $filterSelections) : "";
     
         $queryConstruction = "{$query}{$whereClause}";
-        $sth = $this->$pdo->prepare($queryConstruction);
+        $sth = $this->pdo->prepare($queryConstruction);
 
         // Bind only when the variables are not empty.
         if (!empty($typeId)) {
@@ -88,7 +88,7 @@ class FilterModel extends DatabaseModel {
                       FROM plantsType";
             }
     
-        $sth = $this->$pdo->prepare($query);
+        $sth = $this->pdo->prepare($query);
         $sth->execute();
         $count = $sth->fetchColumn();
     
@@ -99,7 +99,7 @@ class FilterModel extends DatabaseModel {
     public function getColourNames() : array {
     
         $query = "SELECT plantsColour.colourName FROM plantsColour";
-        $sth = $this->$pdo->prepare($query);
+        $sth = $this->pdo->prepare($query);
         $sth->execute();
     
         $colours = $sth->fetchAll();
@@ -111,7 +111,7 @@ class FilterModel extends DatabaseModel {
     public function getTypeNames() : array {
     
         $query = "SELECT plantsType.typeName FROM plantsType";
-        $sth = $this->$pdo->prepare($query);
+        $sth = $this->pdo->prepare($query);
         $sth->execute();
     
         $types = $sth->fetchAll();
@@ -127,7 +127,7 @@ class FilterModel extends DatabaseModel {
                   WHERE plantsColour.colourName = '$colourName'
                   AND plantsType.typeName = '$typeName'";
     
-        $sth = $this->$pdo->prepare($query);
+        $sth = $this->pdo->prepare($query);
         $sth->execute();
     
         $ids = $sth->fetch();
@@ -135,3 +135,4 @@ class FilterModel extends DatabaseModel {
         // Id's is a list that contains id['colourId'] and id['typeId'].
         return $ids;
     }
+}

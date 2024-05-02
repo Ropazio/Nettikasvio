@@ -36,4 +36,17 @@ class Sessions {
         $_SESSION['type'] = $type;
 
     }
+
+
+    public static function getSessionParams() : array {
+
+        $sessionParams = [
+            "searchString"      => $_SESSION['searchString'],
+            "colour"            => $_SESSION['colour'],
+            "type"              => $_SESSION['type']
+        ];
+
+        return $sessionParams;
+    }
+
 }

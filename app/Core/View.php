@@ -11,7 +11,7 @@ class View {
 
         $snippets = $this->loadSnippets($params);
         if (isset($params["lib"])) {
-            $lib = $this->loadLib($params);
+            $lib = $this->loadLib($params["lib"], $params);
         }
 
         require_once $realPath;
@@ -42,13 +42,14 @@ class View {
 
     public function loadLib( string $libName, array $params = [] ) : array {
 
-        $files = scandir($libName);
+        $folder = filePath("libs") . "/" . $libName;
+        $files =  array_diff(scandir($folder), array('.', '..'));
 
         $results = [];
 
         foreach($files as $file) {
             ob_start();
-            require(filePath("libs/{$lib}") . $file);
+            require($folder . "/" . $file);
             $results[$file] = ob_get_clean();
         }
 

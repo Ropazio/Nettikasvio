@@ -3,26 +3,26 @@
 $plants = $params["plants"];
 
 if (empty($plants)) {
-    echo '<p class="plant_list_column_2">Ei kasveja.</p>';
+    echo '<p class="plantListColumn2">Ei kasveja.</p>';
 } else {
-    echo '<div id="plant_list">';
-    echo    '<div id="grid_plant_list">';
-    echo        '<h4 class="plant_list_column_1">Kasvin nimi</h4>';
-    echo        '<h4 class="plant_list_column_2">Tiedot</h4>';
-    echo        '<h4 class="plant_list_column_3">Havaintokuvat</h4>';
+    echo '<div id="plantList">';
+    echo    '<div id="gridPlantList">';
+    echo        '<h4 class="plantListColumn1">Kasvin nimi</h4>';
+    echo        '<h4 class="plantListColumn2">Tiedot</h4>';
+    echo        '<h4 class="plantListColumn3">Havaintokuvat</h4>';
     echo    '</div>';
     echo '</div>';
 
     foreach ($plants as $plant) {
-        echo '<div id="plant_list">';
-        echo    '<div id="grid_plant_list">';
-        echo        '<div class="plant_list_column_1 headline_border">';
+        echo '<div id="plantList">';
+        echo    '<div id="gridPlantList">';
+        echo        '<div class="plantListColumn1 headlineBorder">';
         echo            '<p>' . $plant['name'] . '</p>';
         echo        '</div>';
-        echo        '<div class="plant_list_column_2 headline_border">';
+        echo        '<div class="plantListColumn2 headlineBorder">';
         echo            '<p>' . $plant['info'] . '</p>';
         echo        '</div>';
-        echo        '<div class="plant_list_column_3">';
+        echo        '<div class="plantListColumn3">';
         echo            '<p>' . $plant['image'] . '</p>';
         echo        '</div>';
         echo    '</div>';

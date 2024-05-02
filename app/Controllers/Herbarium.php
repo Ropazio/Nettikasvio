@@ -12,6 +12,7 @@ use app\{
 class Herbarium extends Controller {
 
     public Sessions $session;
+    public FilterModel $filter;
 
     public function __construct() {
 
@@ -23,10 +24,14 @@ class Herbarium extends Controller {
 
     public function index() : void {
 
-        $plants = $this->filter->applyAndGetPlants();
+        $this->session->setHerbariumSession();
+        $sessionParams = $this->session->getSessionParams();
+        $plants = $this->filter->applyAndGetPlants( null, null, null);
         $this->view->view("herbarium/index", [
             "title"         => "Nettikasvio - kasvilista",
-            "plants"        => $plants
+            "plants"        => $plants,
+            "lib"           => "forHerbarium",
+            "sessionParams" => $sessionParams
         ]);
     }
 
@@ -58,14 +63,15 @@ class Herbarium extends Controller {
 
     public function getCountTypes() : int {
 
-        $typeCount = $this->filter->count_filter_list_length(1);
+        $typeCount = $this->filter->countFilterListLength(1);
 
         return $typeCount;
     }
 
+
     public function getCountColours() : int {
 
-        $colourCount = $this->filter->count_filter_list_length(0);
+        $colourCount = $this->filter->countFilterListLength(0);
 
         return $colourCount;
     }
