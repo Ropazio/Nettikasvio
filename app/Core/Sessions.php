@@ -22,14 +22,12 @@ class Sessions {
         $keys = ['searchString', 'colour', 'type'];
 
         foreach ($keys as $key) {
-            if (!(isset($_SESSION[$key]))) {
-                $_SESSION[$key] = null;
-            };
+            $_SESSION[$key] = null;
         }
     }
 
 
-    public static function updateHerbariumSession( string $searchString, int $colour, int $type ) : void {
+    public static function updateHerbariumSession( string $searchString, ?int $colour, ?int $type ) : void {
 
         $_SESSION['searchString'] = $searchString;
         $_SESSION['colour'] = $colour;

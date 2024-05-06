@@ -32,11 +32,11 @@ class FilterModel extends DatabaseModel {
         */
     
         if (!empty($typeId)) {
-            array_push($filterSelections, "plantsType.typeName = :typeId");
+            array_push($filterSelections, "plantsType.id = :typeId");
         }
     
         if (!empty($colourId)) {
-            array_push($filterSelections, "plantsColour.colourName = :colourId");
+            array_push($filterSelections, "plantsColour.id = :colourId");
         }
     
         // Apply name search.
@@ -56,8 +56,6 @@ class FilterModel extends DatabaseModel {
         $queryConstruction = "{$query}{$whereClause}";
         $sth = $this->pdo->prepare($queryConstruction);
 
-        //die(print_r($queryConstruction));
-
         // Bind only when the variables are not empty.
         if (!empty($typeId)) {
             $sth->bindParam(':typeId', $typeId);
@@ -70,11 +68,9 @@ class FilterModel extends DatabaseModel {
             $sth->bindParam(':searchString', $tmp);
         }
 
-        //die(print_r($queryConstruction));
         $sth->execute();
     
         $plants = $sth->fetchAll();
-        die(print_r($plants));
 
         // Plants is an array with plant name and plant type.
         return $plants;
@@ -124,18 +120,32 @@ class FilterModel extends DatabaseModel {
     }
 
 
-    public function convertFilterNameToId( string $colourName, string $typeName ) : array {
+    public function convertFilterNameToId( ?string $colourName, ?string $typeName ) : array {
 
-        $query = "SELECT plantsColour.id AS colourId, plantsType.id AS typeId
-                  FROM plantsColour, plantsType
-                  WHERE plantsColour.colourName = '$colourName'
-                  AND plantsType.typeName = '$typeName'";
+        if (!empty($colourName)) {
+            $query = "SELECT plantsColour.id AS colourId
+                  FROM plantsColour WHERE plantsColour.colourName = ?";
+            $sth = $this->pdo->prepare($query);
+            $sth->execute([$colourName]);
+            $idColour = $sth->fetch(\PDO::FETCH_COLUMN);
+        } else {
+            $idColour = $colourName;
+        }
 
-        $sth = $this->pdo->prepare($query);
-        $sth->execute();
-    
-        $ids = $sth->fetch(\PDO::FETCH_ASSOC);
-    
+        if (!empty($typeName)) {
+            $query = "SELECT plantsType.id AS typeId
+                  FROM plantsType WHERE plantsType.typeName = ?";
+            $sth = $this->pdo->prepare($query);
+            $sth->execute([$typeName]);
+            $idType = $sth->fetch(\PDO::FETCH_COLUMN);
+        } else {
+            $idType = $typeName;
+        }
+
+        $ids = [
+            "colourId"  => (int) $idColour,
+            "typeId"    => (int) $idType
+        ];
         // Id's is a list that contains id['colourId'] and id['typeId'].
         return $ids;
     }

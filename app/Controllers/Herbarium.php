@@ -19,7 +19,6 @@ class Herbarium extends Controller {
         parent::__construct();
         $this->session = new Sessions();
         $this->filter = new FilterModel();
-        $this->session->setHerbariumSession();
     }
 
 
@@ -28,12 +27,12 @@ class Herbarium extends Controller {
         $sessionParams = $this->session->getSessionParams();
         $plants = $this->filter->applyAndGetPlants($sessionParams["searchString"], $sessionParams["colour"], $sessionParams["type"]);
         $filterData = $this->getFilterData();
+        $this->session->setHerbariumSession();
 
         $this->view->view("herbarium/index", [
             "title"         => "Nettikasvio - kasvilista",
             "plants"        => $plants,
             "lib"           => "forHerbarium",
-            "sessionParams" => $sessionParams,
             "filterData"    => $filterData
         ]);
     }
@@ -42,14 +41,15 @@ class Herbarium extends Controller {
     public function update() : void {
 
         if (isset($_POST["searchButton"])) {
-            $searchString = $_POST['searchString'];
-            $colour = $_POST['colour'];
-            $type = $_POST['type'];
+            $searchString = isset($_POST['searchString']) ? $_POST['searchString'] : null;
+            $colour = isset($_POST['colour']) ? $_POST['colour'] : null;
+            $type = isset($_POST['type']) ? $_POST['type'] : null;
 
             // Convert filter names to corresponding id's.
             $filterIds = $this->filter->convertFilterNameToId($colour, $type);
-    
+
             $this->session->updateHerbariumSession($searchString, $filterIds['colourId'], $filterIds['typeId']);
+            $sessionParams = $this->session->getSessionParams();
         }
 
         header("Location: " . siteUrl("herbarium"));

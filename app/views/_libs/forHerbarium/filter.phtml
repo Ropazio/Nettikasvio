@@ -2,42 +2,28 @@
     <div>
         <form method="POST" action="<?= siteUrl("herbarium") ?>" id="gridFilter">
             <div class="filterColumn1">
-                <input type="text" id="textSearch" name="searchString" value="<?= $params["sessionParams"]["searchString"] ?>">
+                <input type="text" id="textSearch" name="searchString">
             </div>
             <div class="filterColumn2">
                 <select name="colour" class="filterDropdown">
                     <?php
-                    // get colour filter list length and enumerate colours
-                    $colour = null;
-                    $selectedColour = $colour == $params["sessionParams"]["colour"];
-                    ?>
-                    <option value="<?= $colour . "\"" . $selectedColour ?>" disabled hidden selected>Valitse kasvin väri</option>
-                    <option value="<?= $colour . "\"" . $selectedColour ?>" >ei valintaa</option>
-                    <?php
+                    echo '<option value="' . null . '" disabled hidden selected>Valitse kasvin väri</option>';
+                    echo '<option value="' . null . '" >ei valintaa</option>';
                     for ($i = 0; $i < $params["filterData"]["coloursCount"]; $i++) {
                         $colour = $params["filterData"]["colours"][$i];
-                        $selectedColour = $colour == $params["sessionParams"]["colour"];
-                    ?>
-                    <option value="<?= $colour . "\"" . $selectedColour ?>" ><?= $colour ?></option>
-                    <?php } ?>
+                        echo '<option value="' . $colour . '" >' . $colour . '</option>';
+                    } ?>
                 </select>
             </div>
             <div class="filterColumn3">
                 <select name="type" class="filterDropdown">';
                     <?php
-                    // get type filter list length and enumerate colours
-                    $type = null;
-                    $selectedType = $type == $params["sessionParams"]["type"];
-                    ?>
-                    <option value="<?= $type . "\"" . $selectedType ?>" disabled hidden selected>Valitse kasvin tyyppi</option>
-                    <option value="<?= $type . "\"" . $selectedType ?>" >ei valintaa</option>
-                    <?php
+                    echo '<option value="' . null . '" disabled hidden selected>Valitse kasvin tyyppi</option>';
+                    echo '<option value="' . null . '" >ei valintaa</option>';
                     for ($i = 0; $i < $params["filterData"]["typesCount"]; $i++) {
                         $type = $params["filterData"]["types"][$i];
-                        $selectedType = $type == $params["sessionParams"]["type"];
-                    ?>
-                    <option value="<?= $type . "\"" . $selectedType ?>"><?= $type ?></option>
-                    <?php } ?>
+                        echo '<option value="' . $type . '" >' . $type . '</option>';
+                    } ?>
                 </select>
             </div>
             <div class="filterColumn4">
