@@ -21,11 +21,26 @@ if (empty($plants)) {
         echo        '<div class="plantListColumn2">';
         echo            '<p>' . $plant['info'] . '</p>';
         echo        '</div>';
-        echo        '<div class="plantListColumn3">';
-        echo            '<p>' . $plant['image'] . '</p>';
+        echo        '<div class="plantListColumn3 imageColumn">';
+        echo            '<div class="gallery">';
+        echo                '<div>';
+                            foreach ($plant['images'] as $image) {
+        echo                    '<img src="' . siteUrl("img/{$image["src"]}") . '" loading="lazy"' . sprintf(" onclick='enlargeImage(\"%s\")'", siteUrl("img/{$image["src"]}")) . '>';
+                            }
+        echo                '</div>';
+        echo            '</div>';
         echo        '</div>';
         echo    '</div>';
     }
 
     echo '</div>';
+
+    echo '<!-- Background for the image enlargement  -->';
+    echo '<div id="enlargedImageView" onclick="closeImage()">';
+    echo '  <div id="imageBackground"></div>';
+    echo '  <div id="enlargedImageContainer">';
+    echo '      <img id="enlargedImage"/>';
+    echo '  </div>';
+    echo '</div>';
+    echo '<!---->';
 }

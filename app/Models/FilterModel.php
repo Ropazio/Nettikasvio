@@ -16,7 +16,7 @@ class FilterModel extends DatabaseModel {
     public function applyAndGetPlants( ?string $searchString, ?int $colourId, ?int $typeId) : array {
 
         // Fetch plant name and type by joining plantsType - id with plants - type id.
-        $query =    "SELECT plants.name AS name, plants.info AS info, plants.image AS image
+        $query =    "SELECT plants.name AS name, plants.info AS info, plants.images AS images
                     FROM plants
                     LEFT JOIN plantsType ON plantsType.id = plants.typeId
                     LEFT JOIN plantsColour ON plantsColour.id = plants.colourId";
@@ -70,7 +70,15 @@ class FilterModel extends DatabaseModel {
 
         $sth->execute();
     
-        $plants = $sth->fetchAll();
+        $plants = $sth->fetchAll(\PDO::FETCH_ASSOC);
+
+        foreach ($plants as &$plant) {
+            $plant = [
+                "name"      => $plant["name"],
+                "info"      => $plant["info"],
+                "images"    => json_decode($plant["images"], true)
+            ];
+        }
 
         // Plants is an array with plant name and plant type.
         return $plants;

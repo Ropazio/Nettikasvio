@@ -21,9 +21,8 @@ body {
 	--mobileMargin: 10px;
 	/* colours */
 	--blackColour: #1A1A1A;
-	--darkTextColour: #262626;
-	--greenColour: #4f8d1b;
-	--darkGreenColour: #325a11;
+	--lightGreenColour: #a2e36c;
+	--greenColour: #579c1e;
 	--naturalWhiteColour: #ededea;
 	--lightGrayColour: #e1e1dc;
 }
@@ -58,7 +57,7 @@ body {
 
 #linkMain {
 	text-decoration: none;
-	color: var(--lightGrayColour);
+	color: #FFF;
 	font-family: Nature;
 	font-size: xxx-large;
 }
@@ -129,7 +128,7 @@ body {
 }
 
 .link:hover {
-	color: var(--darkGreenColour);
+	color: var(--lightGrayColour);
 	transition: 0.2s ease-out;
 }
 
@@ -213,12 +212,18 @@ body {
 #searchButton{
 	border: 1px solid var(--lightGrayColour);
 	border-radius: 1px;
-	background-color: var(--greenColour);
+	background-color: var(--lightGreenColour);
 	width: 100%;
 	height: 100%;
 	padding: 4px;
 	margin-left: 6px;
+	border-radius: 4px;
 	font-family: Paprika;
+}
+
+#searchButton:hover {
+	color: #FFF;
+	transition: 0.1s ease-out;
 }
 
 
@@ -236,7 +241,7 @@ body {
 
 #gridPlantList {
 	display: grid;
-	grid-template-columns: 33% 33% 33%;
+	grid-template-columns: 20% 35% 45%;
     justify-content: center;
     border: 1px solid;
 	border-color: var(--lightGrayColour);
@@ -264,7 +269,64 @@ body {
 	grid-column: 3;
 }
 
+.imageColumn {
+	margin-left: 0px;
+}
 
+.gallery {
+	display: flex;
+	width: inherit;
+	overflow-x: scroll;
+}
+
+.gallery div {
+	display: flex;
+	flex: none;
+}
+
+.gallery div img {
+	margin: 2px;
+	width: 140px;
+}
+
+.gallery::-webkit-scrollbar {
+  display: none;
+}
+
+/*****
+ *  Image enlargement
+ * **************************************/
+
+#enlargedImageView {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+#imageBackground {
+    background-color: #222;
+    opacity: 80%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+#enlargedImageContainer {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#enlargedImage {
+    z-index: 100;
+    max-width: 100%;
+    max-height: 100%;
+}
 
 /**************************************************
 ***************************************************
