@@ -44,7 +44,7 @@ body {
 
 /* Headline box */
 #mainHeadlineBox {
-	padding: 40px;
+	padding: 30px;
 	margin: auto;
 	margin-left: 200px;
 	margin-right: 200px;
@@ -52,7 +52,7 @@ body {
 
 /* Main headline for the page */
 #mainHeadline {
-	transform: scale(1.8);
+	transform: scale(2);
 	text-align: center;
 }
 
@@ -70,8 +70,11 @@ body {
 	border-bottom-right-radius: 4px;
 	margin-left: var(--generalMargin);
 	margin-right: var(--generalMargin);
-	padding: 20px;
 	line-height: 1.5;
+}
+
+.contentBox {
+	padding: 20px;
 }
 
 
@@ -136,12 +139,15 @@ body {
  * Text area *
 ********************/
 
-.subheadline, .description, .list {
-	color: var(--darkTextColour);
-}
-
 .textArea {
-	padding: 40px;
+	padding-left: var(--generalMargin);
+	padding-right: var(--generalMargin);
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: #FFF;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	box-shadow: inset 0px 0px 12px 0 rgba(0, 0, 0, 0.1);
 }
 
 
@@ -158,16 +164,16 @@ body {
 
 #gridFilter {
 	display: grid;
-	grid-template-columns: 30% 27.5% 27.5% 15%;
+	grid-template-columns: 33% 27% 27% 12%;
     justify-content: center;
 	border-radius: 4px;
-	padding: 6px 20px 6px 20px;
+	padding: 6px 6px 6px 6px;
+	height: 36px;
 }
 
 .filterColumn1 {
 	grid-column: 1;
     grid-row: 1;
-	color: #444;
 	text-align: left;
 }
 
@@ -192,6 +198,7 @@ body {
 	border-radius: 1px;
 	width: 100%;
 	height: 100%;
+	font-family: Paprika;
 }
 
 #textSearch {
@@ -200,6 +207,7 @@ body {
 	border: 1px solid var(--lightGrayColour);
 	width: 100%;
 	height: 100%;
+	font-family: Paprika;
 }
 
 #searchButton{
@@ -208,6 +216,9 @@ body {
 	background-color: var(--greenColour);
 	width: 100%;
 	height: 100%;
+	padding: 4px;
+	margin-left: 6px;
+	font-family: Paprika;
 }
 
 
