@@ -3,6 +3,11 @@
     src: url(../fonts/Paprika.regular.ttf);
 }
 
+@font-face {
+    font-family: Nature;
+    src: url(../fonts/Nature.ttf);
+}
+
 body {
 	background: url(public/img/bg.jpg);
 	background-size: 100%;
@@ -11,40 +16,35 @@ body {
 }
 
 :root {
-	--generalMargin: 100px;
+	/* margins */
+	--generalMargin: 80px;
 	--mobileMargin: 10px;
+	/* colours */
 	--blackColour: #1A1A1A;
 	--darkTextColour: #262626;
-	--lightGreenColour: #8ca764;
 	--greenColour: #4f8d1b;
 	--darkGreenColour: #325a11;
 	--naturalWhiteColour: #ededea;
 	--lightGrayColour: #e1e1dc;
 }
 
-/*
-
-General page stuff
-
-*/
+/***********************
+************************
+ * General page stuff * 
+************************
+***********************/
 
 /* Main content box */
 .pageBackground {
 	margin: auto;
-	width: 60%;
-	background-color: rgba(240, 240, 240, 0.8);
-	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
+	width: 80%;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	border-radius: 4px;
 }
 
 /* Headline box */
 #mainHeadlineBox {
-	background: var(--lightGreenColour);
-	border: 2px solid #7a9254;
-	border-radius: 4px;
-	box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
+	padding: 40px;
 	margin: auto;
 	margin-left: 200px;
 	margin-right: 200px;
@@ -52,35 +52,53 @@ General page stuff
 
 /* Main headline for the page */
 #mainHeadline {
-	font-weight: 900;
+	transform: scale(1.8);
 	text-align: center;
-	padding: 10px;
 }
 
 #linkMain {
 	text-decoration: none;
-	color: var(--blackColour);
+	color: var(--lightGrayColour);
+	font-family: Nature;
+	font-size: xxx-large;
 }
 
-/*
+/* Area under the table/navi */
+.contentArea {
+	background-color: var(--lightGrayColour);
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	margin-left: var(--generalMargin);
+	margin-right: var(--generalMargin);
+	padding: 20px;
+	line-height: 1.5;
+}
 
-Navigator stuff
 
-*/
+
+/********************
+
+ * Navigator stuff * 
+
+********************/
 
 #navi {
 	margin-left: var(--generalMargin);
 	margin-right: var(--generalMargin);
-	margin-top: 40px;
 }
 
 #gridNavi {
 	display: grid;
 	grid-template-columns: 33% 33% 33%;
     justify-content: center;
+    background-color: var(--greenColour);
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
 }
 
 .naviColumn1, .naviColumn2, .naviColumn3 {
+	padding: 10px;
+	padding-bottom: 0px;
 	display: inherit;
 	justify-content: center;
 }
@@ -100,56 +118,40 @@ Navigator stuff
     grid-row: 1;
 }
 
-.headlineBorder {
-	border-right: 2px solid rgba(73, 133, 25, 0.3);
-
-}
-
 .link {
 	text-decoration: none;
-	color: var(--darkGreenColour);
+	color: var(--blackColour);
+	font-family: Nature;
+	font-size: xxx-large;
 }
 
 .link:hover {
-	color: var(--greenColour);
+	color: var(--darkGreenColour);
 	transition: 0.2s ease-out;
 }
 
-/*
-
-Page specific stuff
-
-*/
 
 
-/*
-Main page
-*/
+/********************
+ * Text area *
+********************/
 
-/* Area under the table/navi */
-.contentArea {
-	text-align: left;
-	margin-left: 100px;
-	margin-right: 100px;
-	line-height: 1.5;
-}
-
-/* Text area */
 .subheadline, .description, .list {
 	color: var(--darkTextColour);
 }
 
+.textArea {
+	padding: 40px;
+}
 
-/*
-Filter and search
-*/
+
+
+/**********************
+ * Filter and search * 
+**********************/
 
 #filter {
-	margin-left: var(--generalMargin);
-	margin-right: var(--generalMargin);
-	margin-top: 20px;
 	margin-bottom: 20px;
-	border: 2px solid rgba(73, 133, 25, 0.3);
 	border-radius: 4px;
 	background-color: var(--naturalWhiteColour);
 }
@@ -189,6 +191,7 @@ Filter and search
 	border-color: var(--lightGrayColour);
 	border-radius: 1px;
 	width: 100%;
+	height: 100%;
 }
 
 #textSearch {
@@ -196,23 +199,26 @@ Filter and search
 	border-radius: 1px;
 	border: 1px solid var(--lightGrayColour);
 	width: 100%;
-	height: 26px;
+	height: 100%;
 }
 
 #searchButton{
 	border: 1px solid var(--lightGrayColour);
 	border-radius: 1px;
-	background-color: var(--lightGreenColour);
+	background-color: var(--greenColour);
 	width: 100%;
-	height: 26px;
+	height: 100%;
 }
 
-/* search results */
+
+
+/**********************
+ * Search results * 
+**********************/
 
 #plantList {
-	margin-left: var(--generalMargin);
-	margin-right: var(--generalMargin);
-	border: 2px solid rgba(73, 133, 25, 0.3);
+	border: 1px solid;
+	border-color: var(--lightGrayColour);
 	border-radius: 4px;
 	background-color: #FFF;
 }
@@ -221,6 +227,8 @@ Filter and search
 	display: grid;
 	grid-template-columns: 33% 33% 33%;
     justify-content: center;
+    border: 1px solid;
+	border-color: var(--lightGrayColour);
 }
 
 .plantListColumn1, .plantListColumn2, .plantListColumn3 {
@@ -231,21 +239,27 @@ Filter and search
 
 .plantListColumn1 {
 	grid-column: 1;
+	border-right: 1px solid;
+	border-color: var(--lightGrayColour);
 }
 
 .plantListColumn2 {
 	grid-column: 2;
+	border-right: 1px solid;
+	border-color: var(--lightGrayColour);
 }
 
 .plantListColumn3 {
 	grid-column: 3;
 }
 
-/*
 
-Media
 
-*/
+/**************************************************
+***************************************************
+ * * * * * * * * * * * MEDIA * * * * * * * * * * *
+***************************************************
+**************************************************/
 
 @media(max-width: 768px) {
 

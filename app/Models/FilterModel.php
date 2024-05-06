@@ -77,7 +77,7 @@ class FilterModel extends DatabaseModel {
     }
 
 
-    public function countFilterListLength($filterName) : int {
+    public function countFilterListLength( int $filterName) : int {
     
         if ($filterName == 0) {
             $query = "SELECT COUNT(*) AS colourCount
@@ -122,6 +122,7 @@ class FilterModel extends DatabaseModel {
 
     public function convertFilterNameToId( ?string $colourName, ?string $typeName ) : array {
 
+        // If colour filter is set, find the corresponding ID
         if (!empty($colourName)) {
             $query = "SELECT plantsColour.id AS colourId
                   FROM plantsColour WHERE plantsColour.colourName = ?";
@@ -132,6 +133,7 @@ class FilterModel extends DatabaseModel {
             $idColour = $colourName;
         }
 
+        // If type filter is set, find the corresponding ID
         if (!empty($typeName)) {
             $query = "SELECT plantsType.id AS typeId
                   FROM plantsType WHERE plantsType.typeName = ?";
@@ -146,7 +148,7 @@ class FilterModel extends DatabaseModel {
             "colourId"  => (int) $idColour,
             "typeId"    => (int) $idType
         ];
-        // Id's is a list that contains id['colourId'] and id['typeId'].
+
         return $ids;
     }
 }

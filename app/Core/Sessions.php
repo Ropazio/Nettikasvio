@@ -39,9 +39,9 @@ class Sessions {
     public static function getSessionParams() : array {
 
         $sessionParams = [
-            "searchString"      => $_SESSION['searchString'],
-            "colour"            => $_SESSION['colour'],
-            "type"              => $_SESSION['type']
+            "searchString"      => isset($_SESSION['searchString']) ? $_SESSION['searchString'] : null,
+            "colour"            => isset($_SESSION['colour']) ? $_SESSION['colour'] : null,
+            "type"              => isset($_SESSION['type']) ? $_SESSION['type'] : null
         ];
 
         return $sessionParams;
