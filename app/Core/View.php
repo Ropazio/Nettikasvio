@@ -23,7 +23,8 @@ class View {
         $snippets = [
             "header",
             "navi",
-            "pageHeadline"
+            "pageHeadline",
+            "loginBox"
         ];
 
         $title = $params["title"];

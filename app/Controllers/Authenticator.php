@@ -23,7 +23,8 @@ class Authenticator extends Controller {
     public function index() : void {
 
         $this->view->view("authentication/index", [
-            "title"         => "Nettikasvio - Kirjaudu"
+            "title"         => "Nettikasvio - Kirjaudu",
+            "lib"           => "forAuthentication"
         ]);
     }
 

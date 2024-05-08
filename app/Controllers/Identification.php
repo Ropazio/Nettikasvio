@@ -17,8 +17,11 @@ class Identification extends Controller {
 
     public function index() : void {
 
+        $userParams = $this->sessions->getUserSessionParams();
+
         $this->view->view("identification/index", [
-            "title"         => "Nettikasvio - lajintunnistus"
+            "title"         => "Nettikasvio - lajintunnistus",
+            "userParams"    => $userParams
         ]);
     }
 }

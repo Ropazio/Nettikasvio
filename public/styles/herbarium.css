@@ -295,9 +295,9 @@ body {
   display: none;
 }
 
-/*****
- *  Image enlargement
- * **************************************/
+/*********************
+ * Image enlargement *
+*********************/
 
 #enlargedImageView {
     display: none;
@@ -373,7 +373,64 @@ body {
 	max-width: 340px;
 }
 
+/**********************
+ * Search results * 
+**********************/
 
+#loginInfoBox {
+	display: block;
+    background: var(--lightGrayColour);
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: fixed;
+    right: 0px;
+    top: 20px;
+    border: 2px solid var(--greenColour);
+    border-right: none;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 240px;
+    height: 150px;
+    z-index: 100;
+}
+
+#loginInfoBox div div {
+	text-align: center;
+}
+
+#loginInfoBox div div div {
+	margin-top: 40px;
+}
+
+#usernameText {
+	color: var(--greenColour);
+}
+
+#logoutButton {
+	text-decoration: none;
+	color: var(--blackColour);
+	background-color: var(--greenColour);
+	padding: 5px;
+	border-radius: 4px;
+	font-family: Paprika;
+}
+
+#logoutButton:hover {
+	color: #FFF;
+	transition: 0.1s ease-out;
+}
+
+#loginBoxIcon {
+	z-index: 100;
+	background: var(--greenColour);
+	padding: 5px;
+    position: fixed;
+    right: 280px;
+    top: 75px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
 
 /**************************************************
 ***************************************************

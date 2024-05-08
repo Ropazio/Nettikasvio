@@ -17,8 +17,12 @@ class Home extends Controller {
 
     public function index() : void {
 
+        $userParams = $this->sessions->getUserSessionParams();
+
         $this->view->view("home/index", [
-            "title"         => "Nettikasvio"
+            "title"         => "Nettikasvio",
+            "lib"           => "forHome",
+            "userParams"    => $userParams
         ]);
     }
 }

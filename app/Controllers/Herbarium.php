@@ -24,6 +24,7 @@ class Herbarium extends Controller {
 
     public function index() : void {
 
+        $userParams = $this->sessions->getUserSessionParams();
         $sessionParams = $this->session->getHerbariumSessionParams();
         $plants = $this->filter->applyAndGetPlants($sessionParams["searchString"], $sessionParams["colour"], $sessionParams["type"]);
         $filterData = $this->getFilterData();
@@ -33,7 +34,8 @@ class Herbarium extends Controller {
             "title"         => "Nettikasvio - kasvilista",
             "plants"        => $plants,
             "lib"           => "forHerbarium",
-            "filterData"    => $filterData
+            "filterData"    => $filterData,
+            "userParams"    => $userParams
         ]);
     }
 

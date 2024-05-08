@@ -1,0 +1,20 @@
+<div id="loginInfoBox">
+    <div>
+        <p>Kirjautuneena käyttäjänä:</p>
+        <div>
+            <h3 id="usernameText">
+                <strong><?= $params["userParams"]["username"]?></strong>
+            </h3>
+
+            <div>
+                <a id="logoutButton" href="<?= siteUrl("logout") ?>">Kirjaudu ulos</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="loginBoxIcon">
+    <div>
+        <h2><a type="button" onclick="activateLoginBox()"> 👩🏻‍🌾 </a></h2>
+    </div>
+</div>

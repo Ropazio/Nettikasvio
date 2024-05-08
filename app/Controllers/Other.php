@@ -17,8 +17,11 @@ class Other extends Controller {
 
     public function index() : void {
 
+        $userParams = $this->sessions->getUserSessionParams();
+
         $this->view->view("other/index", [
-            "title"         => "Nettikasvio - muuta kivaa"
+            "title"         => "Nettikasvio - muuta kivaa",
+            "userParams"    => $userParams
         ]);
     }
 }
