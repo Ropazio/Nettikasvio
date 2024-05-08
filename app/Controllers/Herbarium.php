@@ -24,7 +24,7 @@ class Herbarium extends Controller {
 
     public function index() : void {
 
-        $sessionParams = $this->session->getSessionParams();
+        $sessionParams = $this->session->getHerbariumSessionParams();
         $plants = $this->filter->applyAndGetPlants($sessionParams["searchString"], $sessionParams["colour"], $sessionParams["type"]);
         $filterData = $this->getFilterData();
         $this->session->setHerbariumSession();
@@ -49,7 +49,7 @@ class Herbarium extends Controller {
             $filterIds = $this->filter->convertFilterNameToId($colour, $type);
 
             $this->session->updateHerbariumSession($searchString, $filterIds['colourId'], $filterIds['typeId']);
-            $sessionParams = $this->session->getSessionParams();
+            $sessionParams = $this->session->getHerbariumSessionParams();
         }
 
         header("Location: " . siteUrl("herbarium"));

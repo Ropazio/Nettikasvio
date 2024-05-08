@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<?= $snippets["header"] ?>
+<body>
+    <div class="pageBackground">
+        <?= $snippets["pageHeadline"] ?>
+        <?= $snippets["navi"] ?>
+
+        <div class="contentArea">
+            <div class="textArea">
+                <form method="POST" data-ajax="false" action="<?= siteUrl("login") ?>">
+                    <div class="loginContainer">
+                        <div>
+                            <label for="username">Käyttäjänimi:</label>
+                            <div>
+                                <input type="text" id="username" name="username"/>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="password">Salasana:</label>
+                            <div>
+                                <input type="password" id="password" name="password"/>
+                            </div>
+                        </div>
+
+                        <div id="loginArea">
+                            <div>
+                                <button type="submit" id="loginButton" name="loginButton">Kirjaudu</button>
+                            </div>
+                            <?php if(isset($_GET['error'])): ?> 
+                            <div id="loginError" class="error">
+                                <p>Kirjautuminen epäonnistui 🥀</p>
+                            </div>
+                            <?php endif ?>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

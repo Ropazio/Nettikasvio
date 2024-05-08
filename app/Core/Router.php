@@ -13,14 +13,16 @@ class Router {
     // ROUTING TABLE = ["page url" => [controller name, method name/function]]
     const ROUTING_TABLE = [
         "POST" => [
-            "herbarium"             => ["Herbarium", "update"]
+            "herbarium"             => ["Herbarium", "update"],
+            "login"                 => ["Authenticator", "login"]
         ],
         "GET" => [
             ""                      => ["Home", "index"],
             "herbarium"             => ["Herbarium", "index"],
             "other"                 => ["Other", "index"],
             "identification"        => ["Identification", "index"],
-
+            "login"                 => ["Authenticator", "index"],
+            "logout"                 => ["Authenticator", "logout"]
         ]
     ];
 
