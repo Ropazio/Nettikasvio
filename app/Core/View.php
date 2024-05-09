@@ -20,12 +20,7 @@ class View {
 
     public function loadSnippets( array $params = [] ) : array {
 
-        $snippets = [
-            "header",
-            "navi",
-            "pageHeadline",
-            "loginBox"
-        ];
+        $snippets =  array_diff(scandir(filepath("snippets")), array('.', '..'));
 
         $title = $params["title"];
 
@@ -33,7 +28,8 @@ class View {
 
         foreach($snippets as $snippetName) {
             ob_start();
-            require(filePath("snippets") . $snippetName . ".phtml");
+            require(filePath("snippets") . $snippetName);
+            $snippetName = basename($snippetName, ".phtml");
             $results[$snippetName] = ob_get_clean();
         }
 

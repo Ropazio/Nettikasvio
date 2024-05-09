@@ -7,12 +7,16 @@
     font-family: Nature;
     src: url(../fonts/Nature.ttf);
 }
+html {
+	background-color: #192412;
+}
 
 body {
 	background: url(public/img/bg.jpg);
 	background-size: 100%;
 	background-attachment: fixed;
 	font-family: Paprika, Serif;
+	margin: 0px;
 }
 
 :root {
@@ -32,6 +36,11 @@ body {
  * General page stuff * 
 ************************
 ***********************/
+
+#pageContainer {
+	position: relative;
+	min-height: 100vh;
+}
 
 /* Main content box */
 .pageBackground {
@@ -70,6 +79,7 @@ body {
 	margin-left: var(--generalMargin);
 	margin-right: var(--generalMargin);
 	line-height: 1.5;
+	margin-bottom: 100px;
 }
 
 .contentBox {
@@ -135,7 +145,45 @@ body {
 	transition: 0.2s ease-out;
 }
 
+/*****************
 
+ * Footer stuff * 
+
+*****************/
+
+footer {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	background-color: var(--greenColour);
+	box-shadow: inset 0px 0px 12px 0 rgba(0, 0, 0, 0.1);
+    padding: 4px;
+}
+
+footer div {
+	display: flex;
+    margin-left: var(--generalMargin);
+}
+
+#githubArea {
+	margin-left: calc(2*var(--generalMargin));
+	margin-top: auto;
+    margin-bottom: auto;
+}
+
+#footerText {
+	color: var(--blackColour);
+    margin-left: 20px;
+}
+
+#catButton {
+    background: url(../img/github.png);
+    background-size: 100%;
+    border: 1px solid black;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
 
 /********************
  * Text area *
