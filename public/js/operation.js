@@ -15,9 +15,11 @@ function activateLoginBox() {
     let icon = document.getElementById("loginBoxIcon");
     if (infoBox.style.visibility == "visible") {
         infoBox.style.visibility = "hidden";
+        infoBox.style.right = "-280px";
         icon.style.right = "0px";
     } else {
         infoBox.style.visibility = "visible";
+        infoBox.style.right = "0px";
         icon.style.right = "280px";
     }
 }

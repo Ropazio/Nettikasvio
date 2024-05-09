@@ -384,7 +384,7 @@ body {
     padding-left: 20px;
     padding-right: 20px;
     position: fixed;
-    right: 0px;
+    right: -280px;
     top: 20px;
     border: 2px solid var(--greenColour);
     border-right: none;
@@ -393,6 +393,7 @@ body {
     width: 240px;
     height: 150px;
     z-index: 100;
+    transition: 0.8s ease all;
 }
 
 #loginInfoBox div div {
@@ -431,13 +432,12 @@ body {
     width: 25px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    transition: 0.8s ease all;
 }
 
 #loginBoxIcon:hover {
-	transition: 0.1s ease-out;
 	width: 30px;
 }
-
 
 
 /**************************************************
