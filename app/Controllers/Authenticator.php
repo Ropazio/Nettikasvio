@@ -22,9 +22,12 @@ class Authenticator extends Controller {
 
     public function index() : void {
 
+        $userParams = $this->sessions->getUserSessionParams();
+
         $this->view->view("authentication/index", [
             "title"         => "Nettikasvio - Kirjaudu",
-            "lib"           => "forAuthentication"
+            "lib"           => "forAuthentication",
+            "userParams"    => $userParams
         ]);
     }
 

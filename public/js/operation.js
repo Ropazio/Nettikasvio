@@ -13,11 +13,11 @@ function enlargeImage(imageSrc) {
 function activateLoginBox() {
     let infoBox = document.getElementById("loginInfoBox");
     let icon = document.getElementById("loginBoxIcon");
-    if (infoBox.style.display == "none") {
-        infoBox.style.display = "block";
-        icon.style.right = "280px";
-    } else {
-        infoBox.style.display = "none";
+    if (infoBox.style.visibility == "visible") {
+        infoBox.style.visibility = "hidden";
         icon.style.right = "0px";
+    } else {
+        infoBox.style.visibility = "visible";
+        icon.style.right = "280px";
     }
 }

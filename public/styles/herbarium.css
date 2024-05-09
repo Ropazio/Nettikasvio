@@ -378,7 +378,7 @@ body {
 **********************/
 
 #loginInfoBox {
-	display: block;
+	visibility: hidden;
     background: var(--lightGrayColour);
     padding-bottom: 20px;
     padding-left: 20px;
@@ -407,7 +407,7 @@ body {
 	color: var(--greenColour);
 }
 
-#logoutButton {
+#authButton {
 	text-decoration: none;
 	color: var(--blackColour);
 	background-color: var(--greenColour);
@@ -416,7 +416,7 @@ body {
 	font-family: Paprika;
 }
 
-#logoutButton:hover {
+#authButton:hover {
 	color: #FFF;
 	transition: 0.1s ease-out;
 }
@@ -426,11 +426,19 @@ body {
 	background: var(--greenColour);
 	padding: 5px;
     position: fixed;
-    right: 280px;
-    top: 75px;
+    right: 0px;
+    top: 70px;
+    width: 25px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 }
+
+#loginBoxIcon:hover {
+	transition: 0.1s ease-out;
+	width: 30px;
+}
+
+
 
 /**************************************************
 ***************************************************

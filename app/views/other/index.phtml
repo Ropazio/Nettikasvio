@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?= $snippets["header"] ?>
-
-<?php echo $params["userParams"]["loggedIn"] ? $snippets["loginBox"] : ""; ?>
+<?= $snippets["loginBox"] ?>
 
 <body>
     <div class="pageBackground">
@@ -14,5 +13,6 @@
             </div>
         </div>
     </div>
+<script type="text/javascript" src="<?= siteUrl("js/operation.js") ?>"></script>
 </body>
 </html>
