@@ -159,4 +159,14 @@ class FilterModel extends DatabaseModel {
 
         return $ids;
     }
+
+
+    public function add( string $speciesName, ?string $speciesDesc, string $speciesType, string $speciesColour, array $images) : void {
+
+        // Add project
+        $images = json_encode($images);
+        $ids = $this->convertFilterNameToId($speciesColour, $speciesType);
+        $query = "INSERT INTO plants (name, info, typeId, colourId, images) VALUES (?, ?, ?, ?, ?)";
+        $this->pdo->prepare($query)->execute([$speciesName, $speciesDesc, $ids["typeId"], $ids["colourId"], $images]);
+    }
 }

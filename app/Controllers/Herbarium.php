@@ -141,15 +141,18 @@ class Herbarium extends Controller {
             $i = 0;
 
             foreach($files as $image) {
+                $images[] = [
+                    "src"      => $image["name"]
+                ];
                 // Save image to img/projects
                 $this->addToImagesFolder($image["name"], $image["tmp_name"]);
                 $i++;
             }
             // Add data to database
-            //$this->model->add($project_type, $project_name, $project_desc, $images);
+            $this->filter->add($speciesName, $speciesDesc, $speciesType, $speciesColour, $images);
         }
 
-        // Back to the hobby page
+        // Back to the add page
         header("Location: " . siteUrl("herbarium/add-species"));
     }
 
