@@ -118,7 +118,7 @@ class Herbarium extends Controller {
             "title"         => "Nettikasvio - Lisää laji",
             "lib"           => "forHerbarium",
             "userParams"    => $userParams,
-            "plantData"    => $plantData
+            "plantData"     => $plantData
         ]);
     }
 
@@ -137,44 +137,58 @@ class Herbarium extends Controller {
 
             // Species images
             $images = [];
-            $files = $_FILES["images"];
+            $files = $this->restructureImages($_FILES["images"]);
             $i = 0;
 
-            die(print_r($files));
-
-            //foreach($_POST["images"] as $image) {
-            //    // Save image (and small image) to img/projects
-            //    $this->addToImagesFolder($files[$i]["name"], $files[$i]["tmp_name"]);
-            //    $i++;
-            //}
+            foreach($files as $image) {
+                // Save image to img/projects
+                $this->addToImagesFolder($image["name"], $image["tmp_name"]);
+                $i++;
+            }
             // Add data to database
             //$this->model->add($project_type, $project_name, $project_desc, $images);
         }
 
         // Back to the hobby page
-        header("Location: " . site_url("hobby-add_project"));
+        header("Location: " . siteUrl("herbarium/add-species"));
     }
 
 
-    public function addToImagesFolder( string $image_name, string $image_tmp_name ) : void {
+    public function addToImagesFolder( string $imageName, string $imageTmpName ) : void {
 
         // Get file info
-        $file_name = basename($image_name);
-        $file_type = pathinfo($file_name, PATHINFO_EXTENSION);
-        $folder = "img/projects/{$file_name}";
+        $fileName = basename($imageName);
+        $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+        $folder = "plantImg/{$fileName}";
 
         // Allow certain file formats
-        $allow_types = array("jpg","png","jpeg");
-        if (in_array($file_type, $allow_types)) {
-            if (move_uploaded_file($image_tmp_name, $folder)) {
-                $this->create_small_image($image_name, $file_type);
-            } else {
-                header("Location: " . site_url("hobby-add_project?error=failed"));
+        $allowTypes = array("jpg","png","jpeg");
+        if (in_array($fileType, $allowTypes)) {
+            if (!move_uploaded_file($imageTmpName, $folder)) {
+                header("Location: " . siteUrl("herbarium/add-species?error=failed"));
                 exit;
             }
         } else {
-            header("Location: " . site_url("hobby-add_project?error=failed"));
+            header("Location: " . siteUrl("herbarium/add-species?error=failed"));
             exit;
         }
+    }
+
+
+    public function restructureImages( array $images ) : array {
+
+        /*  This function restructures files array in the following manner:
+            array([0] = [image0 metadata], [1] = [image1 metadata]...).
+            Before restructuring, the structure was somewhat like this:
+            array([meta0] = [image0, image1...], [meta1] = [image0, image1...]).
+        */
+
+        $newImages = [];
+        foreach ($images as $attribute => $values) {
+            foreach ($values as $key => $value) {
+                $newImages[$key][$attribute] = $value;
+            }
+        }
+        return $newImages;
     }
 }
