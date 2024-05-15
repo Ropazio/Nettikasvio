@@ -68,12 +68,12 @@ class Sessions {
     public function checkUserRights() : void {
 
         if (!$this->isLoggedIn()) {
-            header("Location: " . site_url("login"));
+            header("Location: " . siteUrl("login"));
             exit;
         }
 
         if (!$this->isAdmin()) {
-            header("Location: " . site_url("error401"));
+            header("Location: " . siteUrl("error401"));
             exit;
         }
     }

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<?= $snippets["header"] ?>
+<?= $snippets["loginBox"] ?>
+
+<body>
+    <div id="pageContainer">
+        <div class="pageBackground">
+            <?= $snippets["pageHeadline"] ?>
+            <?= $snippets["navi"] ?>
+    
+            <div class="contentArea">
+                <div class="textArea">
+                    <?= $lib["addForm"] ?>
+                </div>
+            </div>
+        </div>
+        <?= $snippets["footer"] ?>
+    </div>
+
+<script type="text/javascript" src="<?= siteUrl("js/operation.js") ?>"></script>
+</body>
+</html>

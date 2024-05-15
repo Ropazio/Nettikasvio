@@ -14,7 +14,8 @@ class Router {
     const ROUTING_TABLE = [
         "POST" => [
             "herbarium"             => ["Herbarium", "update"],
-            "login"                 => ["Authenticator", "login"]
+            "login"                 => ["Authenticator", "login"],
+            "herbarium/add-species" => ["Herbarium", "add"]
         ],
         "GET" => [
             ""                      => ["Home", "index"],
@@ -22,17 +23,18 @@ class Router {
             "other"                 => ["Other", "index"],
             "identification"        => ["Identification", "index"],
             "login"                 => ["Authenticator", "index"],
-            "logout"                 => ["Authenticator", "logout"]
+            "logout"                => ["Authenticator", "logout"],
+            "herbarium/add-species" => ["Herbarium", "addView"]
         ]
     ];
 
     public function __construct() {
 
         $url = $this->getUrl();
-        // Url is split in parts by "/" and added to array
-        $url = $this->parseUrl($url);
         // get the request method
         $requestMethod = $_SERVER["REQUEST_METHOD"];
+        // Url is split in parts by "/" and added to array
+        $url = $this->parseUrl($url, $requestMethod);
 
         // If page url can't be found, show 404
         if (!isset(self::ROUTING_TABLE[$requestMethod][$url[0]])) {
@@ -65,9 +67,33 @@ class Router {
     }
 
 
-    private function parseUrl( string $url ) : array {
+    private function parseUrl( string $url, string $method ) : array {
 
         $partitionedUrl = explode("/", rtrim($url, "/"));
+
+        if (count($partitionedUrl) > 1) {
+            $pages = self::ROUTING_TABLE[$method];
+            $tempParts = [];
+            $parts = [];
+            foreach ($partitionedUrl as $part) {
+                array_push($tempParts, $part);
+                $pageName = join("/", $tempParts);
+                if (!isset($pages[$pageName])) {
+                    break;
+                    //$pageName = join("/", $parts);
+                    //$partitionedUrl = array($pageName, array_diff($partitionedUrl, $parts));
+                    //return $partitionedUrl;
+                }
+                array_push($parts, $part);
+            }
+            $pageName = join("/", $parts);
+            if (!(array_diff($partitionedUrl, $parts))) {
+                return array($pageName);
+            } else {
+                return array($pageName, implode(array_diff($partitionedUrl, $parts)));
+            }
+        }
+
         return $partitionedUrl;
     }
 
@@ -91,7 +117,7 @@ class Router {
 
     protected function getParams( array $url, string $method ) : string {
 
-        $params = $url[1];
+        $params = end($url);
 
         return $params;
     }

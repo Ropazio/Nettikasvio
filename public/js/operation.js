@@ -10,6 +10,8 @@ function enlargeImage(imageSrc) {
     img.src = imageSrc;
 }
 
+/////////////////////////////////////////////////////////////////////
+
 function activateLoginBox() {
     let infoBox = document.getElementById("loginInfoBox");
     let icon = document.getElementById("loginBoxIcon");
@@ -22,4 +24,34 @@ function activateLoginBox() {
         infoBox.style.right = "0px";
         icon.style.right = "280px";
     }
+}
+
+/////////////////////////////////////////////////////////////////////
+
+var images = 1;
+
+function addImage() {
+
+    var html =  `<tr>
+                    <!-- Input fields for image data -->
+                    <td data-label="Kuvatiedosto (.jpg/.png/.jpeg):" scope="row"><input type="file" name="images[${images}" required></td>
+                    <!---->
+                    <!-- Remove images button -->
+                    <td><input type="button" class="button" onclick="removeImage.call(this)" id="removeImageButton" name="removeImageButton" value="Poista"></td>
+                    <!---->
+                </tr>
+                `;
+
+    var maxImages = 3;
+
+    var table = document.getElementById("imagesForm");
+    if (images <= maxImages) {
+        table.insertAdjacentHTML("beforeend",html);
+        images++;
+    }
+}
+
+var removeImage = function () {
+    this.parentNode.parentNode.remove();
+    images--;
 }

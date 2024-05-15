@@ -1,0 +1,76 @@
+<form method="POST" data-ajax="false" action="<?= siteUrl("herbarium/add-species") ?>">
+    <div class="addContainer">
+        <div>
+            <label for="speciesName">Lajin nimi:</label>
+            <input type="text" id="speciesName" name="speciesName" required>
+        </div>
+        <div>
+            <label for="speciesDesc">Lajin tiedot:</label>
+            <textarea type="text" id="speciesDesc" name="speciesDesc"></textarea>
+        </div>
+
+        <fieldset>
+            <legend>Kasvin tyyppi:</legend>
+            <div>
+            <?php
+            for ($i = 0; $i < $params["plantData"]["typesCount"]; $i++) {
+                $type = $params["plantData"]["types"][$i];
+                echo '<div>';
+                echo    '<input type="radio" id="' . "type{$i}" . '" name="speciesType" value="' . $type . '" required>';
+                echo    '<label for="' . "type{$i}" . '">' . $type . '</label>';
+                echo '</div>';
+            } ?>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Kukan väri:</legend>
+            <div>
+            <?php
+            for ($i = 0; $i < $params["plantData"]["coloursCount"]; $i++) {
+                $colour = $params["plantData"]["colours"][$i];
+                echo '<div>';
+                echo    '<input type="radio" id="' . "colour{$i}" . '" name="speciesColour" value="' . $colour . '" required>';
+                echo    '<label for="' . "colour{$i}" . '">' . $colour . '</label>';
+                echo '</div>';
+            } ?>
+            </div>
+        </fieldset>
+
+        <!-- Images -->
+        <fieldset>
+            <legend>Kuvat:</legend>
+            <table id="imagesForm">
+                <thead>
+                    <tr>
+                        <!-- Labels for image data -->
+                        <th scope="col">Kuvatiedosto: (.jpg/.png/.jpeg)</th>
+                        <!---->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <!-- Input fields for image data -->
+                        <td data-label="Kuvatiedosto:   (.jpg/.png/.jpeg)" scope="row"><input type="file" name="images[0]" required></td>
+                        <!---->
+                        <!-- Add more images button -->
+                        <td><input type="button" class="button" onclick="addImage()" id="addImageButton" name="addImageButton" value="Lisää"></td>
+                        <!---->
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+        <!---->
+
+        <div id="addArea">
+            <div>
+                <button type="submit" id="addSpeciesButton" name="addSpeciesButton">Lisää laji</button>
+            </div>
+            <?php if(isset($_GET['error'])): ?> 
+            <div id="loginError" class="error">
+                <p>Lisääminen epäonnistui 🥀</p>
+            </div>
+            <?php endif ?>
+        </div>
+    </div>
+</form>
