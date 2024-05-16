@@ -42,7 +42,7 @@ function addImage() {
                 </tr>
                 `;
 
-    var maxImages = 3;
+    var maxImages = 6;
 
     var table = document.getElementById("imagesForm");
     if (images <= maxImages) {

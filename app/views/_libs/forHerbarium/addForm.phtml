@@ -30,7 +30,7 @@
             for ($i = 0; $i < $params["plantData"]["coloursCount"]; $i++) {
                 $colour = $params["plantData"]["colours"][$i];
                 echo '<div>';
-                echo    '<input type="radio" id="' . "colour{$i}" . '" name="speciesColour" value="' . $colour . '" required>';
+                echo    '<input type="checkbox" id="' . "colour{$i}" . '" name="speciesColour[]" value="' . $colour . '">';
                 echo    '<label for="' . "colour{$i}" . '">' . $colour . '</label>';
                 echo '</div>';
             } ?>

@@ -13,7 +13,7 @@ class FilterModel extends DatabaseModel {
     }
 
 
-    public function applyAndGetPlants( ?string $searchString, ?int $colourId, ?int $typeId) : array {
+    public function applyAndGetPlants( ?string $searchString, ?string $colourId, ?int $typeId) : array {
 
         // Fetch plant name and type by joining plantsType - id with plants - type id.
         $query =    "SELECT plants.name AS name, plants.info AS info, plants.images AS images
@@ -128,17 +128,20 @@ class FilterModel extends DatabaseModel {
     }
 
 
-    public function convertFilterNameToId( ?string $colourName, ?string $typeName ) : array {
+    public function convertFilterNameToId( ?array $colourNames, ?string $typeName ) : array {
 
         // If colour filter is set, find the corresponding ID
-        if (!empty($colourName)) {
-            $query = "SELECT plantsColour.id AS colourId
-                  FROM plantsColour WHERE plantsColour.colourName = ?";
-            $sth = $this->pdo->prepare($query);
-            $sth->execute([$colourName]);
-            $idColour = $sth->fetch(\PDO::FETCH_COLUMN);
+        $colourIds = [];
+        if (!empty($colourNames)) {
+            foreach ($colourNames as $colourName) {
+                $query = "SELECT plantsColour.id AS colourId
+                          FROM plantsColour WHERE plantsColour.colourName = ?";
+                $sth = $this->pdo->prepare($query);
+                $sth->execute([$colourName]);
+                array_push($colourIds, (int) $sth->fetch(\PDO::FETCH_COLUMN));
+            }
         } else {
-            $idColour = $colourName;
+            array_push($colourIds, (int) $colourNames);
         }
 
         // If type filter is set, find the corresponding ID
@@ -153,7 +156,7 @@ class FilterModel extends DatabaseModel {
         }
 
         $ids = [
-            "colourId"  => (int) $idColour,
+            "colourId"  => $colourIds,
             "typeId"    => (int) $idType
         ];
 
@@ -161,11 +164,12 @@ class FilterModel extends DatabaseModel {
     }
 
 
-    public function add( string $speciesName, ?string $speciesDesc, string $speciesType, string $speciesColour, array $images) : void {
+    public function add( string $speciesName, ?string $speciesDesc, string $speciesType, array $speciesColour, array $images) : void {
 
         // Add project
         $images = json_encode($images);
         $ids = $this->convertFilterNameToId($speciesColour, $speciesType);
+        $ids["colourId"] = json_encode($ids["colourId"]);
         $query = "INSERT INTO plants (name, info, typeId, colourId, images) VALUES (?, ?, ?, ?, ?)";
         $this->pdo->prepare($query)->execute([$speciesName, $speciesDesc, $ids["typeId"], $ids["colourId"], $images]);
     }
