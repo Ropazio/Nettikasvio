@@ -2,11 +2,11 @@
     <div class="addContainer">
         <div>
             <label for="speciesName">Lajin nimi:</label>
-            <input type="text" id="speciesName" name="speciesName" required>
+            <div><input type="text" id="speciesName" name="speciesName" required></div>
         </div>
         <div>
             <label for="speciesDesc">Lajin tiedot:</label>
-            <textarea type="text" id="speciesDesc" name="speciesDesc"></textarea>
+            <div><textarea type="text" id="speciesDesc" name="speciesDesc"></textarea></div>
         </div>
 
         <fieldset>
@@ -54,7 +54,7 @@
                         <td data-label="Kuvatiedosto:   (.jpg/.png/.jpeg)" scope="row"><input type="file" name="images[0]" required></td>
                         <!---->
                         <!-- Add more images button -->
-                        <td><input type="button" class="button" onclick="addImage()" id="addImageButton" name="addImageButton" value="Lisää"></td>
+                        <td id="buttonBox"><input type="button" class="imageButton" onclick="addImage()" id="addImageButton" name="addImageButton" value="Lisää"></td>
                         <!---->
                     </tr>
                 </tbody>

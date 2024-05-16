@@ -422,7 +422,7 @@ footer div {
 }
 
 /**********************
- * Search results * 
+ * Login box *
 **********************/
 
 #loginInfoBox {
@@ -487,6 +487,50 @@ footer div {
 	width: 30px;
 }
 
+
+
+/**********************
+***********************
+ * Add species form *
+***********************
+**********************/
+
+.addContainer > div, .addContainer fieldset {
+	margin-bottom: 20px;
+}
+
+#speciesName, #speciesDesc {
+	width: 60%;
+	margin-top: 10px;
+}
+
+#speciesDesc {
+	height: 100px;
+}
+
+#imagesForm thead {
+	text-align: left;
+}
+
+#imagesForm {
+	width: 100%;
+}
+
+#buttonBox {
+	text-align: center;
+}
+
+.imageButton, #addSpeciesButton {
+	border: 1px solid var(--lightGrayColour);
+	background-color: var(--lightGreenColour);
+	padding: 6px;
+	border-radius: 4px;
+	font-family: Paprika;
+}
+
+#addSpeciesButton {
+	padding: 8px;
+}
 
 /**************************************************
 ***************************************************

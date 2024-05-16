@@ -37,7 +37,7 @@ function addImage() {
                     <td data-label="Kuvatiedosto (.jpg/.png/.jpeg):" scope="row"><input type="file" name="images[${images}]" required></td>
                     <!---->
                     <!-- Remove images button -->
-                    <td><input type="button" class="button" onclick="removeImage.call(this)" id="removeImageButton" name="removeImageButton" value="Poista"></td>
+                    <td id="buttonBox"><input type="button" class="imageButton" onclick="removeImage.call(this)" id="removeImageButton" name="removeImageButton" value="Poista"></td>
                     <!---->
                 </tr>
                 `;
