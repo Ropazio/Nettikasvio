@@ -13,21 +13,22 @@ class FilterModel extends DatabaseModel {
     }
 
 
-    public function applyAndGetPlants( ?string $searchString, ?string $colourId, ?int $typeId) : array {
+    public function applyAndGetPlants( ?string $searchString, ?int $colourId, ?int $typeId) : array {
 
         // Fetch plant name and type by joining plantsType - id with plants - type id.
         $query =    "SELECT plants.name AS name, plants.info AS info, plants.images AS images
                     FROM plants
                     LEFT JOIN plantsType ON plantsType.id = plants.typeId
-                    LEFT JOIN plantsColour ON plantsColour.id = plants.colourId";
+                    LEFT JOIN plantsColour ON plantsColour.plantId = plants.id
+                    LEFT JOIN colours ON colours.id = plantsColour.colourId";
     
         $filterSelections = [];
     
         /*
-        If both filters:         $filterSelections = ["plantsType.typeId = $typeId",
-                                                       "plantsColour.colourId = $colourId"]
-        If only type filter:     $filterSelections = ["plantsType.typeId = $typeId"]
-        If only colour filter    $filterSelections = ["plantsColour.colourId = $colourId"]
+        If both filters:         $filterSelections = ["plantsType.id = $typeId",
+                                                       "plantsColour.id = $colourId"]
+        If only type filter:     $filterSelections = ["plantsType.id = $typeId"]
+        If only colour filter    $filterSelections = ["plantsColour.id = $colourId"]
         If empty, no filter
         */
     
@@ -36,9 +37,9 @@ class FilterModel extends DatabaseModel {
         }
     
         if (!empty($colourId)) {
-            array_push($filterSelections, "plantsColour.id = :colourId");
+            array_push($filterSelections, "colours.id = :colourId");
         }
-    
+
         // Apply name search.
         if (!empty($searchString)) {
             array_push($filterSelections, "name LIKE :searchString");
@@ -46,8 +47,8 @@ class FilterModel extends DatabaseModel {
     
         /*
         count == 0:  $whereClause = "";
-        count == 1:  $whereClause = " WHERE plants.typeId = 2";
-        count  > 1:  $whereClause = " WHERE plants.typeId = 2 AND plants.colourId = 3";
+        count == 1:  $whereClause = " WHERE plantsType.id = 2";
+        count  > 1:  $whereClause = " WHERE plantsType.id = 2 AND colours.id = 6";
         */
     
         // Apply filters.
@@ -60,9 +61,11 @@ class FilterModel extends DatabaseModel {
         if (!empty($typeId)) {
             $sth->bindParam(':typeId', $typeId);
         }
+
         if (!empty($colourId)) {
             $sth->bindParam(':colourId', $colourId);
         }
+
         if (!empty($searchString)) {
             $tmp = '%' . $searchString . '%';
             $sth->bindParam(':searchString', $tmp);
@@ -89,7 +92,7 @@ class FilterModel extends DatabaseModel {
     
         if ($filterName == 0) {
             $query = "SELECT COUNT(*) AS colourCount
-                      FROM plantsColour";
+                      FROM colours";
             }
         if ($filterName == 1) {
             $query = "SELECT COUNT(*) AS typeCount
@@ -106,7 +109,7 @@ class FilterModel extends DatabaseModel {
 
     public function getColourNames() : array {
     
-        $query = "SELECT plantsColour.colourName FROM plantsColour";
+        $query = "SELECT colours.colourName FROM colours";
         $sth = $this->pdo->prepare($query);
         $sth->execute();
     
@@ -134,8 +137,8 @@ class FilterModel extends DatabaseModel {
         $colourIds = [];
         if (!empty($colourNames)) {
             foreach ($colourNames as $colourName) {
-                $query = "SELECT plantsColour.id AS colourId
-                          FROM plantsColour WHERE plantsColour.colourName = ?";
+                $query = "SELECT colours.id AS colourId
+                          FROM colours WHERE colours.colourName = ?";
                 $sth = $this->pdo->prepare($query);
                 $sth->execute([$colourName]);
                 array_push($colourIds, (int) $sth->fetch(\PDO::FETCH_COLUMN));
@@ -169,8 +172,17 @@ class FilterModel extends DatabaseModel {
         // Add project
         $images = json_encode($images);
         $ids = $this->convertFilterNameToId($speciesColour, $speciesType);
-        $ids["colourId"] = json_encode($ids["colourId"]);
-        $query = "INSERT INTO plants (name, info, typeId, colourId, images) VALUES (?, ?, ?, ?, ?)";
-        $this->pdo->prepare($query)->execute([$speciesName, $speciesDesc, $ids["typeId"], $ids["colourId"], $images]);
+        $query = "INSERT INTO plants (name, info, typeId, images) VALUES (?, ?, ?, ?)";
+        $this->pdo->prepare($query)->execute([$speciesName, $speciesDesc, $ids["typeId"], $images]);
+
+        $query = "SELECT plants.id FROM plants WHERE plants.name = ?";
+        $sth = $this->pdo->prepare($query);
+        $sth->execute([$speciesName]);
+        $plantId = $sth->fetch(\PDO::FETCH_COLUMN);
+
+        $query = "INSERT INTO plantsColour (plantId, colourId) VALUES (?, ?)";
+        foreach ($ids["colourId"] as $colour) {
+            $this->pdo->prepare($query)->execute([$plantId, $colour]);
+        }
     }
 }

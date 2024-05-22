@@ -44,13 +44,13 @@ class Herbarium extends Controller {
 
         if (isset($_POST["searchButton"])) {
             $searchString = isset($_POST['searchString']) ? $_POST['searchString'] : null;
-            $colour = isset($_POST['colour']) ? $_POST['colour'] : null;
+            $colour = isset($_POST['colour']) ? [$_POST['colour']] : [];
             $type = isset($_POST['type']) ? $_POST['type'] : null;
 
             // Convert filter names to corresponding id's.
             $filterIds = $this->filter->convertFilterNameToId($colour, $type);
 
-            $this->session->updateHerbariumSession($searchString, $filterIds['colourId'], $filterIds['typeId']);
+            $this->session->updateHerbariumSession($searchString, $filterIds['colourId'][0], $filterIds['typeId']);
             $sessionParams = $this->session->getHerbariumSessionParams();
         }
 
