@@ -135,7 +135,7 @@ body {
 
 .link {
 	text-decoration: none;
-	color: var(--blackColour);
+	color: #FFF;
 	font-family: Nature;
 	font-size: xxx-large;
 }
@@ -172,7 +172,7 @@ footer div {
 }
 
 #footerText {
-	color: var(--blackColour);
+	color: #FFF;
     margin-left: 20px;
 }
 
