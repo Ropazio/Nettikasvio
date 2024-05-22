@@ -75,10 +75,11 @@ class Herbarium extends Controller {
 
 
     public function getColourNames() : array {
+
         $colours = $this->filter->getColourNames();
     
         if (empty($colours)) {
-            return "Virhe filtterissä :(";
+            return ["Virhe filtterissä :("];
         }
     
         return $colours;
@@ -86,10 +87,11 @@ class Herbarium extends Controller {
 
 
     public function getTypeNames() : array {
+
         $types = $this->filter->getTypeNames();
     
         if (empty($types)) {
-            return "Virhe filtterissä :(";
+            return ["Virhe filtterissä :("];
         }
     
         return $types;
@@ -110,6 +112,9 @@ class Herbarium extends Controller {
 
 
     public function addView() : void {
+
+        // make sure that this function of this class can't be accessed without admin rights
+        $this->sessions->checkUserRights();
 
         $userParams = $this->sessions->getUserSessionParams();
         $plantData = $this->getFilterData();

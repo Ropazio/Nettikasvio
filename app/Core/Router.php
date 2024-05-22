@@ -24,7 +24,10 @@ class Router {
             "identification"        => ["Identification", "index"],
             "login"                 => ["Authenticator", "index"],
             "logout"                => ["Authenticator", "logout"],
-            "herbarium/add-species" => ["Herbarium", "addView"]
+            "herbarium/add-species" => ["Herbarium", "addView"],
+            "error401"              => ["Error", "error401"],
+            "error404"              => ["Error", "error404"],
+            "error500"              => ["Error", "error500"]
         ]
     ];
 
@@ -38,7 +41,7 @@ class Router {
 
         // If page url can't be found, show 404
         if (!isset(self::ROUTING_TABLE[$requestMethod][$url[0]])) {
-            //header("Location: " . site_url("error-404"));
+            header("Location: " . siteUrl("error404"));
         }
 
         // Based on the page url, get controller name and method name
@@ -53,7 +56,7 @@ class Router {
             $params = $this->getParams($url, $requestMethod);
             $this->continueToPage($controllerName, $methodName, $params);
         } else {
-            //header("Location: " . site_url("error-404"));
+            header("Location: " . siteUrl("error404"));
         }
     }
 
@@ -80,9 +83,6 @@ class Router {
                 $pageName = join("/", $tempParts);
                 if (!isset($pages[$pageName])) {
                     break;
-                    //$pageName = join("/", $parts);
-                    //$partitionedUrl = array($pageName, array_diff($partitionedUrl, $parts));
-                    //return $partitionedUrl;
                 }
                 array_push($parts, $part);
             }
