@@ -10,15 +10,12 @@ function enlargeImage(imageSrc) {
     img.src = imageSrc;
 }
 
-function addScrollIcon(direction) {
-    let icon;
-    if (direction == "right") {
-        icon = ">";
-    } else {
-        icon = "<";
-    }
-    var html = `<div class="${direction}ScrollIcon">
-                    <button onclick="${direction}Scroll.call(this)">${icon}</button>
+function addScrollIcons() {
+    var html = `<div class="rightScrollIcon">
+                    <button onclick="rightScroll.call(this)">></button>
+                </div>
+                <div class="leftScrollIcon">
+                    <button onclick="leftScroll.call(this)"><</button>
                 </div>
                 `;
     var rows = document.getElementsByClassName("gallery");
@@ -32,7 +29,7 @@ function addScrollIcon(direction) {
 
 var rightScroll = function () {
     this.parentNode.parentNode.scrollLeft += 300;
-    addScrollIcon("left");
+    this.parentNode.nextElementSibling.childNodes[1].style.display = "block";
 }
 
 var leftScroll = function () {

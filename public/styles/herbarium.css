@@ -367,6 +367,10 @@ footer div {
 	width: 30px;
 }
 
+.leftScrollIcon button {
+	display: none;
+}
+
 
 
 /*********************
