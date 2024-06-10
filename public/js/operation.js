@@ -10,6 +10,35 @@ function enlargeImage(imageSrc) {
     img.src = imageSrc;
 }
 
+function addScrollIcon(direction) {
+    let icon;
+    if (direction == "right") {
+        icon = ">";
+    } else {
+        icon = "<";
+    }
+    var html = `<div class="${direction}ScrollIcon">
+                    <button onclick="${direction}Scroll.call(this)">${icon}</button>
+                </div>
+                `;
+    var rows = document.getElementsByClassName("gallery");
+    for (const row of rows) {
+        var images = row.getElementsByTagName("img");
+        if (images.length > 3) {
+            row.insertAdjacentHTML("beforeend", html);
+        }
+    }
+}
+
+var rightScroll = function () {
+    this.parentNode.parentNode.scrollLeft += 300;
+    addScrollIcon("left");
+}
+
+var leftScroll = function () {
+    this.parentNode.parentNode.scrollLeft -= 300;
+}
+
 /////////////////////////////////////////////////////////////////////
 
 function activateLoginBox() {
@@ -46,7 +75,7 @@ function addImage() {
 
     var table = document.getElementById("imagesForm");
     if (images <= maxImages) {
-        table.insertAdjacentHTML("beforeend",html);
+        table.insertAdjacentHTML("beforeend", html);
         images++;
     }
 }

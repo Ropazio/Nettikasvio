@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: Paprika;
     src: url(../fonts/Paprika.regular.ttf);
@@ -334,14 +335,39 @@ footer div {
 	flex: none;
 }
 
-.gallery div img {
-	margin: 2px;
+.gallery img {
+	border-right: 1px solid var(--lightGrayColour);
+	border-left: 1px solid var(--lightGrayColour);
 	width: 140px;
 }
 
 .gallery::-webkit-scrollbar {
   display: none;
 }
+
+.rightScrollIcon, .leftScrollIcon {
+	position: absolute;
+    align-items: center;
+    height: 250px;
+}
+
+.rightScrollIcon {
+	right: 260px;
+}
+
+.leftScrollIcon {
+	right: 630px;
+}
+
+.rightScrollIcon button, .leftScrollIcon button {
+	opacity: 0.8;
+	border-radius: 20px;
+	border: none;
+	height: 30px;
+	width: 30px;
+}
+
+
 
 /*********************
  * Image enlargement *
@@ -398,7 +424,7 @@ footer div {
 	margin-left: 20px;
 }
 
-#loginButton{
+#loginButton {
 	border: 1px solid var(--lightGrayColour);
 	background-color: var(--lightGreenColour);
 	padding: 8px;
