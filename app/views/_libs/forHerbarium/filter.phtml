@@ -7,7 +7,7 @@
             <div class="filterColumn2">
                 <select name="colour" class="filterDropdown">
                     <?php
-                    echo '<option value="' . null . '" disabled hidden selected>Valitse kasvin väri</option>';
+                    echo '<option value="' . null . '" disabled hidden selected>Valitse lajin väri</option>';
                     echo '<option value="' . null . '" >ei valintaa</option>';
                     for ($i = 0; $i < $params["filterData"]["coloursCount"]; $i++) {
                         $colour = $params["filterData"]["colours"][$i];
@@ -18,7 +18,7 @@
             <div class="filterColumn3">
                 <select name="type" class="filterDropdown">';
                     <?php
-                    echo '<option value="' . null . '" disabled hidden selected>Valitse kasvin tyyppi</option>';
+                    echo '<option value="' . null . '" disabled hidden selected>Valitse lajin tyyppi</option>';
                     echo '<option value="' . null . '" >ei valintaa</option>';
                     for ($i = 0; $i < $params["filterData"]["typesCount"]; $i++) {
                         $type = $params["filterData"]["types"][$i];

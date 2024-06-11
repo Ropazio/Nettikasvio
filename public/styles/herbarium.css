@@ -292,7 +292,7 @@ footer div {
 
 #gridPlantList {
 	display: grid;
-	grid-template-columns: 20% 35% 45%;
+	grid-template-columns: 25% 30% 45%;
     justify-content: center;
     border: 1px solid;
 	border-color: var(--lightGrayColour);
