@@ -6,31 +6,68 @@ if (empty($plants)) {
     echo '<div><h4>Ei lajeja.</h4></div>';
 
 } else {
-    echo '<div id="plantList">';
-    echo    '<div id="gridPlantList">';
-    echo        '<div class="plantListColumn1"><h4>Lajin nimi</h4></div>';
-    echo        '<div class="plantListColumn2"><h4>Tiedot</h4></div>';
-    echo        '<div class="plantListColumn3"><h4>Havaintokuvat</h4></div>';
-    echo    '</div>';
 
-    foreach ($plants as $plant) {
-        echo    '<div id="gridPlantList">';
-        echo        '<div class="plantListColumn1">';
-        echo            '<p>' . $plant['name'] . '</p>';
-        echo        '</div>';
-        echo        '<div class="plantListColumn2">';
-        echo            '<p>' . $plant['info'] . '</p>';
-        echo        '</div>';
-        echo        '<div class="plantListColumn3 imageColumn">';
-        echo            '<div class="gallery">';
-        echo                '<div>';
-                            foreach ($plant['images'] as $image) {
-        echo                    '<img src="' . siteUrl("plantImg/{$image["src"]}") . '" loading="lazy"' . sprintf(" onclick='enlargeImage(\"%s\")'", siteUrl("plantImg/{$image["src"]}")) . '>';
-                            }
-        echo                '</div>';
-        echo            '</div>';
-        echo        '</div>';
+    if ($params["userParams"]["loggedIn"] && $params["userParams"]["isAdmin"]) {
+
+        echo '<div id="plantList">';
+        echo    '<div id="gridPlantListAdmin">';
+        echo        '<div class="plantListColumn1"><h4>Lajin nimi</h4></div>';
+        echo        '<div class="plantListColumn2"><h4>Tiedot</h4></div>';
+        echo        '<div class="plantListColumn3"><h4>Havaintokuvat</h4></div>';
+        echo        '<div class="plantListColumn4"><h4>Admin-toiminnot</h4></div>';
         echo    '</div>';
+
+        foreach ($plants as $plant) {
+            echo    '<div id="gridPlantListAdmin">';
+            echo        '<div class="plantListColumn1">';
+            echo            '<p>' . $plant['name'] . '</p>';
+            echo        '</div>';
+            echo        '<div class="plantListColumn2">';
+            echo            '<p>' . $plant['info'] . '</p>';
+            echo        '</div>';
+            echo        '<div class="plantListColumn3 imageColumn">';
+            echo            '<div class="gallery">';
+            echo                '<div>';
+                                foreach ($plant['images'] as $image) {
+            echo                    '<img src="' . siteUrl("plantImg/{$image["src"]}") . '" loading="lazy"' . sprintf(" onclick='enlargeImage(\"%s\")'", siteUrl("plantImg/{$image["src"]}")) . '>';
+                                }
+            echo                '</div>';
+            echo            '</div>';
+            echo        '</div>';
+            echo        '<div class="plantListColumn4">';
+            echo            '<p>' . "toiminto" . '</p>';
+            echo        '</div>';
+            echo    '</div>';
+        }
+
+    } else {
+
+        echo '<div id="plantList">';
+        echo    '<div id="gridPlantList">';
+        echo        '<div class="plantListColumn1"><h4>Lajin nimi</h4></div>';
+        echo        '<div class="plantListColumn2"><h4>Tiedot</h4></div>';
+        echo        '<div class="plantListColumn3"><h4>Havaintokuvat</h4></div>';
+        echo    '</div>';
+
+        foreach ($plants as $plant) {
+            echo    '<div id="gridPlantList">';
+            echo        '<div class="plantListColumn1">';
+            echo            '<p>' . $plant['name'] . '</p>';
+            echo        '</div>';
+            echo        '<div class="plantListColumn2">';
+            echo            '<p>' . $plant['info'] . '</p>';
+            echo        '</div>';
+            echo        '<div class="plantListColumn3 imageColumn">';
+            echo            '<div class="gallery">';
+            echo                '<div>';
+                                foreach ($plant['images'] as $image) {
+            echo                    '<img src="' . siteUrl("plantImg/{$image["src"]}") . '" loading="lazy"' . sprintf(" onclick='enlargeImage(\"%s\")'", siteUrl("plantImg/{$image["src"]}")) . '>';
+                                }
+            echo                '</div>';
+            echo            '</div>';
+            echo        '</div>';
+            echo    '</div>';
+        }
     }
 
     echo '</div>';

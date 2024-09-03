@@ -5,20 +5,20 @@ namespace app\Controllers;
 use app\{
     Core\Controller,
     Core\Sessions,
-    Models\FilterModel
+    Models\PlantsModel
 };
 
 
 class Herbarium extends Controller {
 
     public Sessions $session;
-    public FilterModel $filter;
+    public PlantsModel $plantsModel;
 
     public function __construct() {
 
         parent::__construct();
         $this->session = new Sessions();
-        $this->filter = new FilterModel();
+        $this->plantsModel = new PlantsModel();
     }
 
 
@@ -26,7 +26,7 @@ class Herbarium extends Controller {
 
         $userParams = $this->sessions->getUserSessionParams();
         $sessionParams = $this->session->getHerbariumSessionParams();
-        $plants = $this->filter->applyAndGetPlants($sessionParams["searchString"], $sessionParams["colour"], $sessionParams["type"]);
+        $plants = $this->plantsModel->applyAndGetPlants($sessionParams["searchString"], $sessionParams["colour"], $sessionParams["type"]);
         $filterData = $this->getFilterData();
         $this->session->setHerbariumSession();
 
@@ -48,7 +48,7 @@ class Herbarium extends Controller {
             $type = isset($_POST['type']) ? $_POST['type'] : null;
 
             // Convert filter names to corresponding id's.
-            $filterIds = $this->filter->convertFilterNameToId($colour, $type);
+            $filterIds = $this->plantsModel->convertFilterNameToId($colour, $type);
 
             $this->session->updateHerbariumSession($searchString, $filterIds['colourId'][0], $filterIds['typeId']);
             $sessionParams = $this->session->getHerbariumSessionParams();
@@ -60,7 +60,7 @@ class Herbarium extends Controller {
 
     public function getCountTypes() : int {
 
-        $typeCount = $this->filter->countFilterListLength(1);
+        $typeCount = $this->plantsModel->countFilterListLength(1);
 
         return $typeCount;
     }
@@ -68,7 +68,7 @@ class Herbarium extends Controller {
 
     public function getCountColours() : int {
 
-        $colourCount = $this->filter->countFilterListLength(0);
+        $colourCount = $this->plantsModel->countFilterListLength(0);
 
         return $colourCount;
     }
@@ -76,7 +76,7 @@ class Herbarium extends Controller {
 
     public function getColourNames() : array {
 
-        $colours = $this->filter->getColourNames();
+        $colours = $this->plantsModel->getColourNames();
     
         if (empty($colours)) {
             return ["Virhe filtterissä :("];
@@ -88,7 +88,7 @@ class Herbarium extends Controller {
 
     public function getTypeNames() : array {
 
-        $types = $this->filter->getTypeNames();
+        $types = $this->plantsModel->getTypeNames();
     
         if (empty($types)) {
             return ["Virhe filtterissä :("];
@@ -154,7 +154,7 @@ class Herbarium extends Controller {
                 $i++;
             }
             // Add data to database
-            $this->filter->add($speciesName, $speciesDesc, $speciesType, $speciesColour, $images);
+            $this->plantsModel->add($speciesName, $speciesDesc, $speciesType, $speciesColour, $images);
         }
 
         // Back to the add page
@@ -198,5 +198,53 @@ class Herbarium extends Controller {
             }
         }
         return $newImages;
+    }
+
+
+    public function deleteView() : void {
+
+        // make sure that this function of this class can't be accessed without admin rights
+        $this->sessions->checkUserRights();
+
+        $userParams = $this->sessions->getUserSessionParams();
+        $plantData = $this->getFilterData();
+
+        $this->view->view("herbarium/delete", [
+            "title"         => "Nettikasvio - Poista laji",
+            "lib"           => "forHerbarium",
+            "userParams"    => $userParams,
+            "plantData"     => $plantData
+        ]);
+    }
+
+
+    public function delete() : void {
+
+        // make sure that this function of this class can't be accessed without admin rights
+        $this->sessions->checkUserRights();
+
+        if (isset($_POST["deleteSpeciesButton"])) {
+            $species = $_POST[""];
+            $images = $this->plantsModel->getSpeciesImages($species);
+            $this->deleteSpeciesImages($images);
+            $this->plantsModel->delete($species);
+        } else {
+            header("Location: " . siteUrl("herbarium"));
+            exit;
+        }
+
+        // Back to the herbarium
+        header("Location: " . siteUrl("herbarium"));
+    }
+
+
+    public function deleteSpeciesImages( array $images ) : void {
+
+        foreach ($images as $image) {
+            if (!unlink(realpath("plantImg/{$image}"))) {
+                header("Location: " . siteUrl("herbarium/add-species?error=failed"));
+                exit;
+            };
+        }
     }
 }

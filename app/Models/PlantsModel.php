@@ -5,7 +5,7 @@ namespace app\Models;
 use app\Models\DatabaseModel;
 
 
-class FilterModel extends DatabaseModel {
+class PlantsModel extends DatabaseModel {
 
     public function __construct() {
 
@@ -185,5 +185,29 @@ class FilterModel extends DatabaseModel {
         foreach ($ids["colourId"] as $colour) {
             $this->pdo->prepare($query)->execute([$plantId, $colour]);
         }
+    }
+
+
+    public function delete( string $plant ) : void {
+
+        $this->pdo->prepare("DELETE FROM plants WHERE plant = ?")->execute([$plant]);
+    }
+
+
+    public function getSpeciesImages( string $plant ) : array {
+
+        $sth = $this->pdo->prepare("SELECT images FROM plants WHERE plant = ?");
+        $sth->execute([$plant]);
+
+        $images = $sth->fetch(\PDO::FETCH_ASSOC);
+
+        $images = json_decode($images["images"], true);
+
+        $imageNames = [];
+        foreach ($images as $image) {
+            array_push($imageNames, $image["src"]);
+        }
+
+        return $imageNames;
     }
 }

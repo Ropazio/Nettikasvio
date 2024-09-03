@@ -1,7 +1,12 @@
 # This .htaccess 'forwards' requests made to the project folder to public
 
 RewriteEngine On
+
+# local
 RewriteBase /Nettikasvio
+
+# server
+# RewriteBase public_html/Nettikasvio
 
 RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
 RewriteRule ^ %1 [L,NE,R=302]
