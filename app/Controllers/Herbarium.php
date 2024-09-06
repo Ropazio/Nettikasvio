@@ -218,33 +218,30 @@ class Herbarium extends Controller {
     }
 
 
-    public function delete() : void {
+    public function delete( string $plantId ) : void {
 
         // make sure that this function of this class can't be accessed without admin rights
         $this->sessions->checkUserRights();
 
-        if (isset($_POST["deleteSpeciesButton"])) {
-            $species = $_POST[""];
-            $images = $this->plantsModel->getSpeciesImages($species);
-            $this->deleteSpeciesImages($images);
-            $this->plantsModel->delete($species);
-        } else {
-            header("Location: " . siteUrl("herbarium"));
-            exit;
-        }
+        $species = (int)$plantId;
+        $images = $this->plantsModel->getSpeciesImages($species);
+        $this->deleteSpeciesImages($images);
+        $this->plantsModel->delete($species);
 
         // Back to the herbarium
         header("Location: " . siteUrl("herbarium"));
     }
 
 
-    public function deleteSpeciesImages( array $images ) : void {
+    public function deleteSpeciesImages( array $imageNames ) : void {
 
-        foreach ($images as $image) {
-            if (!unlink(realpath("plantImg/{$image}"))) {
-                header("Location: " . siteUrl("herbarium/add-species?error=failed"));
+        foreach ($imageNames as $imageName) {
+            if (file_exists(realpath("plantImg/{$imageName}"))) {
+                unlink(realpath("plantImg/{$imageName}"));
+            } else {
+                header("Location: " . siteUrl("herbarium?error=failed"));
                 exit;
-            };
+            }
         }
     }
 }

@@ -189,16 +189,16 @@ class PlantsModel extends DatabaseModel {
     }
 
 
-    public function delete( string $plant ) : void {
+    public function delete( int $plantId ) : void {
 
-        $this->pdo->prepare("DELETE FROM plants WHERE plant = ?")->execute([$plant]);
+        $this->pdo->prepare("DELETE FROM plants WHERE plants.id = ?")->execute([$plantId]);
     }
 
 
-    public function getSpeciesImages( string $plant ) : array {
+    public function getSpeciesImages( string $plantId ) : array {
 
-        $sth = $this->pdo->prepare("SELECT images FROM plants WHERE plant = ?");
-        $sth->execute([$plant]);
+        $sth = $this->pdo->prepare("SELECT images FROM plants WHERE plants.id = ?");
+        $sth->execute([$plantId]);
 
         $images = $sth->fetch(\PDO::FETCH_ASSOC);
 

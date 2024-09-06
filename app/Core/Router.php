@@ -13,21 +13,23 @@ class Router {
     // ROUTING TABLE = ["page url" => [controller name, method name/function]]
     const ROUTING_TABLE = [
         "POST" => [
-            "herbarium"             => ["Herbarium", "update"],
-            "login"                 => ["Authenticator", "login"],
-            "herbarium/add-species" => ["Herbarium", "add"]
+            "herbarium"                 => ["Herbarium", "update"],
+            "login"                     => ["Authenticator", "login"],
+            "herbarium/add-species"     => ["Herbarium", "add"],
+            "herbarium/delete-species"  => ["Herbarium", "delete"],
+            "herbarium/edit-species"  => ["Herbarium", "edit"],
         ],
         "GET" => [
-            ""                      => ["Home", "index"],
-            "herbarium"             => ["Herbarium", "index"],
-            "other"                 => ["Other", "index"],
-            "identification"        => ["Identification", "index"],
-            "login"                 => ["Authenticator", "index"],
-            "logout"                => ["Authenticator", "logout"],
-            "herbarium/add-species" => ["Herbarium", "addView"],
-            "error401"              => ["Error", "error401"],
-            "error404"              => ["Error", "error404"],
-            "error500"              => ["Error", "error500"]
+            ""                          => ["Home", "index"],
+            "herbarium"                 => ["Herbarium", "index"],
+            "other"                     => ["Other", "index"],
+            "identification"            => ["Identification", "index"],
+            "login"                     => ["Authenticator", "index"],
+            "logout"                    => ["Authenticator", "logout"],
+            "herbarium/add-species"     => ["Herbarium", "addView"],
+            "error401"                  => ["Error", "error401"],
+            "error404"                  => ["Error", "error404"],
+            "error500"                  => ["Error", "error500"]
         ]
     ];
 
