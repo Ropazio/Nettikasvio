@@ -566,11 +566,11 @@ footer div {
 
 
 
-/**********************
-***********************
- * Add species form *
-***********************
-**********************/
+/*****************************
+******************************
+ * Add and edit species form *
+******************************
+*****************************/
 
 .addContainer > div, .addContainer fieldset {
 	margin-bottom: 20px;
@@ -607,6 +607,10 @@ footer div {
 
 #addSpeciesButton {
 	padding: 8px;
+}
+
+#imageNotice {
+	color: red;
 }
 
 /**************************************************

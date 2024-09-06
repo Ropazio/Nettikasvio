@@ -30,8 +30,13 @@
             <?php
             for ($i = 0; $i < $params["plantData"]["typesCount"]; $i++) {
                 $type = $params["plantData"]["types"][$i];
+                if ($type == $params["speciesData"]["type"]) {
+                    $checked = " checked";
+                } else {
+                    $checked = "";
+                }
                 echo '<div>';
-                echo    '<input type="radio" id="' . "type{$i}" . '" name="speciesType" value="' . $type . '" required>';
+                echo    '<input type="radio" id="' . "type{$i}" . '" name="speciesType" value="' . $type . '" required' . $checked . '>';
                 echo    '<label for="' . "type{$i}" . '">' . $type . '</label>';
                 echo '</div>';
             } ?>
@@ -44,8 +49,13 @@
             <?php
             for ($i = 0; $i < $params["plantData"]["coloursCount"]; $i++) {
                 $colour = $params["plantData"]["colours"][$i];
+                if (in_array($colour, $params["speciesData"]["colours"])) {
+                    $checked = " checked";
+                } else {
+                    $checked = "";
+                }
                 echo '<div>';
-                echo    '<input type="checkbox" id="' . "colour{$i}" . '" name="speciesColour[]" value="' . $colour . '">';
+                echo    '<input type="checkbox" id="' . "colour{$i}" . '" name="speciesColour[]" value="' . $colour . '"' . $checked . '>';
                 echo    '<label for="' . "colour{$i}" . '">' . $colour . '</label>';
                 echo '</div>';
             } ?>
@@ -55,6 +65,20 @@
         <!-- Images -->
         <fieldset>
             <legend>Kuvat:</legend>
+            <div id="imageNotice">
+                <p>Nykyään kasville löytyy seuraavan nimiset kuvatiedostot:</p>
+                <?php
+                echo '<div>';
+                foreach ($params["speciesData"]["images"] as $image) {
+                    echo '<div>';
+                    echo    '<input type="checkbox" id="' . $image . '" name"speciesImages[]" value"' . $image . '" checked>';
+                    echo    '<label for="' . $image . '">' . $image . '</label>';
+                    echo '</div>';
+                }
+                echo '</div>';
+                ?>
+                <p>Jos haluat säilyttää vanhat kuvat, pidä kuvatiedostot ruksittuna. Voit lisätä lisää kuvia alta.</p>
+            </div>
             <table id="imagesForm">
                 <thead>
                     <tr>
@@ -79,7 +103,7 @@
 
         <div id="addArea">
             <div>
-                <button type="submit" id="addSpeciesButton" name="addSpeciesButton">Lisää laji</button>
+                <button type="submit" id="addSpeciesButton" name="addSpeciesButton">Muokkaa lajia</button>
             </div>
         </div>
     </div>

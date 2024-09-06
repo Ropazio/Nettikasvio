@@ -252,7 +252,7 @@ class PlantsModel extends DatabaseModel {
                 "name"      => $dataWithoutColour["name"],
                 "info"      => $dataWithoutColour["info"],
                 "type"      => $dataWithoutColour["type"],
-                "colour"    => $plantColours,
+                "colours"    => $plantColours,
                 "images"    => $imageNames
         ];
 
