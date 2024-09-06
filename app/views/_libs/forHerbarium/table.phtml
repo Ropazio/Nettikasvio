@@ -63,8 +63,8 @@ if (empty($plants)) {
             echo                    '</form>';
             echo                '</div>';
             echo                '<div>';
-            echo                    '<form action="' . siteUrl("herbarium/edit-species/" . $plant['id']) . '"">';
-            echo                        '<input class="adminFunctionalityButton" type="submit" value="Muokkaa lajia"></input>';
+            echo                    '<form method="POST" action="' . siteUrl("herbarium/edit-species/" . $plant['id']) . '"">';
+            echo                        '<button class="adminFunctionalityButton" type="submit" name="editSpeciesButton">Muokkaa lajia</button>';
             echo                    '</form>';
             echo                '</div>';
             echo            '</div>';

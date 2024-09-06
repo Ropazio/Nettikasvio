@@ -195,7 +195,7 @@ class PlantsModel extends DatabaseModel {
     }
 
 
-    public function getSpeciesImages( string $plantId ) : array {
+    public function getSpeciesImages( int $plantId ) : array {
 
         $sth = $this->pdo->prepare("SELECT images FROM plants WHERE plants.id = ?");
         $sth->execute([$plantId]);
@@ -210,5 +210,52 @@ class PlantsModel extends DatabaseModel {
         }
 
         return $imageNames;
+    }
+
+
+    public function getSpeciesData( int $plantId ) : array {
+
+        // Fetch all plant data except colour
+        $dataWithoutColourQuery =   "SELECT DISTINCT plants.name AS name, plants.info AS info, plants.images AS images, plantsType.typeName AS type
+                                    FROM plants
+                                    LEFT JOIN plantsType ON plantsType.id = plants.typeId
+                                    WHERE plants.id = ?";
+
+        $sth = $this->pdo->prepare($dataWithoutColourQuery);
+        $sth->execute([$plantId]);
+
+        $dataWithoutColour = $sth->fetch(\PDO::FETCH_ASSOC);
+
+        // Decode and add plant images to an array
+        $images = json_decode($dataWithoutColour["images"], true);
+
+        $imageNames = [];
+        foreach ($images as $image) {
+            array_push($imageNames, $image["src"]);
+        }
+
+        // Fetch plant colour data
+        $colourQuery = "SELECT colours.colourName AS colour
+                        FROM plants
+                        LEFT JOIN plantsColour ON plantsColour.plantId = plants.id
+                        LEFT JOIN colours ON colours.id = plantsColour.colourId
+                        WHERE plants.id = ?";
+
+        $sth = $this->pdo->prepare($colourQuery);
+        $sth->execute([$plantId]);
+
+        $plantColours = $sth->fetchAll(\PDO::FETCH_COLUMN);
+
+
+        // Add all plant data to an associative array
+        $speciesData = [
+                "name"      => $dataWithoutColour["name"],
+                "info"      => $dataWithoutColour["info"],
+                "type"      => $dataWithoutColour["type"],
+                "colour"    => $plantColours,
+                "images"    => $imageNames
+        ];
+
+        return $speciesData;
     }
 }

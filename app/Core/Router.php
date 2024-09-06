@@ -15,9 +15,10 @@ class Router {
         "POST" => [
             "herbarium"                 => ["Herbarium", "update"],
             "login"                     => ["Authenticator", "login"],
-            "herbarium/add-species"     => ["Herbarium", "add"],
-            "herbarium/delete-species"  => ["Herbarium", "delete"],
-            "herbarium/edit-species"  => ["Herbarium", "edit"],
+            "herbarium/add-species"     => ["Herbarium", "addSpecies"],
+            "herbarium/delete-species"  => ["Herbarium", "deleteSpecies"],
+            "herbarium/edit-species"    => ["Herbarium", "editSpecies"],
+            "herbarium/update-species"  => ["Herbarium", "updateSpecies"],
         ],
         "GET" => [
             ""                          => ["Home", "index"],
@@ -131,7 +132,7 @@ class Router {
 
         $controller = new ("app\Controllers\\" . $controllerName)();
 
-        if ($methodName == "delete") {
+        if (($methodName == "deleteSpecies") || ($methodName == "editSpecies")) {
             $controller->$methodName($params);
         } else {
             $controller->$methodName();

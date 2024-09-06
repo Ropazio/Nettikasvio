@@ -128,7 +128,7 @@ class Herbarium extends Controller {
     }
 
 
-    public function add() : void {
+    public function addSpecies() : void {
 
         // make sure that this function of this class can't be accessed without admin rights
         $this->sessions->checkUserRights();
@@ -206,24 +206,7 @@ class Herbarium extends Controller {
     }
 
 
-    public function deleteView() : void {
-
-        // make sure that this function of this class can't be accessed without admin rights
-        $this->sessions->checkUserRights();
-
-        $userParams = $this->sessions->getUserSessionParams();
-        $plantData = $this->getFilterData();
-
-        $this->view->view("herbarium/delete", [
-            "title"         => "Nettikasvio - Poista laji",
-            "lib"           => "forHerbarium",
-            "userParams"    => $userParams,
-            "plantData"     => $plantData
-        ]);
-    }
-
-
-    public function delete( string $plantId ) : void {
+    public function deleteSpecies( string $plantId ) : void {
 
         // make sure that this function of this class can't be accessed without admin rights
         $this->sessions->checkUserRights();
@@ -249,4 +232,72 @@ class Herbarium extends Controller {
             }
         }
     }
+
+
+    public function editSpecies( string $plantId ) : void {
+
+        $plantId = (int)$plantId;
+
+        $this->editView($plantId);
+    }
+
+
+    public function editView( int $plantId ) : void {
+
+        // make sure that this function of this class can't be accessed without admin rights
+        $this->sessions->checkUserRights();
+
+        // Data for the specific plant
+        $speciesData = $this->plantsModel->getSpeciesData($plantId);
+
+        $userParams = $this->sessions->getUserSessionParams();
+        $plantData = $this->getFilterData();
+
+        $this->view->view("herbarium/edit", [
+            "title"         => "Nettikasvio - Muokkaa lajia",
+            "lib"           => "forHerbarium",
+            "userParams"    => $userParams,
+            "plantData"     => $plantData,
+            "speciesData"   => $speciesData
+        ]);
+    }
+
+
+    public function updateSpecies() : void {
+
+        // make sure that this function of this class can't be accessed without admin rights
+        $this->sessions->checkUserRights();
+
+        if (isset($_POST["editSpeciesButton"])) {
+            // Species info
+            $speciesName = $_POST["speciesName"];
+            $speciesDesc = $_POST["speciesDesc"];
+            $speciesType = $_POST["speciesType"];
+            $speciesColour = $_POST["speciesColour"];
+
+            // Species images
+            $images = [];
+            $files = $this->restructureImages($_FILES["images"]);
+            $i = 0;
+
+            foreach($files as $image) {
+                $images[] = [
+                    "src"      => $image["name"]
+                ];
+                // Save image to img/projects
+                $this->addToImagesFolder($image["name"], $image["tmp_name"]);
+                $i++;
+            }
+
+            // DELETE IMAGES FROM THE FOLDER THAT ARE NOT IN THE DATABASE
+
+            // Add data to database
+            $this->plantsModel->update($speciesName, $speciesDesc, $speciesType, $speciesColour, $images);
+        }
+
+        // Back to the add page
+        header("Location: " . siteUrl("herbarium/add-species?success"));
+    }
+
+
 }
