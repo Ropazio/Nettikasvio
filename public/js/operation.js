@@ -52,6 +52,17 @@ function activateLoginBox() {
     }
 }
 
+document.addEventListener('click', function(event) {
+    let infoBox = document.getElementById("loginInfoBox");
+    let icon = document.getElementById("loginBoxIcon");
+    var outsideInfoBox = !(infoBox.contains(event.target) || icon.contains(event.target));
+    if (outsideInfoBox) {
+        infoBox.style.visibility = "hidden";
+        infoBox.style.right = "-280px";
+        icon.style.right = "0px";
+    }
+});
+
 /////////////////////////////////////////////////////////////////////
 
 var images = 1;
