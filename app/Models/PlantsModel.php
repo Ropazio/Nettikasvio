@@ -16,7 +16,7 @@ class PlantsModel extends DatabaseModel {
     public function applyAndGetPlants( ?string $searchString, ?int $colourId, ?int $typeId) : array {
 
         // Fetch plant name and type by joining plantsType - id with plants - type id.
-        $query =    "SELECT DISTINCT plants.name AS name, plants.info AS info, plants.images AS images
+        $query =    "SELECT DISTINCT plants.name AS name, plants.info AS info, plants.images AS images, plants.id AS id
                     FROM plants
                     LEFT JOIN plantsType ON plantsType.id = plants.typeId
                     LEFT JOIN plantsColour ON plantsColour.plantId = plants.id
@@ -77,6 +77,7 @@ class PlantsModel extends DatabaseModel {
 
         foreach ($plants as &$plant) {
             $plant = [
+                "id"        => $plant["id"],
                 "name"      => $plant["name"],
                 "info"      => $plant["info"],
                 "images"    => json_decode($plant["images"], true)

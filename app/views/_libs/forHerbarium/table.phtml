@@ -2,6 +2,12 @@
 
 $plants = $params["plants"];
 
+if ($params["userParams"]["loggedIn"] && $params["userParams"]["isAdmin"]) {
+    echo    '<div>';
+    echo        '<a class="" href="' . siteUrl("herbarium/add-species") . '">Lisää laji</a>';
+    echo    '</div>';
+}
+
 if (empty($plants)) {
     echo '<div><h4>Ei lajeja.</h4></div>';
 
@@ -35,7 +41,14 @@ if (empty($plants)) {
             echo            '</div>';
             echo        '</div>';
             echo        '<div class="plantListColumn4">';
-            echo            '<p>' . "toiminto" . '</p>';
+            echo            '<div>';
+            echo                '<form method="POST" action="' . siteUrl('herbarium/delete-species/' . $plant['id']) . '"">';
+            echo                    '<button type="submit" name="deletePlant" class="deletePlantButton">Poista laji</button>';
+            echo                '</form>';
+            echo            '</div>';
+            echo            '<div>';
+            echo                '<a class="" href="' . siteUrl("herbarium/edit-species") . '">Muokkaa lajia</a>';
+            echo            '</div>';
             echo        '</div>';
             echo    '</div>';
         }
