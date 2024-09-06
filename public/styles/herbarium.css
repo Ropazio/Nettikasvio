@@ -92,6 +92,7 @@ body {
 }
 
 
+
 /********************
 
  * Navigator stuff * 
@@ -277,6 +278,29 @@ footer div {
 	transition: 0.1s ease-out;
 }
 
+
+
+/**********************
+ * Herbarium admin *
+**********************/
+
+.adminButton {
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+.adminFunctionalityButton {
+	border: 1px solid var(--lightGrayColour);
+	background-color: var(--lightGreenColour);
+	padding: 8px;
+	border-radius: 4px;
+	font-family: Paprika;
+	margin-bottom: 10px;
+}
+
+#adminFunctionalities {
+	margin-top: 20px;
+}
 
 
 /**********************

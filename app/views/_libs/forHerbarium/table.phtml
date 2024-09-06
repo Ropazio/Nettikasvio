@@ -3,8 +3,11 @@
 $plants = $params["plants"];
 
 if ($params["userParams"]["loggedIn"] && $params["userParams"]["isAdmin"]) {
-    echo    '<div>';
-    echo        '<a class="" href="' . siteUrl("herbarium/add-species") . '">Lisää laji</a>';
+    echo    '<div class="adminArea">';
+    echo        '<h4> Jos olet varma kasvihavainnostasi, ja tiedät kasvin nimen, tieteellisen nimen, kasvin tyypin ja värin ja sinulla on kasvista ainakin yksi kuva, voit lisätä kasvin kasvioon.</h4>';
+    echo        '<div class="adminButton">';
+    echo            '<button id="addSpeciesButton" href="' . siteUrl("herbarium/add-species") . '">Lisää uusi laji</button>';
+    echo        '</div>';
     echo    '</div>';
 }
 
@@ -41,13 +44,15 @@ if (empty($plants)) {
             echo            '</div>';
             echo        '</div>';
             echo        '<div class="plantListColumn4">';
-            echo            '<div>';
-            echo                '<form method="POST" action="' . siteUrl('herbarium/delete-species/' . $plant['id']) . '"">';
-            echo                    '<button type="submit" name="deletePlant" class="deletePlantButton">Poista laji</button>';
-            echo                '</form>';
-            echo            '</div>';
-            echo            '<div>';
-            echo                '<a class="" href="' . siteUrl("herbarium/edit-species") . '">Muokkaa lajia</a>';
+            echo            '<div id="adminFunctionalities">';
+            echo                '<div>';
+            echo                    '<form method="POST" action="' . siteUrl('herbarium/delete-species/' . $plant['id']) . '"">';
+            echo                        '<button class="adminFunctionalityButton" type="submit" name="deletePlant" class="deletePlantButton">Poista laji</button>';
+            echo                    '</form>';
+            echo                '</div>';
+            echo                '<div>';
+            echo                    '<button class="adminFunctionalityButton" href="' . siteUrl("herbarium/edit-species") . '">Muokkaa lajia</button>';
+            echo                '</div>';
             echo            '</div>';
             echo        '</div>';
             echo    '</div>';
