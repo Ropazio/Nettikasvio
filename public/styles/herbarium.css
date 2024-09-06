@@ -597,7 +597,7 @@ footer div {
 	text-align: center;
 }
 
-.imageButton, #addSpeciesButton {
+.imageButton, #addSpeciesButton, #editSpeciesButton {
 	border: 1px solid var(--lightGrayColour);
 	background-color: var(--lightGreenColour);
 	padding: 6px;

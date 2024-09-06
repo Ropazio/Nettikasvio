@@ -71,7 +71,7 @@
                 echo '<div>';
                 foreach ($params["speciesData"]["images"] as $image) {
                     echo '<div>';
-                    echo    '<input type="checkbox" id="' . $image . '" name"speciesImages[]" value"' . $image . '" checked>';
+                    echo    '<input type="checkbox" id="' . $image . '" name="speciesImages[]" value="' . $image . '" checked>';
                     echo    '<label for="' . $image . '">' . $image . '</label>';
                     echo '</div>';
                 }
@@ -90,7 +90,7 @@
                 <tbody>
                     <tr>
                         <!-- Input fields for image data -->
-                        <td data-label="Kuvatiedosto:   (.jpg/.png/.jpeg)" scope="row"><input type="file" name="images[0]" required></td>
+                        <td data-label="Kuvatiedosto:   (.jpg/.png/.jpeg)" scope="row"><input type="file" name="images[0]"></td>
                         <!---->
                         <!-- Add more images button -->
                         <td id="buttonBox"><input type="button" class="imageButton" onclick="addImage()" id="addImageButton" name="addImageButton" value="Lisää"></td>
@@ -103,7 +103,7 @@
 
         <div id="addArea">
             <div>
-                <button type="submit" id="addSpeciesButton" name="addSpeciesButton">Muokkaa lajia</button>
+                <button type="submit" id="editSpeciesButton" name="editSpeciesButton">Muokkaa lajia</button>
             </div>
         </div>
     </div>

@@ -274,6 +274,7 @@ class Herbarium extends Controller {
             $speciesDesc = $_POST["speciesDesc"];
             $speciesType = $_POST["speciesType"];
             $speciesColour = $_POST["speciesColour"];
+            $speciesOldImages = $_POST["speciesImages"];
 
             // Species images
             $images = [];
