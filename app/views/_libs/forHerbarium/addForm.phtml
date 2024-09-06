@@ -1,10 +1,20 @@
 <form method="POST" action="<?= siteUrl("herbarium/add-species") ?>" enctype="multipart/form-data">
     <div class="addContainer">
+
+        <!-- Response -->
         <?php if(isset($_GET['success'])): ?>
         <div class="success">
             <h3>Kasvin lisäys onnistui. 🌱</h3>
         </div>
         <?php endif ?>
+        <?php if(isset($_GET['error'])): ?>
+        <div class="error">
+            <h3>Lisääminen epäonnistui. 🥀</h3>
+            <p>Kokeile käyttää kuville eri tiedostonimeä.</p>
+        </div>
+        <?php endif ?>
+        <!---->
+
         <div>
             <label for="speciesName">Lajin nimi:</label>
             <div><input type="text" id="speciesName" name="speciesName" required></div>
@@ -71,11 +81,6 @@
             <div>
                 <button type="submit" id="addSpeciesButton" name="addSpeciesButton">Lisää laji</button>
             </div>
-            <?php if(isset($_GET['error'])): ?> 
-            <div id="loginError" class="error">
-                <p>Lisääminen epäonnistui 🥀</p>
-            </div>
-            <?php endif ?>
         </div>
     </div>
 </form>

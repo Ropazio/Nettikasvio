@@ -169,6 +169,11 @@ class Herbarium extends Controller {
         $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
         $folder = "plantImg/{$fileName}";
 
+        if (file_exists($folder)) {
+            header("Location: " . siteUrl("herbarium/add-species?error=failed"));
+            exit;
+        }
+
         // Allow certain file formats
         $allowTypes = array("jpg","png","jpeg");
         if (in_array($fileType, $allowTypes)) {

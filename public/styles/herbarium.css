@@ -8,6 +8,7 @@
     font-family: Nature;
     src: url(../fonts/Nature.ttf);
 }
+
 html {
 	background-color: #192412;
 }
@@ -30,6 +31,7 @@ body {
 	--greenColour: #579c1e;
 	--naturalWhiteColour: #ededea;
 	--lightGrayColour: #e1e1dc;
+	--wheatColour: #c98d30;
 }
 
 /***********************
@@ -533,7 +535,8 @@ footer div {
 #authButton {
 	text-decoration: none;
 	color: var(--blackColour);
-	background-color: var(--greenColour);
+	background-color: var(--wheatColour);
+	border: 1px solid var(--greenColour);
 	padding: 5px;
 	border-radius: 4px;
 	font-family: Paprika;
@@ -546,7 +549,7 @@ footer div {
 
 #loginBoxIcon {
 	z-index: 100;
-	background: var(--greenColour);
+	background: var(--wheatColour);
 	padding: 5px;
     position: fixed;
     right: 0px;
