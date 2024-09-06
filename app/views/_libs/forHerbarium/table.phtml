@@ -8,6 +8,13 @@ if (isset($_GET['error'])) {
     echo '</div>';
 }
 
+if ((isset($_GET['success']))) {
+    echo "<h1>" . $_GET['success'] . "</h1>";
+    echo '<div class="success">';
+    echo    '<h3>Operaatio onnistui. 🌱</h3>';
+    echo '</div>';
+}
+
 if ($params["userParams"]["loggedIn"] && $params["userParams"]["isAdmin"]) {
     echo    '<div>';
     echo        '<h4> Jos olet varma kasvihavainnostasi, ja tiedät kasvin nimen, tieteellisen nimen, kasvin tyypin ja värin ja sinulla on kasvista ainakin yksi kuva, voit lisätä kasvin kasvioon.</h4>';

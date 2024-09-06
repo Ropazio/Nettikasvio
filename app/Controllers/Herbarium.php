@@ -158,7 +158,7 @@ class Herbarium extends Controller {
         }
 
         // Back to the add page
-        header("Location: " . siteUrl("herbarium/add-species"));
+        header("Location: " . siteUrl("herbarium/add-species?success"));
     }
 
 
@@ -229,7 +229,7 @@ class Herbarium extends Controller {
         $this->plantsModel->delete($species);
 
         // Back to the herbarium
-        header("Location: " . siteUrl("herbarium"));
+        header("Location: " . siteUrl("herbarium?success"));
     }
 
 
