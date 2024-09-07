@@ -278,16 +278,23 @@ class Herbarium extends Controller {
             $speciesColour = $_POST["speciesColour"];
             $speciesSavedImages = $_POST["speciesImages"];
 
+            if (!isset($speciesSavedImages)) {
+                header("Location: " . siteUrl("herbarium?error=failed"));
+                exit;
+            }
+
             // Species images
             $images = [];
-            $files = $this->restructureImages($_FILES["images"]);
-            $i = 0;
+            if (!array_sum($_FILES['images']['error']) > 0) {
+                $files = $this->restructureImages($_FILES["images"]);
+                $i = 0;
 
-            foreach ($files as $image) {
-                $images[] = $image["name"];
-                // Save image to img/projects
-                $this->addToImagesFolder($image["name"], $image["tmp_name"]);
-                $i++;
+                foreach ($files as $image) {
+                    $images[] = $image["name"];
+                    // Save image to img/projects
+                    $this->addToImagesFolder($image["name"], $image["tmp_name"]);
+                    $i++;
+                }
             }
 
             // Delete images from the folder that no longer need to be saved
