@@ -162,7 +162,7 @@ class PlantsModel extends DatabaseModel {
 
         $ids = [
             "colourId"  => $colourIds,
-            "typeId"    => (int) $idType
+            "typeId"    => (int)$idType
         ];
 
         return $ids;
@@ -192,6 +192,7 @@ class PlantsModel extends DatabaseModel {
     public function delete( int $plantId ) : void {
 
         $this->pdo->prepare("DELETE FROM plants WHERE plants.id = ?")->execute([$plantId]);
+        // TODO: remove colour links
     }
 
 
@@ -249,13 +250,29 @@ class PlantsModel extends DatabaseModel {
 
         // Add all plant data to an associative array
         $speciesData = [
+                "id"        => $plantId,
                 "name"      => $dataWithoutColour["name"],
                 "info"      => $dataWithoutColour["info"],
                 "type"      => $dataWithoutColour["type"],
-                "colours"    => $plantColours,
+                "colours"   => $plantColours,
                 "images"    => $imageNames
         ];
 
         return $speciesData;
+    }
+
+
+    public function update( int $speciesId, string $speciesName, ?string $speciesDesc, string $speciesType, array $speciesColour, array $imagesAfterUpdate) : void {
+
+        // Add project
+        $images = json_encode($imagesAfterUpdate);
+        $ids = $this->convertFilterNameToId($speciesColour, $speciesType);
+        $query = "UPDATE plants SET name = ?, info = ?, typeId = ?, images = ? WHERE plants.id = ?";
+        $this->pdo->prepare($query)->execute([$speciesName, $speciesDesc, $ids["typeId"], $images, $speciesId]);
+
+        //$query = "INSERT INTO plantsColour (plantId, colourId) VALUES (?, ?)";
+        //foreach ($ids["colourId"] as $colour) {
+        //    $this->pdo->prepare($query)->execute([$plantId, $colour]);
+        //}
     }
 }

@@ -132,7 +132,7 @@ class Router {
 
         $controller = new ("app\Controllers\\" . $controllerName)();
 
-        if (($methodName == "deleteSpecies") || ($methodName == "editSpecies")) {
+        if (($methodName == "deleteSpecies") || ($methodName == "editSpecies") || ($methodName == "updateSpecies")) {
             $controller->$methodName($params);
         } else {
             $controller->$methodName();

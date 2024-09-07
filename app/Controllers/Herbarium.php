@@ -35,7 +35,8 @@ class Herbarium extends Controller {
             "plants"        => $plants,
             "lib"           => "forHerbarium",
             "filterData"    => $filterData,
-            "userParams"    => $userParams
+            "userParams"    => $userParams,
+            "libException"  => "editForm"
         ]);
     }
 
@@ -123,7 +124,8 @@ class Herbarium extends Controller {
             "title"         => "Nettikasvio - Lisää laji",
             "lib"           => "forHerbarium",
             "userParams"    => $userParams,
-            "plantData"     => $plantData
+            "plantData"     => $plantData,
+            "libException"  => "editForm"
         ]);
     }
 
@@ -263,7 +265,7 @@ class Herbarium extends Controller {
     }
 
 
-    public function updateSpecies() : void {
+    public function updateSpecies( string $speciesId ) : void {
 
         // make sure that this function of this class can't be accessed without admin rights
         $this->sessions->checkUserRights();
@@ -274,7 +276,7 @@ class Herbarium extends Controller {
             $speciesDesc = $_POST["speciesDesc"];
             $speciesType = $_POST["speciesType"];
             $speciesColour = $_POST["speciesColour"];
-            $speciesOldImages = $_POST["speciesImages"];
+            $speciesSavedImages = $_POST["speciesImages"];
 
             // Species images
             $images = [];
@@ -282,23 +284,32 @@ class Herbarium extends Controller {
             $i = 0;
 
             foreach($files as $image) {
-                $images[] = [
-                    "src"      => $image["name"]
-                ];
+                $images[] = $image["name"];
                 // Save image to img/projects
                 $this->addToImagesFolder($image["name"], $image["tmp_name"]);
                 $i++;
             }
 
-            // DELETE IMAGES FROM THE FOLDER THAT ARE NOT IN THE DATABASE
+            // Delete images from the folder that no longer need to be saved
+            $imagesAfterUpdate = array_merge($speciesSavedImages, $images);
+            $speciesId = (int)$speciesId;
+            $this->deleteOldImages($speciesId, $imagesAfterUpdate);
 
             // Add data to database
-            $this->plantsModel->update($speciesName, $speciesDesc, $speciesType, $speciesColour, $images);
+            $this->plantsModel->update($speciesId, $speciesName, $speciesDesc, $speciesType, $speciesColour, $imagesAfterUpdate);
         }
 
         // Back to the add page
-        header("Location: " . siteUrl("herbarium/add-species?success"));
+        header("Location: " . siteUrl("herbarium/update-species?success"));
     }
 
 
+    public function deleteOldImages( int $speciesId, array $images ) : void {
+
+        $previousImages = $this->plantsModel->getSpeciesImages($speciesId);
+
+        $deletableImages = array_diff($previousImages, $images);
+
+        $this->deleteSpeciesImages($deletableImages);
+    }
 }

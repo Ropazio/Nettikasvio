@@ -46,6 +46,11 @@ class View {
 
         foreach($files as $file) {
             ob_start();
+            if (isset($params["libException"])) {
+                if (basename($file, ".phtml") == $params["libException"]) {
+                    continue;
+                }
+            }
             require($folder . "/" . $file);
             $file = basename($file, ".phtml");
             $results[$file] = ob_get_clean();
