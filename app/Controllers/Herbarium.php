@@ -27,7 +27,7 @@ class Herbarium extends Controller {
         $userParams = $this->sessions->getUserSessionParams();
         $sessionParams = $this->session->getHerbariumSessionParams();
         $plants = $this->plantsModel->applyAndGetPlants($sessionParams["searchString"], $sessionParams["colour"], $sessionParams["type"]);
-        $filterData = $this->getFilterData();
+        $filterData = $this->getSpeciesPropertyData();
         $this->session->setHerbariumSession();
 
         $this->view->view("herbarium/index", [
@@ -99,7 +99,7 @@ class Herbarium extends Controller {
     }
 
 
-    public function getFilterData() : array {
+    public function getSpeciesPropertyData() : array {
 
         $data = [
             "types"         => $this->getTypeNames(),
@@ -118,7 +118,7 @@ class Herbarium extends Controller {
         $this->sessions->checkUserRights();
 
         $userParams = $this->sessions->getUserSessionParams();
-        $plantData = $this->getFilterData();
+        $plantData = $this->getSpeciesPropertyData();
 
         $this->view->view("herbarium/add", [
             "title"         => "Nettikasvio - Lisää laji",
@@ -253,7 +253,7 @@ class Herbarium extends Controller {
         $speciesData = $this->plantsModel->getSpeciesData($plantId);
 
         $userParams = $this->sessions->getUserSessionParams();
-        $plantData = $this->getFilterData();
+        $plantData = $this->getSpeciesPropertyData();
 
         $this->view->view("herbarium/edit", [
             "title"         => "Nettikasvio - Muokkaa lajia",

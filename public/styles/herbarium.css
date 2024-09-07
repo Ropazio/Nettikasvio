@@ -27,11 +27,12 @@ body {
 	--mobileMargin: 10px;
 	/* colours */
 	--blackColour: #1A1A1A;
-	--lightGreenColour: #a2e36c;
+	--lightGreenColour: #c2d98d;
 	--greenColour: #579c1e;
+	--darkGreenColour: #306313;
 	--naturalWhiteColour: #ededea;
 	--lightGrayColour: #e1e1dc;
-	--wheatColour: #c98d30;
+	--sandColour: #c2af91;
 }
 
 /***********************
@@ -535,9 +536,8 @@ footer div {
 #authButton {
 	text-decoration: none;
 	color: var(--blackColour);
-	background-color: var(--wheatColour);
-	border: 1px solid var(--greenColour);
-	padding: 5px;
+	background-color: var(--greenColour);
+	padding: 6px;
 	border-radius: 4px;
 	font-family: Paprika;
 }
@@ -549,7 +549,8 @@ footer div {
 
 #loginBoxIcon {
 	z-index: 100;
-	background: var(--wheatColour);
+	background: var(--sandColour);
+	border: 1px solid var(--greenColour);
 	padding: 5px;
     position: fixed;
     right: 0px;
