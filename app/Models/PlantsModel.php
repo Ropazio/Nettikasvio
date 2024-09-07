@@ -191,8 +191,10 @@ class PlantsModel extends DatabaseModel {
 
     public function delete( int $plantId ) : void {
 
+        // Remove plant from the plants table
         $this->pdo->prepare("DELETE FROM plants WHERE plants.id = ?")->execute([$plantId]);
-        // TODO: remove colour links
+        // Remove colour links from the colours pivot table
+        $this->pdo->prepare("DELETE FROM plantsColour WHERE plantId = ?")->execute([$plantId]);
     }
 
 
@@ -270,9 +272,13 @@ class PlantsModel extends DatabaseModel {
         $query = "UPDATE plants SET name = ?, info = ?, typeId = ?, images = ? WHERE plants.id = ?";
         $this->pdo->prepare($query)->execute([$speciesName, $speciesDesc, $ids["typeId"], $images, $speciesId]);
 
-        //$query = "INSERT INTO plantsColour (plantId, colourId) VALUES (?, ?)";
-        //foreach ($ids["colourId"] as $colour) {
-        //    $this->pdo->prepare($query)->execute([$plantId, $colour]);
-        //}
+        // Delete old links from the colours pivot table
+        $this->pdo->prepare("DELETE FROM plantsColour WHERE plantId = ?")->execute([$speciesId]);
+
+        // Add new links to the colours pivot table
+        $query = "INSERT INTO plantsColour (plantId, colourId) VALUES (?, ?)";
+        foreach ($ids["colourId"] as $colour) {
+            $this->pdo->prepare($query)->execute([$speciesId, $colour]);
+        }
     }
 }

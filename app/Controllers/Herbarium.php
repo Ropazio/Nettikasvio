@@ -283,7 +283,7 @@ class Herbarium extends Controller {
             $files = $this->restructureImages($_FILES["images"]);
             $i = 0;
 
-            foreach($files as $image) {
+            foreach ($files as $image) {
                 $images[] = $image["name"];
                 // Save image to img/projects
                 $this->addToImagesFolder($image["name"], $image["tmp_name"]);
@@ -295,8 +295,16 @@ class Herbarium extends Controller {
             $speciesId = (int)$speciesId;
             $this->deleteOldImages($speciesId, $imagesAfterUpdate);
 
+            // Prepare species images in proper format
+            $speciesImages = [];
+            foreach ($imagesAfterUpdate as $speciesImage) {
+                $speciesImages[] = [
+                    "src"      => $speciesImage
+                ];
+            }
+
             // Add data to database
-            $this->plantsModel->update($speciesId, $speciesName, $speciesDesc, $speciesType, $speciesColour, $imagesAfterUpdate);
+            $this->plantsModel->update($speciesId, $speciesName, $speciesDesc, $speciesType, $speciesColour, $speciesImages);
         }
 
         // Back to the add page
