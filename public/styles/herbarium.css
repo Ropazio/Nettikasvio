@@ -1,12 +1,12 @@
 
 @font-face {
     font-family: Paprika;
-    src: url(../fonts/Paprika.regular.ttf);
+    src: url(/Nettikasvio/fonts/paprika.regular.ttf);
 }
 
 @font-face {
     font-family: Nature;
-    src: url(../fonts/Nature.ttf);
+    src: url(/Nettikasvio/fonts/Nature.ttf);
 }
 
 html {
@@ -14,7 +14,7 @@ html {
 }
 
 body {
-	background: url(public/img/bg.jpg);
+	background: url(/Nettikasvio/img/bg.jpg);
 	background-size: 100%;
 	background-attachment: fixed;
 	font-family: Paprika, Serif;
@@ -186,7 +186,7 @@ footer div {
 }
 
 #catButton {
-    background: url(../img/github.png);
+    background: url(/Nettikasvio/img/github.png);
     background-size: 100%;
     border: 1px solid black;
     border-radius: 50%;

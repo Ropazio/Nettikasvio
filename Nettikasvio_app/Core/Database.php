@@ -19,7 +19,7 @@ class Database extends PDO {
             'password'      => '',
             'options'       => []
         ];
-    
+
         $this->pdo = new PDO(
             "mysql:host=127.0.0.1;dbname=". $dbConfig["name"],
             $dbConfig["user"],

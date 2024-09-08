@@ -1,3 +1,7 @@
 <?php
 
-require_once "../app/bootstrap.php";
+// Lokaalissa
+require_once "../Nettikasvio_app/bootstrap.php";
+
+// Servulla
+//require_once "../../Nettikasvio_app/bootstrap.php";
