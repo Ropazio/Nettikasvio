@@ -6,17 +6,16 @@
             <h3 id="usernameText">
                 <strong><?= $params["userParams"]["username"]?></strong>
             </h3>
-
-            <div>
-                <a id="authButton" href="<?= siteUrl("logout") ?>">Kirjaudu ulos</a>
-            </div>
+            <form action="<?= siteUrl("logout") ?>">
+                <button id="authButton" type="submit">Kirjaudu ulos</button>
+            </form>
         </div>
         <?php else: ?>
         <p>Et ole kirjautunut sisään.</p>
         <div>
-            <div>
-                <a id="authButton" href="<?= siteUrl("login") ?>">Kirjaudu</a>
-            </div>
+            <form action="<?= siteUrl("login") ?>">
+                <button id="authButton" type="submit">Kirjaudu</button>
+            </form>
         </div>
         <?php endif ?>
     </div>
