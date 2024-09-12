@@ -15,7 +15,7 @@ if ((isset($_GET['success']))) {
 }
 
 if ($params["userParams"]["loggedIn"] && $params["userParams"]["isAdmin"]) {
-    echo    '<div>';
+    echo    '<div id="adminText">';
     echo        '<h4> Jos olet varma kasvihavainnostasi, ja tiedät kasvin nimen, tieteellisen nimen, kasvin tyypin ja värin ja sinulla on kasvista ainakin yksi kuva, voit lisätä kasvin kasvioon.</h4>';
     echo        '<form action="' . siteUrl("herbarium/add-species") . '" class="adminButton">';
     echo            '<input type="submit" id="addSpeciesButton" value="Lisää uusi laji"></input>';
@@ -24,14 +24,14 @@ if ($params["userParams"]["loggedIn"] && $params["userParams"]["isAdmin"]) {
 }
 
 if (empty($plants)) {
-    echo '<div><h4>Ei lajeja.</h4></div>';
+    echo '<div id="plantListText"><h4>Ei lajeja.</h4></div>';
 
 } else {
 
     if ($params["userParams"]["loggedIn"] && $params["userParams"]["isAdmin"]) {
 
         echo '<div id="plantList">';
-        echo    '<div id="gridPlantListAdmin">';
+        echo    '<div class="plantListHeadlinesAdmin">';
         echo        '<div class="plantListColumn1"><h4>Lajin nimi</h4></div>';
         echo        '<div class="plantListColumn2"><h4>Tiedot</h4></div>';
         echo        '<div class="plantListColumn3"><h4>Havaintokuvat</h4></div>';
@@ -39,7 +39,7 @@ if (empty($plants)) {
         echo    '</div>';
 
         foreach ($plants as $plant) {
-            echo    '<div id="gridPlantListAdmin">';
+            echo    '<div class="gridPlantListAdmin">';
             echo        '<div class="plantListColumn1">';
             echo            '<p>' . $plant['name'] . '</p>';
             echo        '</div>';
@@ -75,14 +75,14 @@ if (empty($plants)) {
     } else {
 
         echo '<div id="plantList">';
-        echo    '<div id="gridPlantList">';
+        echo    '<div class="plantListHeadlines">';
         echo        '<div class="plantListColumn1"><h4>Lajin nimi</h4></div>';
         echo        '<div class="plantListColumn2"><h4>Tiedot</h4></div>';
         echo        '<div class="plantListColumn3"><h4>Havaintokuvat</h4></div>';
         echo    '</div>';
 
         foreach ($plants as $plant) {
-            echo    '<div id="gridPlantList">';
+            echo    '<div class="gridPlantList">';
             echo        '<div class="plantListColumn1">';
             echo            '<p>' . $plant['name'] . '</p>';
             echo        '</div>';

@@ -1,7 +1,7 @@
 
 @font-face {
     font-family: Paprika;
-    src: url(/Nettikasvio/fonts/paprika.regular.ttf);
+    src: url(/Nettikasvio/fonts/Paprika.regular.ttf);
 }
 
 @font-face {
@@ -11,6 +11,7 @@
 
 html {
 	background-color: #192412;
+	overflow-x: hidden;
 }
 
 body {
@@ -24,7 +25,8 @@ body {
 :root {
 	/* margins */
 	--generalMargin: 80px;
-	--mobileMargin: 10px;
+	--mobileMargin: 0px;
+	--mobilePadding: 10px;
 	/* colours */
 	--blackColour: #1A1A1A;
 	--lightGreenColour: #c2d98d;
@@ -33,6 +35,7 @@ body {
 	--naturalWhiteColour: #ededea;
 	--lightGrayColour: #e1e1dc;
 	--sandColour: #c2af91;
+	--lightSandColour: #e6e0d7;
 }
 
 /***********************
@@ -83,7 +86,7 @@ body {
 	margin-left: var(--generalMargin);
 	margin-right: var(--generalMargin);
 	line-height: 1.5;
-	margin-bottom: 100px;
+	min-height: 100vh;
 }
 
 .contentBox {
@@ -207,6 +210,7 @@ footer div {
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
 	box-shadow: inset 0px 0px 12px 0 rgba(0, 0, 0, 0.1);
+	min-height: 100vh;
 }
 
 
@@ -315,31 +319,44 @@ footer div {
 **********************/
 
 #plantList {
-	border: 1px solid;
-	border-color: var(--lightGrayColour);
-	border-radius: 4px;
 	background-color: #FFF;
 }
 
-#gridPlantList {
+.plantListHeadlines {
 	display: grid;
-	grid-template-columns: 25% 30% 45%;
+	grid-template-columns: 25% 25% 50%;
     justify-content: center;
-    border: 1px solid;
-	border-color: var(--lightGrayColour);
+	background-color: var(--lightSandColour);
+	border: 1px solid var(--lightGreenColour);
 }
 
-#gridPlantListAdmin {
+.plantListHeadlinesAdmin {
 	display: grid;
-	grid-template-columns: 20% 20% 40% 20%;
+	grid-template-columns: 20% 15% 45% 20%;
     justify-content: center;
-    border: 1px solid;
-	border-color: var(--lightGrayColour);
+    background-color: var(--lightSandColour);
+    border: 1px solid var(--lightGreenColour);
+}
+
+.gridPlantList {
+	display: grid;
+	grid-template-columns: 25% 25% 50%;
+    justify-content: center;
+	font-size: small;
+	border-top: 1px solid var(--lightGrayColour);
+}
+
+.gridPlantListAdmin {
+	display: grid;
+	grid-template-columns: 20% 15% 45% 20%;
+    justify-content: center;
+    font-size: small;
+	border-top: 1px solid var(--lightGrayColour);
 }
 
 .plantListColumn1, .plantListColumn2, .plantListColumn3, .plantListColumn4 {
 	display: inherit;
-	margin-left: 20px;
+	margin-left: 10px;
 	justify-content: left;
 }
 
@@ -620,14 +637,28 @@ footer div {
 ***************************************************
 **************************************************/
 
-@media(max-width: 768px) {
+@media(max-width: 992px) {
+
+/* General, containing page main headline, navi and general layout */
 
     body {
         margin: 0px;
+        font-size: small;
     }
 
     .pageBackground {
     	width: 100%;
+    }
+
+    #mainHeadline {
+    	transform: scale(1.2);
+    }
+
+    #mainHeadlineBox {
+    	margin-right: var(--mobileMargin);
+    	margin-left: var(--mobileMargin);
+    	border-radius: 0px;
+    	padding: var(--mobilePadding);
     }
 
     #navi, .contentArea, #filter, #plantList {
@@ -635,8 +666,100 @@ footer div {
     	margin-left: var(--mobileMargin);
     }
 
-    #mainHeadlineBox {
-    	margin-right: 0px;
-    	margin-left: 0px;
-    	border-radius: 0px;
+    .textArea {
+    	padding-left: var(--mobilePadding);
+    	padding-right: var(--mobilePadding);
+    	padding-top: 10px;
     }
+
+    .link {
+    	font-size: x-large;
+    }
+
+    footer div {
+    	margin-left: var(--mobileMargin);
+    }
+
+    #githubArea {
+    	margin-left: 15px;
+    }
+
+/* Buttons everywhere */
+
+    #searchButton, #addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, .adminFunctionalityButton {
+    	font-size: smaller;
+    }
+
+    #searchButton {
+    	margin-left: 0px;
+    }
+
+    .adminButton {
+    	text-align: center;
+    }
+
+/* Herbarium general stuff */
+
+    .contentBox {
+    	padding: 0px;
+    }
+
+    #adminText {
+    	margin: 10px;
+    }
+
+    .gridPlantListAdmin, .gridPlantList {
+    	font-size: smaller;
+    }
+
+/* Filter in herbarium */
+
+    .filterDropdown, #textSearch {
+    	font-size: smaller;
+    	padding: 6px;
+    }
+
+    #filter {
+    	height: 110px;
+    }
+
+    #gridFilter {
+    	grid-template-columns: 100%;
+    }
+
+    .filterColumn2 {
+    	grid-column: 1;
+    	grid-row: 2;
+    }
+
+    .filterColumn3 {
+    	grid-column: 1;
+    	grid-row: 3;
+    }
+
+    .filterColumn4 {
+    	grid-column: 1;
+    	grid-row: 4;
+    }
+
+/* Plantlist in herbarium */
+
+	.plantListColumn1, .plantListColumn2 {
+		margin-left: 5px;
+	}
+
+	.plantListColumn4 {
+		padding-left: 5px;
+	}
+
+	.gridPlantListAdmin, .plantListHeadlinesAdmin  {
+		grid-template-columns: 25% 25% 30% 20%;		
+	}
+
+	.rightScrollIcon, .leftScrollIcon {
+		display: none;
+	}
+
+	#plantListText {
+    	margin: 10px;		
+	}
