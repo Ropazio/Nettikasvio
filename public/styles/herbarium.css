@@ -91,6 +91,7 @@ body {
     margin-right: var(--generalMargin);
     line-height: 1.5;
     min-height: 100vh;
+    margin-bottom: 100px;
 }
 
 .contentBox {
@@ -604,17 +605,17 @@ footer div {
 
 /* General button stuff */
 
-#searchButton, #addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, .adminFunctionalityButton, #authButton {
+#searchButton, #addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, #removeImageButton, .adminFunctionalityButton, #authButton {
     border-radius: 2px;
     font-family: Paprika;
     padding: 6px;
 }
 
-#addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, #authButton {
+#addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, #removeImageButton, #authButton {
     width: 125px;
 }
 
-#searchButton:hover, #addSpeciesButton:hover, #editSpeciesButton:hover, #loginButton:hover, #addImageButton:hover, .adminFunctionalityButton:hover, #authButton:hover {
+#searchButton:hover, #addSpeciesButton:hover, #editSpeciesButton:hover, #loginButton:hover, #addImageButton:hover, #removeImageButton:hover, .adminFunctionalityButton:hover, #authButton:hover {
     color: var(--grayColour);
     transition: 0.1s ease-out;
 }
@@ -671,7 +672,7 @@ footer div {
 
 /* Buttons */
 
-    #searchButton, #addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, .adminFunctionalityButton {
+    #searchButton, #addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, .adminFunctionalityButton, #removeImageButton {
         font-size: smaller;
         width: 100%;
     }
@@ -817,7 +818,7 @@ footer div {
     }
 
     #plantListText {
-        margin: 10px;       
+        margin: 10px;
     }
 
     .rightScrollIcon, .leftScrollIcon {

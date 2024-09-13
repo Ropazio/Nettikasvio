@@ -50,7 +50,8 @@ if (empty($plants)) {
             echo            '<div class="gallery">';
             echo                '<div>';
                                 foreach ($plant['images'] as $image) {
-            echo                    '<img src="' . siteUrl("plantImg/{$image["src"]}") . '" loading="lazy"' . sprintf(" onclick='enlargeImage(\"%s\")'", siteUrl("plantImg/{$image["src"]}")) . '>';
+                                    $thumbnail = pathinfo($image["src"], PATHINFO_FILENAME) . "-small." . pathinfo($image["src"], PATHINFO_EXTENSION);
+            echo                    '<img src="' . siteUrl("plantImg/thumbnails/{$thumbnail}") . '" loading="lazy"' . sprintf(" onclick='enlargeImage(\"%s\")'", siteUrl("plantImg/{$image["src"]}")) . '>';
                                 }
             echo                '</div>';
             echo            '</div>';

@@ -178,14 +178,53 @@ class Herbarium extends Controller {
 
         // Allow certain file formats
         $allowTypes = array("jpg","png","jpeg");
-        if (in_array($fileType, $allowTypes)) {
+        if (in_array(strtolower($fileType), $allowTypes)) {
             if (!move_uploaded_file($imageTmpName, $folder)) {
                 header("Location: " . siteUrl("herbarium/add-species?error=failed"));
                 exit;
+            } else {
+                $this->createThumbnail($imageName, $fileType);
             }
         } else {
             header("Location: " . siteUrl("herbarium/add-species?error=failed"));
             exit;
+        }
+    }
+
+
+    public function createThumbnail( string $originalImage, string $fileType ) : void {
+
+        $originalPath = "plantImg/{$originalImage}";
+
+        // Get new dimensions
+        list($width, $height) = getimagesize($originalPath);
+        $newWidth = 140;
+        $newHeight =  round($newWidth * $height / $width);
+
+        // Resample
+        if (imagecreatetruecolor($newWidth, $newHeight)) {
+            $imageTrueColour = imagecreatetruecolor($newWidth, $newHeight);
+        } else {
+            header("Location: " . siteUrl("herbarium/add-species?error=failed"));
+            exit;
+        }
+        if ($fileType != "png") {
+            $image = imagecreatefromjpeg($originalPath);
+        } else {
+            $image = imagecreatefrompng($originalPath);
+        }
+        if (!imagecopyresampled($imageTrueColour, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height)) {
+            header("Location: " . site_url("herbarium/add-species?error=failed"));
+            exit;
+        }
+
+        // Save
+        $fileName = pathinfo($originalImage, PATHINFO_FILENAME) . "-small." . pathinfo($originalImage, PATHINFO_EXTENSION);
+        $folder = "plantImg/thumbnails/{$fileName}";
+        if ($fileType != "png") {
+            imagejpeg($imageTrueColour, $folder, 100);
+        } else {
+            imagepng($imageTrueColour, $folder);
         }
     }
 
@@ -226,8 +265,10 @@ class Herbarium extends Controller {
     public function deleteSpeciesImages( array $imageNames ) : void {
 
         foreach ($imageNames as $imageName) {
-            if (file_exists(realpath("plantImg/{$imageName}"))) {
+            $thumbnail = pathinfo($imageName, PATHINFO_FILENAME) . "-small." . pathinfo($imageName, PATHINFO_EXTENSION);
+            if ((file_exists(realpath("plantImg/{$imageName}"))) && (file_exists(realpath("plantImg/thumbnails/{$thumbnail}")))) {
                 unlink(realpath("plantImg/{$imageName}"));
+                unlink(realpath("plantImg/thumbnails/{$thumbnail}"));
             } else {
                 header("Location: " . siteUrl("herbarium?error=failed"));
                 exit;
