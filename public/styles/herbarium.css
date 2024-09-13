@@ -10,32 +10,32 @@
 }
 
 html {
-	background-color: #192412;
-	overflow-x: hidden;
+    background-color: #192412;
+    overflow-x: hidden;
 }
 
 body {
-	background: url(/Nettikasvio/img/bg.jpg);
-	background-size: 100%;
-	background-attachment: fixed;
-	font-family: Paprika, Serif;
-	margin: 0px;
-	overflow-x: hidden;
+    background: url(/Nettikasvio/img/bg.jpg);
+    background-size: 100%;
+    background-attachment: fixed;
+    font-family: Paprika, Serif;
+    margin: 0px;
+    overflow-x: hidden;
 }
 
 :root {
-	/* margins */
-	--generalMargin: 80px;
-	--mobileMargin: 0px;
-	--mobilePadding: 10px;
-	/* colours */
-	--blackColour: #1A1A1A;
-	--grayColour: #4a5047;
-	--lightGreenColour: #c2d98d;
-	--greenColour: #579c1e;
-	--naturalWhiteColour: #ededea;
-	--lightGrayColour: #e1e1dc;
-	--lightSandColour: #c8beb1;
+    /* margins */
+    --generalMargin: 80px;
+    --mobileMargin: 0px;
+    --mobilePadding: 10px;
+    /* colours */
+    --blackColour: #1A1A1A;
+    --grayColour: #4a5047;
+    --lightGreenColour: #c2d98d;
+    --greenColour: #579c1e;
+    --naturalWhiteColour: #ededea;
+    --lightGrayColour: #e1e1dc;
+    --lightSandColour: #c8beb1;
 }
 
 /***********************
@@ -45,64 +45,64 @@ body {
 ***********************/
 
 #pageContainer {
-	position: relative;
-	min-height: 100vh;
+    position: relative;
+    min-height: 100vh;
 }
 
 /* Main content box */
 .pageBackground {
-	margin: auto;
-	width: 90%;
-	padding-top: 20px;
-	padding-bottom: 20px;
+    margin: auto;
+    width: 90%;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 /* Headline box */
 #mainHeadlineBox {
-	padding: 30px;
-	margin: auto;
-	margin-left: 200px;
-	margin-right: 200px;
+    padding: 30px;
+    margin: auto;
+    margin-left: 200px;
+    margin-right: 200px;
 }
 
 /* Main headline for the page */
 #mainHeadline {
-	transform: scale(2);
-	text-align: center;
+    transform: scale(2);
+    text-align: center;
 }
 
 #linkMain {
-	text-decoration: none;
-	color: #FFF;
-	font-family: Nature;
-	font-size: xxx-large;
+    text-decoration: none;
+    color: #FFF;
+    font-family: Nature;
+    font-size: xxx-large;
 }
 
 #linkMain:hover {
-	color: var(--naturalWhiteColour);
+    color: var(--naturalWhiteColour);
 }
 
 /* Area under the table/navi */
 .contentArea {
-	background-color: var(--lightGrayColour);
-	border-bottom-left-radius: 4px;
-	border-bottom-right-radius: 4px;
-	margin-left: var(--generalMargin);
-	margin-right: var(--generalMargin);
-	line-height: 1.5;
-	min-height: 100vh;
+    background-color: var(--lightGrayColour);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin-left: var(--generalMargin);
+    margin-right: var(--generalMargin);
+    line-height: 1.5;
+    min-height: 100vh;
 }
 
 .contentBox {
-	padding: 20px;
+    padding: 20px;
 }
 
 .error {
-	color: red;
+    color: red;
 }
 
 .success {
-	color: green;
+    color: green;
 }
 
 
@@ -114,51 +114,51 @@ body {
 ********************/
 
 #navi {
-	margin-left: var(--generalMargin);
-	margin-right: var(--generalMargin);
+    margin-left: var(--generalMargin);
+    margin-right: var(--generalMargin);
 }
 
 #gridNavi {
-	display: grid;
-	grid-template-columns: 33% 33% 33%;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
     justify-content: center;
     background-color: var(--greenColour);
-	border-top-left-radius: 4px;
-	border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
 .naviColumn1, .naviColumn2, .naviColumn3 {
-	padding: 10px;
-	padding-bottom: 0px;
-	display: inherit;
-	justify-content: center;
+    padding: 10px;
+    padding-bottom: 0px;
+    display: inherit;
+    justify-content: center;
 }
 
 .naviColumn1 {
-	grid-column: 1;
+    grid-column: 1;
     grid-row: 1;
 }
 
 .naviColumn2 {
-	grid-column: 2;
+    grid-column: 2;
     grid-row: 1;
 }
 
 .naviColumn3 {
-	grid-column: 3;
+    grid-column: 3;
     grid-row: 1;
 }
 
 .link {
-	text-decoration: none;
-	color: #FFF;
-	font-family: Nature;
-	font-size: xxx-large;
+    text-decoration: none;
+    color: #FFF;
+    font-family: Nature;
+    font-size: xxx-large;
 }
 
 .link:hover {
-	color: var(--lightGrayColour);
-	transition: 0.2s ease-out;
+    color: var(--lightGrayColour);
+    transition: 0.2s ease-out;
 }
 
 /*****************
@@ -168,27 +168,27 @@ body {
 *****************/
 
 footer {
-	position: absolute;
-	bottom: 0px;
-	width: 100%;
-	background-color: var(--greenColour);
-	box-shadow: inset 0px 0px 12px 0 rgba(0, 0, 0, 0.1);
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background-color: var(--greenColour);
+    box-shadow: inset 0px 0px 12px 0 rgba(0, 0, 0, 0.1);
     padding: 4px;
 }
 
 footer div {
-	display: flex;
+    display: flex;
     margin-left: var(--generalMargin);
 }
 
 #githubArea {
-	margin-left: calc(2*var(--generalMargin));
-	margin-top: auto;
+    margin-left: calc(2*var(--generalMargin));
+    margin-top: auto;
     margin-bottom: auto;
 }
 
 #footerText {
-	color: #FFF;
+    color: #FFF;
     margin-left: 20px;
 }
 
@@ -206,15 +206,15 @@ footer div {
 ********************/
 
 .textArea {
-	padding-left: var(--generalMargin);
-	padding-right: var(--generalMargin);
-	padding-top: 40px;
-	padding-bottom: 40px;
-	background-color: #FFF;
-	border-bottom-left-radius: 4px;
-	border-bottom-right-radius: 4px;
-	box-shadow: inset 0px 0px 12px 0 rgba(0, 0, 0, 0.1);
-	min-height: 100vh;
+    padding-left: var(--generalMargin);
+    padding-right: var(--generalMargin);
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #FFF;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    box-shadow: inset 0px 0px 12px 0 rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
 }
 
 
@@ -224,62 +224,63 @@ footer div {
 **********************/
 
 #filter {
-	margin-bottom: 20px;
-	background-color: var(--naturalWhiteColour);
+    margin-bottom: 20px;
+    background-color: var(--naturalWhiteColour);
 }
 
 #gridFilter {
-	display: grid;
-	grid-template-columns: 33% 27% 27% 12%;
+    display: grid;
+    grid-template-columns: 33% 27% 27% 12%;
     justify-content: center;
-	padding: 6px 6px 6px 6px;
-	height: 36px;
+    padding: 6px 6px 6px 6px;
+    height: 36px;
 }
 
 .filterColumn1 {
-	grid-column: 1;
+    grid-column: 1;
     grid-row: 1;
-	text-align: left;
+    text-align: left;
 }
 
 .filterColumn2 {
-	grid-column: 2;
+    grid-column: 2;
     grid-row: 1;
 }
 
 .filterColumn3 {
-	grid-column: 3;
+    grid-column: 3;
     grid-row: 1;
 }
 
 .filterColumn4 {
-	grid-column: 4;
+    grid-column: 4;
     grid-row: 1;
+    margin-right: 4px;
 }
 
 .filterDropdown {
-	padding: 4px;
-	border-color: var(--lightGrayColour);
-	width: 100%;
-	height: 100%;
-	font-family: Paprika;
+    padding: 4px;
+    border-color: var(--lightGrayColour);
+    width: 100%;
+    height: 100%;
+    font-family: Paprika;
 }
 
 #textSearch {
-	box-sizing: border-box;
-	border: 1px solid var(--lightGrayColour);
-	width: 100%;
-	height: 100%;
-	font-family: Paprika;
+    box-sizing: border-box;
+    border: 1px solid var(--lightGrayColour);
+    width: 100%;
+    height: 100%;
+    font-family: Paprika;
 }
 
 #searchButton{
-	border: 1px solid var(--lightGrayColour);
-	background-color: var(--lightGreenColour);
-	width: 100%;
-	height: 100%;
-	padding: 4px;
-	margin-left: 6px;
+    border: 1px solid var(--lightGrayColour);
+    background-color: var(--lightGreenColour);
+    width: 100%;
+    height: 100%;
+    padding: 4px;
+    margin-left: 4px;
 }
 
 
@@ -289,19 +290,19 @@ footer div {
 **********************/
 
 .adminButton {
-	margin-bottom: 20px;
-	text-align: left;
+    margin-bottom: 20px;
+    text-align: left;
 }
 
 .adminFunctionalityButton {
-	border: 1px solid var(--lightGrayColour);
-	background-color: var(--lightGreenColour);
-	padding: 8px;
-	margin-bottom: 10px;
+    border: 1px solid var(--lightGrayColour);
+    background-color: var(--lightGreenColour);
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 #adminFunctionalities {
-	margin-top: 12px;
+    margin-top: 12px;
 }
 
 
@@ -310,89 +311,91 @@ footer div {
 **********************/
 
 #plantList {
-	background-color: #FFF;
+    background-color: #FFF;
 }
 
 .plantListHeadlines {
-	display: grid;
-	grid-template-columns: 25% 30% 45%;
+    display: grid;
+    grid-template-columns: 25% 30% 45%;
     justify-content: center;
-	background-color: var(--lightGreenColour);
+    background-color: var(--lightGreenColour);
 }
 
 .plantListHeadlinesAdmin {
-	display: grid;
-	grid-template-columns: 20% 25% 40% 15%;
+    display: grid;
+    grid-template-columns: 20% 25% 40% 15%;
     justify-content: center;
     background-color: var(--lightGreenColour);
 }
 
 .gridPlantList {
-	display: grid;
-	grid-template-columns: 25% 30% 45%;
+    display: grid;
+    grid-template-columns: 25% 30% 45%;
     justify-content: center;
-	font-size: small;
-	border-top: 1px solid var(--lightGrayColour);
+    font-size: small;
+    border-top: 1px solid var(--lightGrayColour);
 }
 
 .gridPlantListAdmin {
-	display: grid;
-	grid-template-columns: 20% 25% 40% 15%;
+    display: grid;
+    grid-template-columns: 20% 25% 40% 15%;
     justify-content: center;
     font-size: small;
-	border-top: 1px solid var(--lightGrayColour);
+    border-top: 1px solid var(--lightGrayColour);
 }
 
 .plantListColumn1, .plantListColumn2, .plantListColumn3, .plantListColumn4 {
-	display: inherit;
-	margin-left: 10px;
-	justify-content: left;
+    display: inherit;
+    margin-left: 10px;
+    justify-content: left;
 }
 
 .plantListColumn1 {
-	grid-column: 1;
-	border-right: 1px solid;
-	border-color: var(--lightGrayColour);
+    grid-column: 1;
+    border-right: 1px solid;
+    border-color: var(--lightGrayColour);
 }
 
 .plantListColumn2 {
-	grid-column: 2;
-	border-right: 1px solid;
-	border-color: var(--lightGrayColour);
+    grid-column: 2;
+    border-right: 1px solid;
+    border-color: var(--lightGrayColour);
 }
 
 .plantListColumn3 {
-	grid-column: 3;
+    grid-column: 3;
 }
 
 .plantListColumn4 {
-	grid-column: 4;
-	padding-left: 10px;
-	margin-left: 0px;
-	border-left: 1px solid;
-	border-color: var(--lightGrayColour);
+    grid-column: 4;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 0px;
+    border-left: 1px solid;
+    border-color: var(--lightGrayColour);
+    justify-content: normal;
 }
 
 .imageColumn {
-	background-color: var(--naturalWhiteColour);
-	margin-left: 0px;
+    background-color: var(--naturalWhiteColour);
+    margin-left: 0px;
 }
 
 .gallery {
-	display: flex;
-	width: inherit;
-	overflow-x: scroll;
+    display: flex;
+    width: inherit;
+    overflow-x: scroll;
 }
 
 .gallery div {
-	display: flex;
-	flex: none;
+    display: flex;
+    flex: none;
 }
 
 .gallery img {
-	border-right: 1px solid var(--lightGrayColour);
-	border-left: 1px solid var(--lightGrayColour);
-	width: 140px;
+    border-right: 1px solid var(--lightGrayColour);
+    border-left: 1px solid var(--lightGrayColour);
+    width: 140px;
 }
 
 .gallery::-webkit-scrollbar {
@@ -400,29 +403,29 @@ footer div {
 }
 
 .rightScrollIcon, .leftScrollIcon {
-	position: sticky;
+    position: sticky;
     align-items: center;
     height: 250px;
 }
 
 .rightScrollIcon {
-	right: 2%;
+    right: 2%;
 }
 
 .leftScrollIcon {
-	right: 92%;
+    right: 92%;
 }
 
 .rightScrollIcon button, .leftScrollIcon button {
-	opacity: 0.8;
-	border-radius: 20px;
-	border: none;
-	height: 30px;
-	width: 30px;
+    opacity: 0.8;
+    border-radius: 20px;
+    border: none;
+    height: 30px;
+    width: 30px;
 }
 
 .leftScrollIcon button {
-	display: none;
+    display: none;
 }
 
 
@@ -471,31 +474,30 @@ footer div {
 **********************/
 
 #loginArea {
-	display: flex;
+    display: flex;
 }
 
 #loginArea div {
-	align-content: center;
+    align-content: center;
 }
 
 #loginError {
-	margin-left: 20px;
+    margin-left: 20px;
 }
 
 #loginButton {
-	border: 1px solid var(--lightGrayColour);
-	background-color: var(--lightGreenColour);
-	padding: 6px;
+    border: 1px solid var(--lightGrayColour);
+    background-color: var(--lightGreenColour);
 }
 
 .loginContainer div div {
-	margin-top: 10px;
-	margin-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #username, #password {
-	width: 100%;
-	max-width: 340px;
+    width: 100%;
+    max-width: 340px;
 }
 
 /**********************
@@ -503,7 +505,7 @@ footer div {
 **********************/
 
 #loginInfoBox {
-	visibility: hidden;
+    visibility: hidden;
     background: var(--lightGrayColour);
     padding-bottom: 20px;
     padding-left: 20px;
@@ -522,27 +524,26 @@ footer div {
 }
 
 #loginInfoBox div div {
-	text-align: center;
+    text-align: center;
 }
 
 #loginInfoBox div div div {
-	margin-top: 40px;
+    margin-top: 40px;
 }
 
 #usernameText {
-	color: var(--greenColour);
+    color: var(--greenColour);
 }
 
 #authButton {
-	background-color: var(--greenColour);
-	border: none;
-	padding: 6px;
+    background-color: var(--greenColour);
+    border: none;
 }
 
 #loginBoxIcon {
-	z-index: 100;
-	background: var(--lightSandColour);
-	padding: 5px;
+    z-index: 100;
+    background: var(--lightSandColour);
+    padding: 5px;
     position: fixed;
     right: 0px;
     top: 70px;
@@ -553,7 +554,7 @@ footer div {
 }
 
 #loginBoxIcon:hover {
-	width: 30px;
+    width: 30px;
 }
 
 
@@ -565,42 +566,38 @@ footer div {
 *****************************/
 
 .addContainer > div, .addContainer fieldset {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 #speciesName, #speciesDesc {
-	width: 60%;
-	margin-top: 10px;
+    width: 60%;
+    margin-top: 10px;
 }
 
 #speciesDesc {
-	height: 100px;
+    height: 100px;
 }
 
 #imagesForm thead {
-	text-align: left;
+    text-align: left;
 }
 
 #imagesForm {
-	width: 100%;
+    width: 100%;
 }
 
 #buttonBox {
-	text-align: center;
+    text-align: right;
 }
 
 .imageButton, #addSpeciesButton, #editSpeciesButton {
-	border: 1px solid var(--lightGrayColour);
-	background-color: var(--lightGreenColour);
-	padding: 6px;
-}
-
-#addSpeciesButton {
-	padding: 8px;
+    border: 1px solid var(--lightGrayColour);
+    background-color: var(--lightGreenColour);
+    padding: 6px;
 }
 
 #imageNotice {
-	color: red;
+    color: red;
 }
 
 
@@ -608,13 +605,18 @@ footer div {
 /* General button stuff */
 
 #searchButton, #addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, .adminFunctionalityButton, #authButton {
-	border-radius: 2px;
-	font-family: Paprika;
+    border-radius: 2px;
+    font-family: Paprika;
+    padding: 6px;
+}
+
+#addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, #authButton {
+    width: 125px;
 }
 
 #searchButton:hover, #addSpeciesButton:hover, #editSpeciesButton:hover, #loginButton:hover, #addImageButton:hover, .adminFunctionalityButton:hover, #authButton:hover {
-	color: var(--grayColour);
-	transition: 0.1s ease-out;
+    color: var(--grayColour);
+    transition: 0.1s ease-out;
 }
 
 
@@ -625,52 +627,66 @@ footer div {
 ***************************************************
 **************************************************/
 
+/*** Tablet ***/
 @media(max-width: 1200px) {
 
-	/* Filter in herbarium */
+/* Filter in herbarium */
 
     .filterDropdown, #textSearch {
-    	font-size: smaller;
-    	padding: 6px;
+        font-size: smaller;
+        padding: 6px;
     }
 
     #filter {
-    	height: 150px;
+        height: 150px;
     }
 
     #gridFilter {
-    	grid-template-columns: 100%;
+        grid-template-columns: 100%;
     }
 
     .filterColumn2 {
-    	grid-column: 1;
-    	grid-row: 2;
-    	margin-top: 4px;
+        grid-column: 1;
+        grid-row: 2;
+        margin-top: 4px;
     }
 
     .filterColumn3 {
-    	grid-column: 1;
-    	grid-row: 3;
-    	margin-top: 4px;
+        grid-column: 1;
+        grid-row: 3;
+        margin-top: 4px;
     }
 
     .filterColumn4 {
-    	grid-column: 1;
-    	grid-row: 4;
-    	margin-top: 10px;
-    }
-
-    #searchButton {
-    	padding: 6px;
-    	margin-left: 0px;
+        grid-column: 1;
+        grid-row: 4;
+        text-align: center;
+        margin-top: 4px;
+        margin-right: 0px;
     }
 
     #filter {
-    	height: 170px;
+        height: 160px;
     }
 
+/* Buttons */
+
+    #searchButton, #addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, .adminFunctionalityButton {
+        font-size: smaller;
+        width: 100%;
+    }
+
+    #searchButton {
+        margin-left: 0px;
+    }
+
+    .adminButton {
+        text-align: center;
+    }
 }
 
+
+/*** Phone ***/
 @media(max-width: 992px) {
 
 /* General, containing page main headline, navi and general layout */
@@ -681,123 +697,135 @@ footer div {
     }
 
     .pageBackground {
-    	width: 100%;
+        width: 100%;
     }
 
     #mainHeadline {
-    	transform: scale(1.2);
+        transform: scale(1.2);
     }
 
     #mainHeadlineBox {
-    	margin-right: var(--mobileMargin);
-    	margin-left: var(--mobileMargin);
-    	border-radius: 0px;
-    	padding: var(--mobilePadding);
+        margin-right: var(--mobileMargin);
+        margin-left: var(--mobileMargin);
+        border-radius: 0px;
+        padding: var(--mobilePadding);
     }
 
     #navi, .contentArea, #filter, #plantList {
-    	margin-right: var(--mobileMargin);
-    	margin-left: var(--mobileMargin);
+        margin-right: var(--mobileMargin);
+        margin-left: var(--mobileMargin);
     }
 
     .textArea {
-    	padding-left: var(--mobilePadding);
-    	padding-right: var(--mobilePadding);
-    	padding-top: 10px;
+        padding-left: var(--mobilePadding);
+        padding-right: var(--mobilePadding);
+        padding-top: 10px;
     }
 
     .link {
-    	font-size: x-large;
+        font-size: x-large;
     }
 
     footer div {
-    	margin-left: var(--mobileMargin);
+        margin-left: var(--mobileMargin);
     }
 
     #githubArea {
-    	margin-left: 15px;
+        margin-left: 15px;
     }
 
 /* Buttons everywhere */
 
     #searchButton, #addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, .adminFunctionalityButton {
-    	font-size: smaller;
+        font-size: smaller;
     }
 
     #searchButton {
-    	padding: 6px;
-    	margin-left: 0px;
+        margin-left: 0px;
     }
 
     .adminButton {
-    	text-align: center;
+        text-align: center;
+        margin-left: 6px;
+        margin-right: 6px;
     }
 
 /* Herbarium general stuff */
 
     .contentBox {
-    	padding: 0px;
+        padding: 0px;
     }
 
     #adminText {
-    	margin: 10px;
+        margin: 10px;
     }
 
     .gridPlantListAdmin, .gridPlantList {
-    	font-size: smaller;
+        font-size: smaller;
     }
 
 /* Filter in herbarium */
 
     .filterDropdown, #textSearch {
-    	font-size: smaller;
-    	padding: 6px;
+        font-size: smaller;
+        padding: 6px;
     }
 
     #filter {
-    	height: 150px;
+        height: 145px;
     }
 
     #gridFilter {
-    	grid-template-columns: 100%;
+        grid-template-columns: 100%;
     }
 
     .filterColumn2 {
-    	grid-column: 1;
-    	grid-row: 2;
-    	margin-top: 4px;
+        grid-column: 1;
+        grid-row: 2;
+        margin-top: 4px;
     }
 
     .filterColumn3 {
-    	grid-column: 1;
-    	grid-row: 3;
-    	margin-top: 4px;
+        grid-column: 1;
+        grid-row: 3;
+        margin-top: 4px;
     }
 
     .filterColumn4 {
-    	grid-column: 1;
-    	grid-row: 4;
-    	margin-top: 10px;
+        grid-column: 1;
+        grid-row: 4;
+        margin-right: 0px;
     }
 
 /* Plantlist in herbarium */
 
-	.plantListColumn1, .plantListColumn2 {
-		margin-left: 10px;
-	}
+    .plantListColumn1, .plantListColumn2 {
+        margin-left: 10px;
+        overflow: scroll;
+    }
 
-	.plantListColumn4 {
-		padding-left: 5px;
-	}
+    .plantListColumn4 {
+        padding-left: 5px;
+    }
 
-	.gridPlantListAdmin, .plantListHeadlinesAdmin  {
-		grid-template-columns: 25% 25% 30% 20%;		
-	}
+    .gridPlantListAdmin, .plantListHeadlinesAdmin  {
+        grid-template-columns: 25% 25% 30% 20%;
+    }
 
-	#plantListText {
-    	margin: 10px;		
-	}
+    .gridPlantList, .plantListHeadlines {
+        grid-template-columns: 25% 25% 50%;
+    }
 
-	.rightScrollIcon, .leftScrollIcon {
-		visibility: hidden;
-	}
+    #plantListText {
+        margin: 10px;       
+    }
+
+    .rightScrollIcon, .leftScrollIcon {
+        visibility: hidden;
+        max-height: 150px;
+    }
+
+    .gallery img {
+        max-width: 80px;
+        max-height: 150px;
+    }

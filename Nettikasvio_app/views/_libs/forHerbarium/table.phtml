@@ -15,8 +15,8 @@ if ((isset($_GET['success']))) {
 }
 
 if ($params["userParams"]["loggedIn"] && $params["userParams"]["isAdmin"]) {
-    echo    '<div id="adminText">';
-    echo        '<h4> Jos olet varma kasvihavainnostasi, ja tiedät kasvin nimen, tieteellisen nimen, kasvin tyypin ja värin ja sinulla on kasvista ainakin yksi kuva, voit lisätä kasvin kasvioon.</h4>';
+    echo    '<div>';
+    echo        '<h4 id="adminText"> Jos olet varma kasvihavainnostasi, ja tiedät kasvin nimen, tieteellisen nimen, kasvin tyypin ja värin ja sinulla on kasvista ainakin yksi kuva, voit lisätä kasvin kasvioon.</h4>';
     echo        '<form action="' . siteUrl("herbarium/add-species") . '" class="adminButton">';
     echo            '<input type="submit" id="addSpeciesButton" value="Lisää uusi laji"></input>';
     echo        '</form>';
