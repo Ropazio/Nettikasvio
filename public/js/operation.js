@@ -47,7 +47,9 @@ var leftScroll = function () {
 var removeRightScroll = function () {
     if ((this.scrollWidth - (this.scrollLeft + this.offsetWidth)) <= 10) {
         let child = this.querySelector('.rightScrollIcon');
-        child.style.display = "none";
+        child.style.visibility = "hidden";
+    } else {
+        this.parentNode.parentNode.querySelector('.rightScrollIcon').style.visibility = "visible";
     }
 }
 
