@@ -27,13 +27,28 @@ function addScrollIcons() {
     }
 }
 
+const scrollLength = 300;
+var scrolled = 0;
+
 var rightScroll = function () {
-    this.parentNode.parentNode.scrollLeft += 300;
+    this.parentNode.parentNode.scrollLeft += scrollLength;
+    scrolled += scrollLength;
     this.parentNode.nextElementSibling.childNodes[1].style.display = "block";
 }
 
 var leftScroll = function () {
-    this.parentNode.parentNode.scrollLeft -= 300;
+    this.parentNode.parentNode.scrollLeft -= scrollLength;
+    scrolled -= scrollLength;
+    if (scrolled == 0) {
+        this.style.display = "none";
+    }
+}
+
+var removeRightScroll = function () {
+    if ((this.scrollWidth - (this.scrollLeft + this.offsetWidth)) <= 10) {
+        let child = this.querySelector('.rightScrollIcon');
+        child.style.display = "none";
+    }
 }
 
 /////////////////////////////////////////////////////////////////////

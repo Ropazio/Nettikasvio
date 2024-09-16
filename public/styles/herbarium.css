@@ -405,17 +405,17 @@ footer div {
 }
 
 .rightScrollIcon, .leftScrollIcon {
-    position: sticky;
+    position: absolute;
     align-items: center;
     height: 250px;
 }
 
 .rightScrollIcon {
-    right: 2%;
+    right: 24%;
 }
 
 .leftScrollIcon {
-    right: 92%;
+    right: 51%;
 }
 
 .rightScrollIcon button, .leftScrollIcon button {
@@ -754,8 +754,14 @@ footer div {
 
 /* Herbarium general stuff */
 
+    .contentArea {
+        border-radius: unset;
+        margin-bottom: 40px;
+    }
+
     .contentBox {
         padding: 0px;
+        padding-bottom: 4px;
     }
 
     #adminText {
