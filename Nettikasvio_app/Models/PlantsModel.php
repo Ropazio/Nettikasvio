@@ -85,7 +85,10 @@ class PlantsModel extends DatabaseModel {
 
         }
 
-        // Plants is an array with plant name and plant type.
+        // Sort plants alphabetically by name
+        $plantNames = array_column($plants, "name");
+        array_multisort($plantNames, SORT_ASC, $plants);
+
         return $plants;
     }
 
