@@ -10,6 +10,8 @@ function enlargeImage(imageSrc) {
     img.src = imageSrc;
 }
 
+/////////////////////////////////////////////////////////////////////
+
 function addScrollIcons() {
     var html = `<div class="rightScrollIcon">
                     <button onclick="rightScroll.call(this)">></button>
