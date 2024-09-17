@@ -21,8 +21,8 @@ function addScrollIcons() {
     var rows = document.getElementsByClassName("gallery");
     for (const row of rows) {
         var images = row.getElementsByTagName("img");
-        if (images.length > 3) {
-            row.insertAdjacentHTML("beforeend", html);
+        if (row.offsetWidth >= row.parentNode.offsetWidth) {
+            row.parentNode.insertAdjacentHTML("beforeend", html);
         }
     }
 }
@@ -31,13 +31,13 @@ const scrollLength = 300;
 var scrolled = 0;
 
 var rightScroll = function () {
-    this.parentNode.parentNode.scrollLeft += scrollLength;
+    this.parentNode.parentNode.querySelector('.gallery').scrollLeft += scrollLength;
     scrolled += scrollLength;
     this.parentNode.nextElementSibling.childNodes[1].style.display = "block";
 }
 
 var leftScroll = function () {
-    this.parentNode.parentNode.scrollLeft -= scrollLength;
+    this.parentNode.parentNode.childNodes[0].scrollLeft -= scrollLength;
     scrolled -= scrollLength;
     if (scrolled == 0) {
         this.style.display = "none";
@@ -46,7 +46,7 @@ var leftScroll = function () {
 
 var removeRightScroll = function () {
     if ((this.scrollWidth - (this.scrollLeft + this.offsetWidth)) <= 10) {
-        let child = this.querySelector('.rightScrollIcon');
+        let child = this.parentNode.querySelector('.rightScrollIcon');
         child.style.visibility = "hidden";
     } else {
         this.parentNode.parentNode.querySelector('.rightScrollIcon').style.visibility = "visible";

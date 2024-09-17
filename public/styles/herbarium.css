@@ -53,6 +53,7 @@ body {
 .pageBackground {
     margin: auto;
     width: 90%;
+    max-width: 1800px;
     padding-top: 20px;
     padding-bottom: 20px;
 }
@@ -380,6 +381,7 @@ footer div {
 .imageColumn {
     background-color: var(--naturalWhiteColour);
     margin-left: 0px;
+    position: relative;
 }
 
 .gallery {
@@ -406,16 +408,16 @@ footer div {
 
 .rightScrollIcon, .leftScrollIcon {
     position: absolute;
-    align-items: center;
+    align-content: center;
     height: 250px;
 }
 
 .rightScrollIcon {
-    right: 24%;
+    right: 2%;
 }
 
 .leftScrollIcon {
-    right: 51%;
+    left: 2%;
 }
 
 .rightScrollIcon button, .leftScrollIcon button {
