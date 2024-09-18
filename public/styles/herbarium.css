@@ -209,6 +209,11 @@ footer div {
     border-radius: 50%;
     height: 50px;
     width: 50px;
+    transition: 0.8s ease-in-out;
+}
+
+#catButton:hover {
+    transform: rotate(360deg);
 }
 
 /**************
@@ -726,6 +731,12 @@ footer div {
     }
 }
 
+/* Identification */
+
+.imageArea img {
+    max-width: 400px;
+}
+
 
 /*** Phone ***/
 @media(max-width: 992px) {
@@ -835,3 +846,13 @@ footer div {
         max-width: 80px;
         max-height: 150px;
     }
+
+/* Identification */
+
+.imageArea img {
+    max-width: 300px;
+}
+
+.textParagraph {
+    margin-left: 20px;
+}
