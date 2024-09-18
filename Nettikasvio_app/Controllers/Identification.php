@@ -21,7 +21,8 @@ class Identification extends Controller {
 
         $this->view->view("identification/index", [
             "title"         => "Nettikasvio - lajintunnistus",
-            "userParams"    => $userParams
+            "userParams"    => $userParams,
+            "lib"           => "forIdentification"
         ]);
     }
 }

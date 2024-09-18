@@ -46,6 +46,7 @@ class View {
 
         foreach($files as $file) {
             ob_start();
+            // Hax
             if (isset($params["libException"])) {
                 if (basename($file, ".phtml") == $params["libException"]) {
                     continue;

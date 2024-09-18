@@ -107,6 +107,14 @@ body {
     color: green;
 }
 
+.textMainHeadline, .textHeadline {
+    color: var(--greenColour);
+}
+
+.textParagraph {
+    margin-left: 40px;
+}
+
 
 
 /********************
@@ -202,6 +210,12 @@ footer div {
     height: 50px;
     width: 50px;
 }
+
+/**************
+***************
+ * Herbarium *
+***************
+**************/
 
 /********************
  * Text area *
@@ -471,6 +485,59 @@ footer div {
 
 
 
+/*****************************
+ * Add and edit species form *
+*****************************/
+
+.addContainer > div, .addContainer fieldset {
+    margin-bottom: 20px;
+}
+
+#speciesName, #speciesDesc {
+    width: 60%;
+    margin-top: 10px;
+}
+
+#speciesDesc {
+    height: 100px;
+}
+
+#imagesForm thead {
+    text-align: left;
+}
+
+#imagesForm {
+    width: 100%;
+}
+
+#buttonBox {
+    text-align: right;
+}
+
+.imageButton, #addSpeciesButton, #editSpeciesButton {
+    border: 1px solid var(--lightGrayColour);
+    background-color: var(--lightGreenColour);
+    padding: 6px;
+}
+
+#imageNotice {
+    color: red;
+}
+
+
+
+/******************
+*******************
+ * Identification *
+*******************
+******************/
+
+.imageArea img {
+    max-width: 600px;
+}
+
+
+
 /**********************
 ***********************
  * * * * Login * * * *
@@ -563,49 +630,6 @@ footer div {
 
 
 
-/*****************************
-******************************
- * Add and edit species form *
-******************************
-*****************************/
-
-.addContainer > div, .addContainer fieldset {
-    margin-bottom: 20px;
-}
-
-#speciesName, #speciesDesc {
-    width: 60%;
-    margin-top: 10px;
-}
-
-#speciesDesc {
-    height: 100px;
-}
-
-#imagesForm thead {
-    text-align: left;
-}
-
-#imagesForm {
-    width: 100%;
-}
-
-#buttonBox {
-    text-align: right;
-}
-
-.imageButton, #addSpeciesButton, #editSpeciesButton {
-    border: 1px solid var(--lightGrayColour);
-    background-color: var(--lightGreenColour);
-    padding: 6px;
-}
-
-#imageNotice {
-    color: red;
-}
-
-
-
 /* General button stuff */
 
 #searchButton, #addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, #removeImageButton, .adminFunctionalityButton, #authButton {
@@ -641,6 +665,7 @@ footer div {
         max-height: 150px;
     }
 
+    /*
     .gallery::after {
         content: "";
         position: absolute;
@@ -648,6 +673,7 @@ footer div {
         width: 100%;
         height: 100%;
     }
+    */
 
 /* Filter in herbarium */
 
