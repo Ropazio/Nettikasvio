@@ -670,15 +670,16 @@ footer div {
         max-height: 150px;
     }
 
-    /*
+
     .gallery::after {
         content: "";
         position: absolute;
         box-shadow: inset -40px 0px 30px -20px var(--naturalWhiteColour);
-        width: 100%;
+        right: 0;
+        width: 40px;
         height: 100%;
     }
-    */
+
 
 /* Filter in herbarium */
 
@@ -715,6 +716,7 @@ footer div {
         margin-right: 0px;
     }
 
+
 /* Buttons */
 
     #searchButton, #addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, .adminFunctionalityButton, #removeImageButton {
@@ -731,11 +733,12 @@ footer div {
     }
 }
 
+
 /* Identification */
 
-.imageArea img {
-    max-width: 400px;
-}
+    .imageArea img {
+        max-width: 400px;
+    }
 
 
 /*** Phone ***/
@@ -786,12 +789,14 @@ footer div {
         margin-left: 15px;
     }
 
-/* Buttons everywhere */
+
+/* Buttons */
 
     .adminButton {
         margin-left: 6px;
         margin-right: 6px;
     }
+
 
 /* Herbarium general stuff */
 
@@ -813,11 +818,13 @@ footer div {
         font-size: smaller;
     }
 
+
 /* Filter in herbarium */
 
     #filter {
         height: 145px;
     }
+
 
 /* Plantlist in herbarium */
 
@@ -847,12 +854,13 @@ footer div {
         max-height: 150px;
     }
 
+
 /* Identification */
 
-.imageArea img {
-    max-width: 300px;
-}
+    .imageArea img {
+        max-width: 300px;
+    }
 
-.textParagraph {
-    margin-left: 20px;
-}
+    .textParagraph {
+        margin-left: 20px;
+    }
