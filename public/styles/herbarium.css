@@ -731,7 +731,6 @@ footer div {
     .adminButton {
         text-align: center;
     }
-}
 
 
 /* Identification */
@@ -739,6 +738,8 @@ footer div {
     .imageArea img {
         max-width: 400px;
     }
+}
+
 
 
 /*** Phone ***/
@@ -864,3 +865,4 @@ footer div {
     .textParagraph {
         margin-left: 20px;
     }
+}
