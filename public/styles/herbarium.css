@@ -54,27 +54,24 @@ body {
   padding-bottom: 20px;
 }
 
-/* Headline box */
+/* Main headline of the page */
 #mainHeadlineBox {
   padding: 30px;
   margin: auto;
   margin-left: 200px;
   margin-right: 200px;
 }
-
-/* Main headline for the page */
-#mainHeadline {
+#mainHeadlineBox div {
   transform: scale(2);
   text-align: center;
 }
-
-#linkMain {
+#mainHeadlineBox a {
   text-decoration: none;
   color: #FFF;
   font-family: Nature;
   font-size: xxx-large;
 }
-#linkMain:hover {
+#mainHeadlineBox a:hover {
   color: var(--naturalWhiteColour);
 }
 
@@ -102,7 +99,7 @@ body {
   color: green;
 }
 
-.textMainHeadline, .textHeadline {
+.identificationText h2, .identificationText h3, .identificationText h4, .homeText h2, .homeText h3, .homeText h4 {
   color: var(--greenColour);
 }
 
@@ -118,6 +115,16 @@ body {
 #navi {
   margin-left: var(--generalMargin);
   margin-right: var(--generalMargin);
+}
+#navi a {
+  text-decoration: none;
+  color: #FFF;
+  font-family: Nature;
+  font-size: xxx-large;
+}
+#navi a:hover {
+  color: var(--lightGrayColour);
+  transition: 0.2s ease-out;
 }
 
 #gridNavi {
@@ -151,17 +158,6 @@ body {
   grid-row: 1;
 }
 
-.link {
-  text-decoration: none;
-  color: #FFF;
-  font-family: Nature;
-  font-size: xxx-large;
-}
-.link:hover {
-  color: var(--lightGrayColour);
-  transition: 0.2s ease-out;
-}
-
 /*****************
 
  * Footer stuff * 
@@ -179,16 +175,15 @@ footer div {
   display: flex;
   margin-left: var(--generalMargin);
 }
+footer h4 {
+  color: #FFF;
+  margin-left: 20px;
+}
 
 #githubArea {
   margin-left: calc(2 * var(--generalMargin));
   margin-top: auto;
   margin-bottom: auto;
-}
-
-#footerText {
-  color: #FFF;
-  margin-left: 20px;
 }
 
 #catButton {
@@ -569,8 +564,7 @@ footer div {
 #loginInfoBox div div div {
   margin-top: 40px;
 }
-
-#usernameText {
+#loginInfoBox h3 {
   color: var(--greenColour);
 }
 
@@ -685,14 +679,14 @@ footer div {
   .pageBackground {
     width: 100%;
   }
-  #mainHeadline {
-    transform: scale(1.2);
-  }
   #mainHeadlineBox {
     margin-right: var(--mobileMargin);
     margin-left: var(--mobileMargin);
     border-radius: 0px;
     padding: var(--mobilePadding);
+  }
+  #mainHeadlineBox div {
+    transform: scale(1.2);
   }
   #navi, .contentArea, #filter, #plantList {
     margin-right: var(--mobileMargin);
@@ -703,7 +697,7 @@ footer div {
     padding-right: var(--mobilePadding);
     padding-top: 10px;
   }
-  .link {
+  #navi a {
     font-size: x-large;
   }
   footer div {

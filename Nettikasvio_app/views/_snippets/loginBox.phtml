@@ -3,7 +3,7 @@
         <?php if ($params["userParams"]["loggedIn"]): ?>
         <p>Kirjautuneena käyttäjänä:</p>
         <div>
-            <h3 id="usernameText">
+            <h3>
                 <strong><?= $params["userParams"]["username"]?></strong>
             </h3>
             <form action="<?= siteUrl("logout") ?>">

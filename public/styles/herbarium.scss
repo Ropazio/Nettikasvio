@@ -59,30 +59,28 @@ body {
     padding-bottom: 20px;
 }
 
-/* Headline box */
+/* Main headline of the page */
 
 #mainHeadlineBox {
     padding: 30px;
     margin: auto;
     margin-left: 200px;
     margin-right: 200px;
-}
 
-/* Main headline for the page */
+    div {
+        transform: scale(2);
+        text-align: center;
+    }
 
-#mainHeadline {
-    transform: scale(2);
-    text-align: center;
-}
+    a {
+        text-decoration: none;
+        color: #FFF;
+        font-family: Nature;
+        font-size: xxx-large;
 
-#linkMain {
-    text-decoration: none;
-    color: #FFF;
-    font-family: Nature;
-    font-size: xxx-large;
-
-    &:hover {
-        color: var(--naturalWhiteColour);
+        &:hover {
+            color: var(--naturalWhiteColour);
+        }
     }
 }
 
@@ -111,8 +109,10 @@ body {
     color: green;
 }
 
-.textMainHeadline, .textHeadline {
-    color: var(--greenColour);
+.identificationText, .homeText {
+    h2, h3, h4 {
+        color: var(--greenColour);
+    }
 }
 
 .textParagraph {
@@ -128,6 +128,18 @@ body {
 #navi {
     margin-left: var(--generalMargin);
     margin-right: var(--generalMargin);
+
+    a {
+        text-decoration: none;
+        color: #FFF;
+        font-family: Nature;
+        font-size: xxx-large;
+
+        &:hover {
+            color: var(--lightGrayColour);
+            transition: 0.2s ease-out;
+        }
+    }
 }
 
 #gridNavi {
@@ -161,17 +173,6 @@ body {
     grid-row: 1;
 }
 
-.link {
-    text-decoration: none;
-    color: #FFF;
-    font-family: Nature;
-    font-size: xxx-large;
-
-    &:hover {
-        color: var(--lightGrayColour);
-        transition: 0.2s ease-out;
-    }
-}
 
 /*****************
 
@@ -191,17 +192,17 @@ footer {
         display: flex;
         margin-left: var(--generalMargin);
     }
+
+    h4 {
+        color: #FFF;
+        margin-left: 20px;
+    }
 }
 
 #githubArea {
     margin-left: calc(2*var(--generalMargin));
     margin-top: auto;
     margin-bottom: auto;
-}
-
-#footerText {
-    color: #FFF;
-    margin-left: 20px;
 }
 
 #catButton {
@@ -604,10 +605,10 @@ footer {
             margin-top: 40px;
         }
     }
-}
 
-#usernameText {
-    color: var(--greenColour);
+    h3 {
+        color: var(--greenColour);
+    }
 }
 
 #authButton {
@@ -743,15 +744,15 @@ footer {
         width: 100%;
     }
 
-    #mainHeadline {
-        transform: scale(1.2);
-    }
-
     #mainHeadlineBox {
         margin-right: var(--mobileMargin);
         margin-left: var(--mobileMargin);
         border-radius: 0px;
         padding: var(--mobilePadding);
+
+        div {
+            transform: scale(1.2);
+        }
     }
 
     #navi, .contentArea, #filter, #plantList {
@@ -765,8 +766,10 @@ footer {
         padding-top: 10px;
     }
 
-    .link {
-        font-size: x-large;
+    #navi {
+        a {
+            font-size: x-large;
+        }
     }
 
     footer div {
