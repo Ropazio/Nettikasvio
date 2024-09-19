@@ -1,41 +1,38 @@
-
 @font-face {
-    font-family: Paprika;
-    src: url(/Nettikasvio/fonts/Paprika.regular.ttf);
+  font-family: Paprika;
+  src: url(/Nettikasvio/fonts/Paprika.regular.ttf);
 }
-
 @font-face {
-    font-family: Nature;
-    src: url(/Nettikasvio/fonts/Nature.ttf);
+  font-family: Nature;
+  src: url(/Nettikasvio/fonts/Nature.ttf);
 }
-
 html {
-    background-color: #192412;
-    overflow-x: hidden;
+  background-color: #192412;
+  overflow-x: hidden;
 }
 
 body {
-    background: url(/Nettikasvio/img/bg.jpg);
-    background-size: 100%;
-    background-attachment: fixed;
-    font-family: Paprika, Serif;
-    margin: 0px;
-    overflow-x: hidden;
+  background: url(/Nettikasvio/img/bg.jpg);
+  background-size: 100%;
+  background-attachment: fixed;
+  font-family: Paprika, Serif;
+  margin: 0px;
+  overflow-x: hidden;
 }
 
 :root {
-    /* margins */
-    --generalMargin: 80px;
-    --mobileMargin: 0px;
-    --mobilePadding: 10px;
-    /* colours */
-    --blackColour: #1A1A1A;
-    --grayColour: #4a5047;
-    --lightGreenColour: #c2d98d;
-    --greenColour: #579c1e;
-    --naturalWhiteColour: #ededea;
-    --lightGrayColour: #e1e1dc;
-    --lightSandColour: #c8beb1;
+  /* margins */
+  --generalMargin:80px;
+  --mobileMargin:0px;
+  --mobilePadding:10px;
+  /* colours */
+  --blackColour:#1A1A1A;
+  --grayColour:#4a5047;
+  --lightGreenColour:#c2d98d;
+  --greenColour:#579c1e;
+  --naturalWhiteColour:#ededea;
+  --lightGrayColour:#e1e1dc;
+  --lightSandColour:#c8beb1;
 }
 
 /***********************
@@ -43,132 +40,126 @@ body {
  * General page stuff * 
 ************************
 ***********************/
-
 #pageContainer {
-    position: relative;
-    min-height: 100vh;
+  position: relative;
+  min-height: 100vh;
 }
 
 /* Main content box */
 .pageBackground {
-    margin: auto;
-    width: 90%;
-    max-width: 1800px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+  margin: auto;
+  width: 90%;
+  max-width: 1800px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 /* Headline box */
 #mainHeadlineBox {
-    padding: 30px;
-    margin: auto;
-    margin-left: 200px;
-    margin-right: 200px;
+  padding: 30px;
+  margin: auto;
+  margin-left: 200px;
+  margin-right: 200px;
 }
 
 /* Main headline for the page */
 #mainHeadline {
-    transform: scale(2);
-    text-align: center;
+  transform: scale(2);
+  text-align: center;
 }
 
 #linkMain {
-    text-decoration: none;
-    color: #FFF;
-    font-family: Nature;
-    font-size: xxx-large;
+  text-decoration: none;
+  color: #FFF;
+  font-family: Nature;
+  font-size: xxx-large;
 }
-
 #linkMain:hover {
-    color: var(--naturalWhiteColour);
+  color: var(--naturalWhiteColour);
 }
 
 /* Area under the table/navi */
 .contentArea {
-    background-color: var(--lightGrayColour);
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    margin-left: var(--generalMargin);
-    margin-right: var(--generalMargin);
-    line-height: 1.5;
-    min-height: 100vh;
-    margin-bottom: 100px;
+  background-color: var(--lightGrayColour);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  margin-left: var(--generalMargin);
+  margin-right: var(--generalMargin);
+  line-height: 1.5;
+  min-height: 100vh;
+  margin-bottom: 100px;
 }
 
 .contentBox {
-    padding: 20px;
+  padding: 20px;
 }
 
 .error {
-    color: red;
+  color: red;
 }
 
 .success {
-    color: green;
+  color: green;
 }
 
 .textMainHeadline, .textHeadline {
-    color: var(--greenColour);
+  color: var(--greenColour);
 }
 
 .textParagraph {
-    margin-left: 40px;
+  margin-left: 40px;
 }
-
-
 
 /********************
 
  * Navigator stuff * 
 
 ********************/
-
 #navi {
-    margin-left: var(--generalMargin);
-    margin-right: var(--generalMargin);
+  margin-left: var(--generalMargin);
+  margin-right: var(--generalMargin);
 }
 
 #gridNavi {
-    display: grid;
-    grid-template-columns: 33% 33% 33%;
-    justify-content: center;
-    background-color: var(--greenColour);
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  justify-content: center;
+  background-color: var(--greenColour);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
 .naviColumn1, .naviColumn2, .naviColumn3 {
-    padding: 10px;
-    padding-bottom: 0px;
-    display: inherit;
-    justify-content: center;
+  padding: 10px;
+  padding-bottom: 0px;
+  display: inherit;
+  justify-content: center;
 }
 
 .naviColumn1 {
-    grid-column: 1;
-    grid-row: 1;
+  grid-column: 1;
+  grid-row: 1;
 }
 
 .naviColumn2 {
-    grid-column: 2;
-    grid-row: 1;
+  grid-column: 2;
+  grid-row: 1;
 }
 
 .naviColumn3 {
-    grid-column: 3;
-    grid-row: 1;
+  grid-column: 3;
+  grid-row: 1;
 }
 
 .link {
-    text-decoration: none;
-    color: #FFF;
-    font-family: Nature;
-    font-size: xxx-large;
+  text-decoration: none;
+  color: #FFF;
+  font-family: Nature;
+  font-size: xxx-large;
 }
-
 .link:hover {
-    color: var(--lightGrayColour);
-    transition: 0.2s ease-out;
+  color: var(--lightGrayColour);
+  transition: 0.2s ease-out;
 }
 
 /*****************
@@ -176,44 +167,41 @@ body {
  * Footer stuff * 
 
 *****************/
-
 footer {
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-    background-color: var(--greenColour);
-    box-shadow: inset 0px 0px 12px 0 rgba(0, 0, 0, 0.1);
-    padding: 4px;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  background-color: var(--greenColour);
+  box-shadow: inset 0px 0px 12px 0 rgba(0, 0, 0, 0.1);
+  padding: 4px;
 }
-
 footer div {
-    display: flex;
-    margin-left: var(--generalMargin);
+  display: flex;
+  margin-left: var(--generalMargin);
 }
 
 #githubArea {
-    margin-left: calc(2*var(--generalMargin));
-    margin-top: auto;
-    margin-bottom: auto;
+  margin-left: calc(2 * var(--generalMargin));
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 #footerText {
-    color: #FFF;
-    margin-left: 20px;
+  color: #FFF;
+  margin-left: 20px;
 }
 
 #catButton {
-    background: url(/Nettikasvio/img/github.png);
-    background-size: 100%;
-    border: 1px solid black;
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-    transition: 0.8s ease-in-out;
+  background: url(/Nettikasvio/img/github.png);
+  background-size: 100%;
+  border: 1px solid black;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  transition: 0.8s ease-in-out;
 }
-
 #catButton:hover {
-    transform: rotate(360deg);
+  transform: rotate(360deg);
 }
 
 /**************
@@ -221,648 +209,561 @@ footer div {
  * Herbarium *
 ***************
 **************/
-
 /********************
  * Text area *
 ********************/
-
 .textArea {
-    padding-left: var(--generalMargin);
-    padding-right: var(--generalMargin);
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-color: #FFF;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    box-shadow: inset 0px 0px 12px 0 rgba(0, 0, 0, 0.1);
-    min-height: 100vh;
+  padding-left: var(--generalMargin);
+  padding-right: var(--generalMargin);
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #FFF;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  box-shadow: inset 0px 0px 12px 0 rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
 }
-
-
 
 /**********************
  * Filter and search * 
 **********************/
-
 #filter {
-    margin-bottom: 20px;
-    background-color: var(--naturalWhiteColour);
+  margin-bottom: 20px;
+  background-color: var(--naturalWhiteColour);
 }
 
 #gridFilter {
-    display: grid;
-    grid-template-columns: 33% 27% 27% 12%;
-    justify-content: center;
-    padding: 6px 6px 6px 6px;
-    height: 36px;
+  display: grid;
+  grid-template-columns: 33% 27% 27% 12%;
+  justify-content: center;
+  padding: 6px 6px 6px 6px;
+  height: 36px;
 }
 
 .filterColumn1 {
-    grid-column: 1;
-    grid-row: 1;
-    text-align: left;
+  grid-column: 1;
+  grid-row: 1;
+  text-align: left;
 }
 
 .filterColumn2 {
-    grid-column: 2;
-    grid-row: 1;
+  grid-column: 2;
+  grid-row: 1;
 }
 
 .filterColumn3 {
-    grid-column: 3;
-    grid-row: 1;
+  grid-column: 3;
+  grid-row: 1;
 }
 
 .filterColumn4 {
-    grid-column: 4;
-    grid-row: 1;
-    margin-right: 4px;
+  grid-column: 4;
+  grid-row: 1;
+  margin-right: 4px;
 }
 
 .filterDropdown {
-    padding: 4px;
-    border-color: var(--lightGrayColour);
-    width: 100%;
-    height: 100%;
-    font-family: Paprika;
+  padding: 4px;
+  border-color: var(--lightGrayColour);
+  width: 100%;
+  height: 100%;
+  font-family: Paprika;
 }
 
 #textSearch {
-    box-sizing: border-box;
-    border: 1px solid var(--lightGrayColour);
-    width: 100%;
-    height: 100%;
-    font-family: Paprika;
+  box-sizing: border-box;
+  border: 1px solid var(--lightGrayColour);
+  width: 100%;
+  height: 100%;
+  font-family: Paprika;
 }
 
-#searchButton{
-    border: 1px solid var(--lightGrayColour);
-    background-color: var(--lightGreenColour);
-    width: 100%;
-    height: 100%;
-    padding: 4px;
-    margin-left: 4px;
+#searchButton {
+  border: 1px solid var(--lightGrayColour);
+  background-color: var(--lightGreenColour);
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  margin-left: 4px;
 }
-
-
 
 /**********************
  * Herbarium admin *
 **********************/
-
 .adminButton {
-    margin-bottom: 20px;
-    text-align: left;
+  margin-bottom: 20px;
+  text-align: left;
 }
 
 .adminFunctionalityButton {
-    border: 1px solid var(--lightGrayColour);
-    background-color: var(--lightGreenColour);
-    margin-bottom: 10px;
-    width: 100%;
+  border: 1px solid var(--lightGrayColour);
+  background-color: var(--lightGreenColour);
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 #adminFunctionalities {
-    margin-top: 12px;
+  margin-top: 12px;
 }
-
 
 /**********************
  * Search results * 
 **********************/
-
 #plantList {
-    background-color: #FFF;
+  background-color: #FFF;
 }
 
 .plantListHeadlines {
-    display: grid;
-    grid-template-columns: 25% 30% 45%;
-    justify-content: center;
-    background-color: var(--lightGreenColour);
+  display: grid;
+  grid-template-columns: 25% 30% 45%;
+  justify-content: center;
+  background-color: var(--lightGreenColour);
 }
 
 .plantListHeadlinesAdmin {
-    display: grid;
-    grid-template-columns: 20% 25% 40% 15%;
-    justify-content: center;
-    background-color: var(--lightGreenColour);
+  display: grid;
+  grid-template-columns: 20% 25% 40% 15%;
+  justify-content: center;
+  background-color: var(--lightGreenColour);
 }
 
 .gridPlantList {
-    display: grid;
-    grid-template-columns: 25% 30% 45%;
-    justify-content: center;
-    font-size: small;
-    border-top: 1px solid var(--lightGrayColour);
+  display: grid;
+  grid-template-columns: 25% 30% 45%;
+  justify-content: center;
+  font-size: small;
+  border-top: 1px solid var(--lightGrayColour);
 }
 
 .gridPlantListAdmin {
-    display: grid;
-    grid-template-columns: 20% 25% 40% 15%;
-    justify-content: center;
-    font-size: small;
-    border-top: 1px solid var(--lightGrayColour);
+  display: grid;
+  grid-template-columns: 20% 25% 40% 15%;
+  justify-content: center;
+  font-size: small;
+  border-top: 1px solid var(--lightGrayColour);
 }
 
 .plantListColumn1, .plantListColumn2, .plantListColumn3, .plantListColumn4 {
-    display: inherit;
-    margin-left: 10px;
-    justify-content: left;
+  display: inherit;
+  margin-left: 10px;
+  justify-content: left;
 }
 
 .plantListColumn1 {
-    grid-column: 1;
-    border-right: 1px solid;
-    border-color: var(--lightGrayColour);
+  grid-column: 1;
+  border-right: 1px solid;
+  border-color: var(--lightGrayColour);
 }
 
 .plantListColumn2 {
-    grid-column: 2;
-    border-right: 1px solid;
-    border-color: var(--lightGrayColour);
+  grid-column: 2;
+  border-right: 1px solid;
+  border-color: var(--lightGrayColour);
 }
 
 .plantListColumn3 {
-    grid-column: 3;
+  grid-column: 3;
 }
 
 .plantListColumn4 {
-    grid-column: 4;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-left: 0px;
-    border-left: 1px solid;
-    border-color: var(--lightGrayColour);
-    justify-content: normal;
+  grid-column: 4;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 0px;
+  border-left: 1px solid;
+  border-color: var(--lightGrayColour);
+  justify-content: normal;
 }
 
 .imageColumn {
-    background-color: var(--naturalWhiteColour);
-    margin-left: 0px;
-    position: relative;
+  background-color: var(--naturalWhiteColour);
+  margin-left: 0px;
+  position: relative;
 }
 
 .gallery {
-    display: flex;
-    width: inherit;
-    overflow-x: scroll;
-    scroll-behavior: smooth;
+  display: flex;
+  width: inherit;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
 }
-
 .gallery div {
-    display: flex;
-    flex: none;
+  display: flex;
+  flex: none;
 }
-
 .gallery img {
-    border-right: 1px solid var(--lightGrayColour);
-    border-left: 1px solid var(--lightGrayColour);
-    width: 140px;
+  border-right: 1px solid var(--lightGrayColour);
+  border-left: 1px solid var(--lightGrayColour);
+  width: 140px;
 }
-
 .gallery::-webkit-scrollbar {
   display: none;
 }
 
 .rightScrollIcon, .leftScrollIcon {
-    position: absolute;
-    align-content: center;
-    height: 250px;
+  position: absolute;
+  align-content: center;
+  height: 250px;
 }
 
 .rightScrollIcon {
-    right: 2%;
+  right: 2%;
+}
+.rightScrollIcon button {
+  opacity: 0.8;
+  border-radius: 20px;
+  border: none;
+  height: 30px;
+  width: 30px;
 }
 
 .leftScrollIcon {
-    left: 2%;
+  left: 2%;
 }
-
-.rightScrollIcon button, .leftScrollIcon button {
-    opacity: 0.8;
-    border-radius: 20px;
-    border: none;
-    height: 30px;
-    width: 30px;
-}
-
 .leftScrollIcon button {
-    display: none;
+  opacity: 0.8;
+  border-radius: 20px;
+  border: none;
+  height: 30px;
+  width: 30px;
+  display: none;
 }
-
-
 
 /*********************
  * Image enlargement *
 *********************/
-
 #enlargedImageView {
-    display: none;
-    position: fixed;
-    left: 0;
-    top: 0;
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
 }
 
 #imageBackground {
-    background-color: #222;
-    opacity: 80%;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
+  background-color: #222;
+  opacity: 80%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
 }
 
 #enlargedImageContainer {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #enlargedImage {
-    z-index: 100;
-    max-width: 100%;
-    max-height: 100%;
+  z-index: 100;
+  max-width: 100%;
+  max-height: 100%;
 }
-
-
 
 /*****************************
  * Add and edit species form *
 *****************************/
-
 .addContainer > div, .addContainer fieldset {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-#speciesName, #speciesDesc {
-    width: 60%;
-    margin-top: 10px;
+#speciesName {
+  width: 60%;
+  margin-top: 10px;
 }
 
 #speciesDesc {
-    height: 100px;
-}
-
-#imagesForm thead {
-    text-align: left;
+  width: 60%;
+  margin-top: 10px;
+  height: 100px;
 }
 
 #imagesForm {
-    width: 100%;
+  width: 100%;
+}
+#imagesForm thead {
+  text-align: left;
 }
 
 #buttonBox {
-    text-align: right;
+  text-align: right;
 }
 
 .imageButton, #addSpeciesButton, #editSpeciesButton {
-    border: 1px solid var(--lightGrayColour);
-    background-color: var(--lightGreenColour);
-    padding: 6px;
+  border: 1px solid var(--lightGrayColour);
+  background-color: var(--lightGreenColour);
+  padding: 6px;
 }
 
 #imageNotice {
-    color: red;
+  color: red;
 }
-
-
 
 /******************
 *******************
  * Identification *
 *******************
 ******************/
-
 .imageArea img {
-    max-width: 600px;
+  max-width: 600px;
 }
-
-
 
 /**********************
 ***********************
  * * * * Login * * * *
 ***********************
 **********************/
-
 #loginArea {
-    display: flex;
+  display: flex;
 }
-
 #loginArea div {
-    align-content: center;
+  align-content: center;
 }
 
 #loginError {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 #loginButton {
-    border: 1px solid var(--lightGrayColour);
-    background-color: var(--lightGreenColour);
+  border: 1px solid var(--lightGrayColour);
+  background-color: var(--lightGreenColour);
 }
 
 .loginContainer div div {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #username, #password {
-    width: 100%;
-    max-width: 340px;
+  width: 100%;
+  max-width: 340px;
 }
 
 /**********************
  * Login box *
 **********************/
-
 #loginInfoBox {
-    visibility: hidden;
-    background: var(--lightGrayColour);
-    padding-bottom: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    position: fixed;
-    right: -280px;
-    top: 20px;
-    border: 2px solid var(--lightSandColour);
-    border-right: none;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    width: 240px;
-    height: 150px;
-    z-index: 100;
-    transition: 0.8s ease all;
+  visibility: hidden;
+  background: var(--lightGrayColour);
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  position: fixed;
+  right: -280px;
+  top: 20px;
+  border: 2px solid var(--lightSandColour);
+  border-right: none;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  width: 240px;
+  height: 150px;
+  z-index: 100;
+  transition: 0.8s ease all;
 }
-
 #loginInfoBox div div {
-    text-align: center;
+  text-align: center;
 }
-
 #loginInfoBox div div div {
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 #usernameText {
-    color: var(--greenColour);
+  color: var(--greenColour);
 }
 
 #authButton {
-    background-color: var(--greenColour);
-    border: none;
+  background-color: var(--greenColour);
+  border: none;
 }
 
 #loginBoxIcon {
-    z-index: 100;
-    background: var(--lightSandColour);
-    padding: 5px;
-    position: fixed;
-    right: 0px;
-    top: 70px;
-    width: 25px;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    transition: 0.8s ease all;
+  z-index: 100;
+  background: var(--lightSandColour);
+  padding: 5px;
+  position: fixed;
+  right: 0px;
+  top: 70px;
+  width: 25px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: 0.8s ease all;
 }
-
 #loginBoxIcon:hover {
-    width: 30px;
+  width: 30px;
 }
-
-
 
 /* General button stuff */
-
 #searchButton, #addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, #removeImageButton, .adminFunctionalityButton, #authButton {
-    border-radius: 2px;
-    font-family: Paprika;
-    padding: 6px;
+  border-radius: 2px;
+  font-family: Paprika;
+  padding: 6px;
 }
 
 #addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, #removeImageButton, #authButton {
-    width: 125px;
+  width: 125px;
 }
 
 #searchButton:hover, #addSpeciesButton:hover, #editSpeciesButton:hover, #loginButton:hover, #addImageButton:hover, #removeImageButton:hover, .adminFunctionalityButton:hover, #authButton:hover {
-    color: var(--grayColour);
-    transition: 0.1s ease-out;
+  color: var(--grayColour);
+  transition: 0.1s ease-out;
 }
-
-
 
 /**************************************************
 ***************************************************
  * * * * * * * * * * * MEDIA * * * * * * * * * * *
 ***************************************************
 **************************************************/
-
 /*** Tablet ***/
-@media(max-width: 1200px) {
-
-/* Herbarium */
-
-    .rightScrollIcon, .leftScrollIcon {
-        display: none;
-        max-height: 150px;
-    }
-
-
-    .gallery::after {
-        content: "";
-        position: absolute;
-        box-shadow: inset -40px 0px 30px -20px var(--naturalWhiteColour);
-        right: 0;
-        width: 40px;
-        height: 100%;
-    }
-
-
-/* Filter in herbarium */
-
-    .filterDropdown, #textSearch {
-        font-size: smaller;
-        padding: 6px;
-    }
-
-    #filter {
-        height: 160px;
-    }
-
-    #gridFilter {
-        grid-template-columns: 100%;
-    }
-
-    .filterColumn2 {
-        grid-column: 1;
-        grid-row: 2;
-        margin-top: 4px;
-    }
-
-    .filterColumn3 {
-        grid-column: 1;
-        grid-row: 3;
-        margin-top: 4px;
-    }
-
-    .filterColumn4 {
-        grid-column: 1;
-        grid-row: 4;
-        text-align: center;
-        margin-top: 4px;
-        margin-right: 0px;
-    }
-
-
-/* Buttons */
-
-    #searchButton, #addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, .adminFunctionalityButton, #removeImageButton {
-        font-size: smaller;
-        width: 100%;
-    }
-
-    #searchButton {
-        margin-left: 0px;
-    }
-
-    .adminButton {
-        text-align: center;
-    }
-
-
-/* Identification */
-
-    .imageArea img {
-        max-width: 400px;
-    }
+@media (max-width: 1200px) {
+  /* Herbarium */
+  .rightScrollIcon, .leftScrollIcon {
+    display: none;
+    max-height: 150px;
+  }
+  .gallery::after {
+    content: "";
+    position: absolute;
+    box-shadow: inset -40px 0px 30px -20px var(--naturalWhiteColour);
+    right: 0;
+    width: 40px;
+    height: 100%;
+  }
+  /* Filter in herbarium */
+  .filterDropdown, #textSearch {
+    font-size: smaller;
+    padding: 6px;
+  }
+  #filter {
+    height: 160px;
+  }
+  #gridFilter {
+    grid-template-columns: 100%;
+  }
+  .filterColumn2 {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 4px;
+  }
+  .filterColumn3 {
+    grid-column: 1;
+    grid-row: 3;
+    margin-top: 4px;
+  }
+  .filterColumn4 {
+    grid-column: 1;
+    grid-row: 4;
+    text-align: center;
+    margin-top: 4px;
+    margin-right: 0px;
+  }
+  /* Buttons */
+  #searchButton, #addSpeciesButton, #editSpeciesButton, #loginButton, #addImageButton, .adminFunctionalityButton, #removeImageButton {
+    font-size: smaller;
+    width: 100%;
+  }
+  #searchButton {
+    margin-left: 0px;
+  }
+  .adminButton {
+    text-align: center;
+  }
+  /* Identification */
+  .imageArea img {
+    max-width: 400px;
+  }
 }
-
-
-
 /*** Phone ***/
-@media(max-width: 992px) {
-
-/* General, containing page main headline, navi and general layout */
-
-    body {
-        margin: 0px;
-        font-size: small;
-    }
-
-    .pageBackground {
-        width: 100%;
-    }
-
-    #mainHeadline {
-        transform: scale(1.2);
-    }
-
-    #mainHeadlineBox {
-        margin-right: var(--mobileMargin);
-        margin-left: var(--mobileMargin);
-        border-radius: 0px;
-        padding: var(--mobilePadding);
-    }
-
-    #navi, .contentArea, #filter, #plantList {
-        margin-right: var(--mobileMargin);
-        margin-left: var(--mobileMargin);
-    }
-
-    .textArea {
-        padding-left: var(--mobilePadding);
-        padding-right: var(--mobilePadding);
-        padding-top: 10px;
-    }
-
-    .link {
-        font-size: x-large;
-    }
-
-    footer div {
-        margin-left: var(--mobileMargin);
-    }
-
-    #githubArea {
-        margin-left: 15px;
-    }
-
-
-/* Buttons */
-
-    .adminButton {
-        margin-left: 6px;
-        margin-right: 6px;
-    }
-
-
-/* Herbarium general stuff */
-
-    .contentArea {
-        border-radius: unset;
-        margin-bottom: 40px;
-    }
-
-    .contentBox {
-        padding: 0px;
-        padding-bottom: 4px;
-    }
-
-    #adminText {
-        margin: 10px;
-    }
-
-    .gridPlantListAdmin, .gridPlantList {
-        font-size: smaller;
-    }
-
-
-/* Filter in herbarium */
-
-    #filter {
-        height: 145px;
-    }
-
-
-/* Plantlist in herbarium */
-
-    .plantListColumn1, .plantListColumn2 {
-        margin-left: 10px;
-        overflow: scroll;
-    }
-
-    .plantListColumn4 {
-        padding-left: 5px;
-    }
-
-    .gridPlantListAdmin, .plantListHeadlinesAdmin  {
-        grid-template-columns: 25% 25% 30% 20%;
-    }
-
-    .gridPlantList, .plantListHeadlines {
-        grid-template-columns: 25% 25% 50%;
-    }
-
-    #plantListText {
-        margin: 10px;
-    }
-
-    .gallery img {
-        max-width: 80px;
-        max-height: 150px;
-    }
-
-
-/* Identification */
-
-    .imageArea img {
-        max-width: 300px;
-    }
-
-    .textParagraph {
-        margin-left: 20px;
-    }
+@media (max-width: 992px) {
+  /* General, containing page main headline, navi and general layout */
+  body {
+    margin: 0px;
+    font-size: small;
+  }
+  .pageBackground {
+    width: 100%;
+  }
+  #mainHeadline {
+    transform: scale(1.2);
+  }
+  #mainHeadlineBox {
+    margin-right: var(--mobileMargin);
+    margin-left: var(--mobileMargin);
+    border-radius: 0px;
+    padding: var(--mobilePadding);
+  }
+  #navi, .contentArea, #filter, #plantList {
+    margin-right: var(--mobileMargin);
+    margin-left: var(--mobileMargin);
+  }
+  .textArea {
+    padding-left: var(--mobilePadding);
+    padding-right: var(--mobilePadding);
+    padding-top: 10px;
+  }
+  .link {
+    font-size: x-large;
+  }
+  footer div {
+    margin-left: var(--mobileMargin);
+  }
+  #githubArea {
+    margin-left: 15px;
+  }
+  /* Buttons */
+  .adminButton {
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+  /* Herbarium general stuff */
+  .contentArea {
+    border-radius: unset;
+    margin-bottom: 40px;
+  }
+  .contentBox {
+    padding: 0px;
+    padding-bottom: 4px;
+  }
+  #adminText {
+    margin: 10px;
+  }
+  .gridPlantListAdmin, .gridPlantList {
+    font-size: smaller;
+  }
+  /* Filter in herbarium */
+  #filter {
+    height: 145px;
+  }
+  /* Plantlist in herbarium */
+  .plantListColumn1, .plantListColumn2 {
+    margin-left: 10px;
+    overflow: scroll;
+  }
+  .plantListColumn4 {
+    padding-left: 5px;
+  }
+  .gridPlantListAdmin, .plantListHeadlinesAdmin {
+    grid-template-columns: 25% 25% 30% 20%;
+  }
+  .gridPlantList, .plantListHeadlines {
+    grid-template-columns: 25% 25% 50%;
+  }
+  #plantListText {
+    margin: 10px;
+  }
+  .gallery img {
+    max-width: 80px;
+    max-height: 150px;
+  }
+  /* Identification */
+  .imageArea img {
+    max-width: 300px;
+  }
+  .textParagraph {
+    margin-left: 20px;
+  }
 }
+
+/*# sourceMappingURL=herbarium.css.map */
