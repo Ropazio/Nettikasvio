@@ -47,11 +47,13 @@ var leftScroll = function () {
 }
 
 var removeRightScroll = function () {
-    if ((this.scrollWidth - (this.scrollLeft + this.offsetWidth)) <= 10) {
+    if (window.innerWidth >= 1200) {
         let child = this.parentNode.querySelector('.rightScrollIcon');
-        child.style.visibility = "hidden";
-    } else {
-        this.parentNode.parentNode.querySelector('.rightScrollIcon').style.visibility = "visible";
+        if ((this.scrollWidth - (this.scrollLeft + this.offsetWidth)) <= 10) {
+            child.style.visibility = "hidden";
+        } else {
+            this.parentNode.parentNode.querySelector('.rightScrollIcon').style.visibility = "visible";
+        }
     }
 }
 
