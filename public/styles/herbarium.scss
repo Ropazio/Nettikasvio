@@ -119,6 +119,12 @@ body {
     margin-left: 40px;
 }
 
+.editTextBox {
+    width: 100%;
+    height: 60vh;
+    overflow-y: scroll;
+}
+
 /********************
 
  * Navigator stuff * 
@@ -740,7 +746,7 @@ footer {
         font-size: small;
     }
 
-    .pageContainer > div {
+    #pageContainer > div {
         width: 100%;
     }
 

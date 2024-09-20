@@ -13,15 +13,18 @@ class Router {
     // ROUTING TABLE = ["page url" => [controller name, method name/function]]
     const ROUTING_TABLE = [
         "POST" => [
+            "home"                      => ["", ""],
             "herbarium"                 => ["Herbarium", "update"],
             "login"                     => ["Authenticator", "login"],
             "herbarium/add-species"     => ["Herbarium", "addSpecies"],
             "herbarium/delete-species"  => ["Herbarium", "deleteSpecies"],
             "herbarium/edit-species"    => ["Herbarium", "editSpecies"],
             "herbarium/update-species"  => ["Herbarium", "updateSpecies"],
+            "home/edit-text"            => ["Home", "editText"]
         ],
         "GET" => [
             ""                          => ["Home", "index"],
+            "home"                      => ["Home", "index"],
             "herbarium"                 => ["Herbarium", "index"],
             "other"                     => ["Other", "index"],
             "identification"            => ["Identification", "index"],
@@ -30,7 +33,8 @@ class Router {
             "herbarium/add-species"     => ["Herbarium", "addView"],
             "error401"                  => ["Error", "error401"],
             "error404"                  => ["Error", "error404"],
-            "error500"                  => ["Error", "error500"]
+            "error500"                  => ["Error", "error500"],
+            "home/edit-text"            => ["Home", "update"]
         ]
     ];
 
@@ -132,7 +136,7 @@ class Router {
 
         $controller = new ("app\Controllers\\" . $controllerName)();
 
-        if (($methodName == "deleteSpecies") || ($methodName == "editSpecies") || ($methodName == "updateSpecies")) {
+        if (($methodName == "deleteSpecies") || ($methodName == "editSpecies") || ($methodName == "updateSpecies") || ($methodName == "editText")) {
             $controller->$methodName($params);
         } else {
             $controller->$methodName();

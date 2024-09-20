@@ -1,12 +1,9 @@
-<div class="homeText">
-    <h2>
-        Mukavaa, että löysit tiesi nettikasvioon!
-    </h2>
-    <br>
-    <p>
-        Nettikasvio on nyt toiminnassa ja se sisältää kasveja pääasiassa Pohjois-Suomen alueelta. Lisäilen tässä lajeja sitä mukaan, kun vastaan tulee. Alan nyt opiskelemaan kasvin osia ja muita perusasioita lajintunnistukseen liittyen. Lisäilen tiedot sitten lajintunnistusosioon.
-    </p>
-    <p>
-        Toivottavasti kasvit ovat oikein tunnistettu! En ole mikään biologi, mutta parhaani yritän. :) Teen myöhemmin vielä "nettisieniön". :D
-    </p>
-</div>
+<?php if ($params["userParams"]["loggedIn"] && $params["userParams"]["isAdmin"]): ?>
+    <div>
+        <form action="<?= siteUrl('home/edit-text') ?>">
+            <button class="adminFunctionalityButton">Muokkaa sivun tekstiä</button>
+        </form>
+    </div>
+<?php endif ?>
+
+<?= $params["pageText"]["content"] ?>

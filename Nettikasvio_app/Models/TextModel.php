@@ -13,13 +13,26 @@ class TextModel extends DatabaseModel {
     }
 
 
-    public function getPageText( string $textName ) : string {
+    public function getPageText( string $textName ) : array {
 
-        $sth = $this->pdo->prepare("SELECT content FROM pageTexts WHERE name = ?");
+        $sth = $this->pdo->prepare("SELECT id, content FROM pageTexts WHERE name = ?");
         $sth->execute([$textName]);
 
-        $content = stripslashes($sth->fetch(\PDO::FETCH_COLUMN));
+        $text = $sth->fetch(\PDO::FETCH_ASSOC);
+        $text = [
+                "id"        => $text["id"],
+                "content"   => $text["content"]
+        ];
 
-        return $content;
+        return $text;
+    }
+
+
+    public function update( string $text, int $textId ) : void {
+
+        // Update text with given text id
+        $query = "UPDATE pageTexts SET content = ? WHERE id = ?";
+        $sth = $this->pdo->prepare($query);
+        $sth->execute([$text, $textId]);
     }
 }

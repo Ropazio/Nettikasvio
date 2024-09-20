@@ -1,0 +1,8 @@
+<form method="POST" action="<?= siteUrl('home/edit-text/' . $params['pageText']['id']) ?>">
+    <div>
+        <textarea name="homeText" class="editTextBox"><?= $params["pageText"]["content"] ?></textarea>
+        <button type="submit" name="updateHomeTextButton" class="adminFunctionalityButton">
+            Päivitä teksti
+        </button>
+    </div>
+</form>

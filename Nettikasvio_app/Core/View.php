@@ -39,7 +39,7 @@ class View {
 
     public function loadLib( string $libName, array $params = [] ) : array {
 
-        $folder = filePath("libs") . "/" . $libName;
+        $folder = filePath("libs") . $libName;
         $files =  array_diff(scandir($folder), array('.', '..'));
 
         $results = [];

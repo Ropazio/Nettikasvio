@@ -28,8 +28,42 @@ class Home extends Controller {
             "title"         => "Nettikasvio",
             "lib"           => "forHome",
             "userParams"    => $userParams,
+            "pageText"      => $pageContent,
+        ]);
+    }
+
+
+    public function update() : void {
+
+        $userParams = $this->sessions->getUserSessionParams();
+        $pageContent = $this->textModel->getPageText("home");
+
+        $this->view->view("home/update", [
+            "title"         => "Nettikasvio - Päivitä teksti",
+            "lib"           => "forHome",
+            "userParams"    => $userParams,
             "pageText"      => $pageContent
         ]);
+    }
+
+
+    public function editText( string $textId ) : void {
+
+        $text = False;
+
+        if (isset($_POST["updateHomeTextButton"])) {
+            $text = $_POST["homeText"];
+        }
+        if (!$text) {
+            // Back to the home page
+            header("Location: " . siteUrl(""));
+            exit;
+        } else {
+            $this->textModel->update($text, (int)$textId);
+        }
+
+        // Back to the home page
+        header("Location: " . siteUrl(""));
     }
 }
 
