@@ -33,7 +33,10 @@ class Home extends Controller {
     }
 
 
-    public function update() : void {
+    public function updateView() : void {
+
+        // make sure that this function of this class can't be accessed without admin rights
+        $this->sessions->checkUserRights();
 
         $userParams = $this->sessions->getUserSessionParams();
         $pageContent = $this->textModel->getPageText("home");

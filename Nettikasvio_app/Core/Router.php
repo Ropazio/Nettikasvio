@@ -34,7 +34,7 @@ class Router {
             "error401"                  => ["Error", "error401"],
             "error404"                  => ["Error", "error404"],
             "error500"                  => ["Error", "error500"],
-            "home/edit-text"            => ["Home", "update"]
+            "home/edit-text"            => ["Home", "updateView"]
         ]
     ];
 
@@ -46,6 +46,8 @@ class Router {
         // Url is split in parts by "/" and added to array
         $url = $this->parseUrl($url, $requestMethod);
 
+        // If url has multiple parts, the base needs to be on the url list!
+        // For instance for home/XXX, there needs to be home on the list (with the same method)
         // If page url can't be found, show 404
         if (!isset(self::ROUTING_TABLE[$requestMethod][$url[0]])) {
             header("Location: " . siteUrl("error404"));
