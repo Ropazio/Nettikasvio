@@ -50,9 +50,7 @@ if (empty($plants)) {
             echo            '<div class="gallery" onscroll="removeRightScroll.call(this)">';
             echo                '<div>';
                                 foreach ($plant['images'] as $image) {
-//                                    $thumbnail = pathinfo($image["src"], PATHINFO_FILENAME) . "-small." . pathinfo($image["src"], PATHINFO_EXTENSION);
-//            echo                    '<img src="' . siteUrl("plantImg/thumbnails/{$thumbnail}") . '" loading="lazy"' . sprintf(" onclick='enlargeImage(\"%s\")'", siteUrl("plantImg/{$image["src"]}")) . '>';
-            echo                    '<img src="' . $image["url"] . '" loading="lazy"' . sprintf(" onclick='enlargeImage(\"%s\")'", siteUrl("plantImg/{$image["src"]}")) . '>';
+            echo                    '<img src="' . $image[($params["env"] . "Image")] . '" loading="lazy"' . sprintf(" onclick='enlargeImage(\"%s\")'", $image[($params["env"] . "Thumb")]) . '>';
                                 }
             echo                '</div>';
             echo            '</div>';
@@ -95,8 +93,7 @@ if (empty($plants)) {
             echo            '<div class="gallery" onscroll="removeRightScroll.call(this)">';
             echo                '<div>';
                                 foreach ($plant['images'] as $image) {
-                                    $thumbnail = pathinfo($image["src"], PATHINFO_FILENAME) . "-small." . pathinfo($image["src"], PATHINFO_EXTENSION);
-            echo                    '<img src="' . siteUrl("plantImg/thumbnails/{$thumbnail}") . '" loading="lazy"' . sprintf(" onclick='enlargeImage(\"%s\")'", siteUrl("plantImg/{$image["src"]}")) . '>';
+            echo                    '<img src="' . $image[($params["env"] . "Image")] . '" loading="lazy"' . sprintf(" onclick='enlargeImage(\"%s\")'", $image[($params["env"] . "Thumb")]) . '>';
                                 }
             echo                '</div>';
             echo            '</div>';

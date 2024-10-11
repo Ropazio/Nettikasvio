@@ -22,7 +22,7 @@ class S3Model extends Model {
     }
 
 
-    public function upload( string $prefix, string $fileName, string $fileTempName) : string {
+    public function upload( string $prefix, string $fileName, string $tempFilePath) : string {
 
         $this->s3Client = $this->s3->getS3Client();
 
@@ -30,7 +30,7 @@ class S3Model extends Model {
             $result = $this->s3Client->putObject([
                 "Bucket"        => $this->s3->getS3Bucket(),
                 "Key"           => $prefix . "/" . $fileName,
-                "SourceFile"    => $fileTempName
+                "SourceFile"    => $tempFilePath . "/" . $fileName
             ]);
             $resultArray = $result->toArray();
 

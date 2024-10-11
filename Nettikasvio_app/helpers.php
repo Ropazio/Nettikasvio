@@ -14,6 +14,12 @@ define("SITE_ROOT_URL", "Nettikasvio");
 // Production (server)
 //define("SITE_ROOT_URL", "");
 
+// If plant image store is on server
+//define("ENV_IMAGE_STORE", "server");
+
+// If plant image store is on Amazon s3
+define("ENV_IMAGE_STORE", "s3");
+
 //////////////////////////////////////////////////////////////////
 
 $folders = [

@@ -6,7 +6,8 @@ use app\{
     Core\Controller,
     Core\Sessions,
     Models\PlantsModel,
-    Models\S3Model
+    Models\S3Model,
+    Models\ServerStoreModel
 };
 
 
@@ -15,6 +16,7 @@ class Herbarium extends Controller {
     public Sessions $session;
     public PlantsModel $plantsModel;
     public S3Model $s3Model;
+    public ServerStoreModel $serverStoreModel;
 
     public function __construct() {
 
@@ -22,6 +24,7 @@ class Herbarium extends Controller {
         $this->session = new Sessions();
         $this->plantsModel = new PlantsModel();
         $this->s3Model = new S3Model();
+        $this->serverStoreModel = new ServerStoreModel();
     }
 
 
@@ -36,6 +39,7 @@ class Herbarium extends Controller {
         $this->view->view("herbarium/index", [
             "title"         => "Nettikasvio - kasvilista",
             "plants"        => $plants,
+            "env"           => (ENV_IMAGE_STORE == "s3") ? "url" : "src",
             "lib"           => "forHerbarium",
             "filterData"    => $filterData,
             "userParams"    => $userParams,
@@ -152,13 +156,38 @@ class Herbarium extends Controller {
 
             foreach($files as $image) {
                 $speciesCommonName = strstr($speciesName, ",", true);
-                // Save images to s3 bucket with plant common name prefix
-                $imageUrl = $this->s3Model->upload($speciesCommonName, $image["name"], $image["tmp_name"]);
-                // Save image to img/projects
-                //$this->addToImagesFolder($speciesCommonName, $image["name"], $image["tmp_name"]);
+
+                // Get file info
+                $fileName = basename($image["name"]);
+                $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+
+                // Resize image
+                $standardSizeImage = $this->resizeImage($image["tmp_name"], $fileType, 2000);
+                $this->serverStoreModel->saveResizedImage($standardSizeImage, false, $speciesCommonName, $fileName, $fileType);
+
+                // Create thumbnail
+                $smallSizeImage = $this->resizeImage($image["tmp_name"], $fileType, 140);
+                $this->serverStoreModel->saveResizedImage($smallSizeImage, true, $speciesCommonName, $fileName, $fileType);
+
+                if (ENV_IMAGE_STORE == "s3") {
+                    // Save images to s3 bucket with plant common name prefix
+                    $tempPath = "plantImg/temp";
+                    $standardSizeImageUrl = $this->s3Model->upload($speciesCommonName, $fileName, $tempPath);
+                    $prefix = "thumbnails/{$speciesCommonName}";
+                    $smallSizeImageUrl = $this->s3Model->upload($prefix, $fileName, $tempPath);
+                    $this->clearTemp();
+                }
+                if (ENV_IMAGE_STORE == "server") {
+                    // Save images to plantImg with plant common name prefix
+                    $standardSizeImagePath = $this->addToImagesFolder($speciesCommonName, $fileName, $image["tmp_name"], $fileType, false);
+                    $smallSizeImagePath = $this->addToImagesFolder($speciesCommonName, $fileName, $image["tmp_name"], $fileType, true);
+                }
+
                 $images[] = [
-                    "src"       => $speciesCommonName . "/" . $image["name"],
-                    "url"       => isset($imageUrl) ? $imageUrl : null,
+                    "srcImage"       => isset($standardSizeImagePath) ? $standardSizeImagePath : null,
+                    "srcThumb"       => isset($smallSizeImagePath) ? $smallSizeImagePath : null,
+                    "urlImage"       => isset($standardSizeImageUrl) ? $standardSizeImageUrl : null,
+                    "urlThumb"       => isset($smallSizeImageUrl) ? $smallSizeImageUrl : null,
                 ];
                 $i++;
             }
@@ -171,45 +200,11 @@ class Herbarium extends Controller {
     }
 
 
-    public function addToImagesFolder( string $speciesCommonName, string $imageName, string $imageTmpName ) : void {
-
-        // Get file info
-        $fileName = basename($imageName);
-        $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
-        $folder = "plantImg/{$speciesCommonName}";
-        if (!is_dir($folder)) {
-            mkdir($folder);
-        }
-        $file = "$folder/$fileName";
-        if (file_exists($file)) {
-            header("Location: " . siteUrl("herbarium/add-species?error=failed"));
-            exit;
-        }
-
-        // Allow certain file formats
-        $allowTypes = array("jpg","png","jpeg");
-        if (in_array(strtolower($fileType), $allowTypes)) {
-            if (!move_uploaded_file($imageTmpName, $file)) {
-                header("Location: " . siteUrl("herbarium/add-species?error=failed"));
-                exit;
-            } else {
-                $this->createThumbnail($imageName, $speciesCommonName, $fileType);
-            }
-        } else {
-            header("Location: " . siteUrl("herbarium/add-species?error=failed"));
-            exit;
-        }
-    }
-
-
-    public function createThumbnail( string $originalImage, string $subfolder, string $fileType ) : void {
-
-        $originalPath = "plantImg/{$subfolder}/{$originalImage}";
+    public function resizeImage( string $imageSrc, string $fileType, int $newWidth ) : object {
 
         // Get new dimensions
-        list($width, $height) = getimagesize($originalPath);
-        $newWidth = 140;
-        $newHeight =  round($newWidth * $height / $width);
+        list($width, $height) = getimagesize($imageSrc);
+        $newHeight = round($newWidth * $height / $width);
 
         // Resample
         if (imagecreatetruecolor($newWidth, $newHeight)) {
@@ -219,26 +214,25 @@ class Herbarium extends Controller {
             exit;
         }
         if ($fileType != "png") {
-            $image = imagecreatefromjpeg($originalPath);
+            $image = imagecreatefromjpeg($imageSrc);
         } else {
-            $image = imagecreatefrompng($originalPath);
+            $image = imagecreatefrompng($imageSrc);
         }
         if (!imagecopyresampled($imageTrueColour, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height)) {
             header("Location: " . site_url("herbarium/add-species?error=failed"));
             exit;
-        }
-
-        // Save
-        $fileName = pathinfo($originalImage, PATHINFO_FILENAME) . "-small." . pathinfo($originalImage, PATHINFO_EXTENSION);
-        $folder = "plantImg/thumbnails/{$subfolder}";
-        if (!is_dir($folder)) {
-            mkdir($folder);
-        }
-        $file = "$folder/$fileName";
-        if ($fileType != "png") {
-            imagejpeg($imageTrueColour, $file, 100);
         } else {
-            imagepng($imageTrueColour, $file);
+            return $imageTrueColour;
+        }
+    }
+
+
+    public function addToImagesFolder( string $speciesCommonName, string $imageName, string $imageTmpName, string $filetype, bool $isThumbnail ) : void {
+
+        $success = $this->serverStoreModel->saveToFolder($speciesCommonName, $imageName, $imageTmpName, $filetype, $isThumbnail);
+        if (!$success) {
+            header("Location: " . siteUrl("herbarium/add-species?error=failed"));
+            exit;
         }
     }
 
@@ -382,5 +376,16 @@ class Herbarium extends Controller {
         $deletableImages = array_diff($previousImages, $images);
 
         $this->deleteSpeciesImages($deletableImages);
+    }
+
+
+    public function clearTemp() : void {
+
+        $files = glob('plantImg/temp/*');
+        foreach ($files as $file) {
+            if(is_file($file)) {
+                unlink($file);
+            }
+        }
     }
 }
