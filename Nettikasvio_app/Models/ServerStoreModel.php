@@ -68,4 +68,23 @@ class ServerStoreModel extends Model {
 
         return $fileName;
     }
+
+
+    public function deleteImagesFromFolder( array $imageNames ) : void {
+
+        foreach ($imageNames as $imageName) {
+            if (!$imageName) {
+                continue;
+            } else {
+                list($fileName, $prefix) = array_reverse(explode("/", $imageName));
+                if ((file_exists(realpath("plantImg/{$prefix}/{$fileName}"))) && (file_exists(realpath("plantImg/thumbnails/{$prefix}/{$fileName}")))) {
+                    unlink(realpath("plantImg/{$prefix}/{$fileName}"));
+                    unlink(realpath("plantImg/thumbnails/{$prefix}/{$fileName}"));
+                } else {
+                    header("Location: " . siteUrl("herbarium?error=failed"));
+                    exit;
+                }
+            }
+        }
+    }
 }

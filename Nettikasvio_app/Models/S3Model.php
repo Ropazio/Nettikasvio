@@ -42,7 +42,39 @@ class S3Model extends Model {
         }
 
         if (!empty($error)) {
-            echo "Error in uploading files: " . $error;
+            echo "Error occurred while uploading files: " . $error;
+        }
+    }
+
+
+    public function delete( array $images ) {
+
+        $this->s3Client = $this->s3->getS3Client();
+        $bucket = $this->s3->getS3Bucket();
+
+        foreach ($images as $image) {
+            if (!$image) {
+                continue;
+            } else {
+                list($fileName, $prefix) = array_reverse(explode("/", $image));
+                try {
+                    $this->s3Client->deleteObject([
+                        "Bucket"        => $bucket,
+                        "Key"           => $prefix . "/" . $fileName
+                    ]);
+                    $this->s3Client->deleteObject([
+                        "Bucket"        => $bucket,
+                        "Key"           => "thumbnails/" . $prefix . "/" . $fileName
+                    ]);
+
+                } catch (S3Exception $e) {
+                    $error = $e->getMessage();
+                }
+
+                if (!empty($error)) {
+                    echo "Error occurred while deleting files: " . $error;
+                }
+            }
         }
     }
 }

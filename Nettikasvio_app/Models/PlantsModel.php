@@ -206,13 +206,13 @@ class PlantsModel extends DatabaseModel {
         $sth = $this->pdo->prepare("SELECT images FROM plants WHERE plants.id = ?");
         $sth->execute([$plantId]);
 
-        $images = $sth->fetch(\PDO::FETCH_ASSOC);
+        $images = $sth->fetch(\PDO::FETCH_COLUMN);
 
-        $images = json_decode($images["images"], true);
+        $images = json_decode($images, true);
 
         $imageNames = [];
-        foreach ($images as $image) {
-            array_push($imageNames, $image["src"]);
+        foreach ($images[0] as $image) {
+            array_push($imageNames, $image);
         }
 
         return $imageNames;

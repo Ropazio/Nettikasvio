@@ -262,27 +262,17 @@ class Herbarium extends Controller {
 
         $species = (int)$plantId;
         $images = $this->plantsModel->getSpeciesImages($species);
-        $this->deleteSpeciesImages($images);
+
+        if (ENV_IMAGE_STORE == "s3") {
+            $this->s3Model->delete($images);
+        }
+        if (ENV_IMAGE_STORE == "server") {
+            $this->serverStoreModel->deleteImagesFromFolder($images);
+        }
         $this->plantsModel->delete($species);
 
         // Back to the herbarium
         header("Location: " . siteUrl("herbarium?success"));
-    }
-
-
-    public function deleteSpeciesImages( array $imageNames ) : void {
-
-        foreach ($imageNames as $imageName) {
-            $folder = strstr($imageName, "/", true);
-            $thumbnail = pathinfo($imageName, PATHINFO_FILENAME) . "-small." . pathinfo($imageName, PATHINFO_EXTENSION);
-            if ((file_exists(realpath("plantImg/{$imageName}"))) && (file_exists(realpath("plantImg/thumbnails/{$thumbnail}")))) {
-                unlink(realpath("plantImg/{$folder}/{$imageName}"));
-                unlink(realpath("plantImg/thumbnails/{$folder}/{$thumbnail}"));
-            } else {
-                header("Location: " . siteUrl("herbarium?error=failed"));
-                exit;
-            }
-        }
     }
 
 
