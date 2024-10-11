@@ -163,24 +163,24 @@ class Herbarium extends Controller {
 
                 // Resize image
                 $standardSizeImage = $this->resizeImage($image["tmp_name"], $fileType, 2000);
-                $this->serverStoreModel->saveResizedImage($standardSizeImage, false, $speciesCommonName, $fileName, $fileType);
+                $imageName = $this->serverStoreModel->saveResizedImage($standardSizeImage, false, $speciesCommonName, $fileName, $fileType);
 
                 // Create thumbnail
                 $smallSizeImage = $this->resizeImage($image["tmp_name"], $fileType, 140);
-                $this->serverStoreModel->saveResizedImage($smallSizeImage, true, $speciesCommonName, $fileName, $fileType);
+                $smallImageName = $this->serverStoreModel->saveResizedImage($smallSizeImage, true, $speciesCommonName, $fileName, $fileType);
 
                 if (ENV_IMAGE_STORE == "s3") {
                     // Save images to s3 bucket with plant common name prefix
                     $tempPath = "plantImg/temp";
-                    $standardSizeImageUrl = $this->s3Model->upload($speciesCommonName, $fileName, $tempPath);
+                    $standardSizeImageUrl = $this->s3Model->upload($speciesCommonName, $imageName, $tempPath);
                     $prefix = "thumbnails/{$speciesCommonName}";
-                    $smallSizeImageUrl = $this->s3Model->upload($prefix, $fileName, $tempPath);
+                    $smallSizeImageUrl = $this->s3Model->upload($prefix, $smallImageName, $tempPath);
                     $this->clearTemp();
                 }
                 if (ENV_IMAGE_STORE == "server") {
                     // Save images to plantImg with plant common name prefix
-                    $standardSizeImagePath = $this->addToImagesFolder($speciesCommonName, $fileName, $image["tmp_name"], $fileType, false);
-                    $smallSizeImagePath = $this->addToImagesFolder($speciesCommonName, $fileName, $image["tmp_name"], $fileType, true);
+                    $standardSizeImagePath = $this->addToImagesFolder($speciesCommonName, $imageName, $image["tmp_name"], $fileType, false);
+                    $smallSizeImagePath = $this->addToImagesFolder($speciesCommonName, $smallImageName, $image["tmp_name"], $fileType, true);
                 }
 
                 $images[] = [

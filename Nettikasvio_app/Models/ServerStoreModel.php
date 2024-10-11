@@ -36,7 +36,7 @@ class ServerStoreModel extends Model {
     }
 
 
-    public function saveResizedImage( object $resizedImage, bool $isThumbnail, string $speciesFolder, string $imageName, string $fileType ) {
+    public function saveResizedImage( object $resizedImage, bool $isThumbnail, string $speciesFolder, string $imageName, string $fileType ) : string {
 
         if ($isThumbnail) {
             $fileName = pathinfo($imageName, PATHINFO_FILENAME) . "-small." . pathinfo($imageName, PATHINFO_EXTENSION);
@@ -65,5 +65,7 @@ class ServerStoreModel extends Model {
         } else {
             imagepng($resizedImage, $file);
         }
+
+        return $fileName;
     }
 }
