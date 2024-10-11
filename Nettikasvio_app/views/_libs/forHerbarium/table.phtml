@@ -50,8 +50,9 @@ if (empty($plants)) {
             echo            '<div class="gallery" onscroll="removeRightScroll.call(this)">';
             echo                '<div>';
                                 foreach ($plant['images'] as $image) {
-                                    $thumbnail = pathinfo($image["src"], PATHINFO_FILENAME) . "-small." . pathinfo($image["src"], PATHINFO_EXTENSION);
-            echo                    '<img src="' . siteUrl("plantImg/thumbnails/{$thumbnail}") . '" loading="lazy"' . sprintf(" onclick='enlargeImage(\"%s\")'", siteUrl("plantImg/{$image["src"]}")) . '>';
+//                                    $thumbnail = pathinfo($image["src"], PATHINFO_FILENAME) . "-small." . pathinfo($image["src"], PATHINFO_EXTENSION);
+//            echo                    '<img src="' . siteUrl("plantImg/thumbnails/{$thumbnail}") . '" loading="lazy"' . sprintf(" onclick='enlargeImage(\"%s\")'", siteUrl("plantImg/{$image["src"]}")) . '>';
+            echo                    '<img src="' . $image["url"] . '" loading="lazy"' . sprintf(" onclick='enlargeImage(\"%s\")'", siteUrl("plantImg/{$image["src"]}")) . '>';
                                 }
             echo                '</div>';
             echo            '</div>';

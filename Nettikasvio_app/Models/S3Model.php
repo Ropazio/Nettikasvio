@@ -6,24 +6,28 @@ use app\{
     Core\S3,
     Models\Model
 };
+use Aws\S3\{
+    S3Client,
+    Exception\S3Exception
+};
 
 
 class S3Model extends Model {
 
     protected S3 $s3;
-    //protected \S3Client $s3Client;
+    protected S3Client $s3Client;
 
     public function __construct() {
         $this->s3 = new S3();
     }
 
 
-    public function upload( string $prefix, string $fileName, string $fileTempName) {
+    public function upload( string $prefix, string $fileName, string $fileTempName) : string {
 
-        $s3Client = $this->s3->getS3Client();
+        $this->s3Client = $this->s3->getS3Client();
 
         try {
-            $result = $s3Client->putObject([
+            $result = $this->s3Client->putObject([
                 "Bucket"        => $this->s3->getS3Bucket(),
                 "Key"           => $prefix . "/" . $fileName,
                 "SourceFile"    => $fileTempName
@@ -31,14 +35,14 @@ class S3Model extends Model {
             $resultArray = $result->toArray();
 
             if (!empty($resultArray["ObjectURL"])) {
-                die($resultArray["ObjectURL"]);
+                return $resultArray["ObjectURL"];
             }
-        } catch (Aws\S3\Exception\S3Exception $e) {
+        } catch (S3Exception $e) {
             $error = $e->getMessage();
         }
 
         if (!empty($error)) {
-            die($error);
+            echo "Error in uploading files: " . $error;
         }
     }
 }

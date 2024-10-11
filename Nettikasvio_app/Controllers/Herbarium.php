@@ -151,14 +151,15 @@ class Herbarium extends Controller {
             $i = 0;
 
             foreach($files as $image) {
-                $images[] = [
-                    "src"      => $image["name"]
-                ];
-                // Save images to s3 bucket with plant common name prefix
                 $speciesCommonName = strstr($speciesName, ",", true);
-                $this->s3Model->upload($speciesCommonName, $image["name"], $image["tmp_name"]);
+                // Save images to s3 bucket with plant common name prefix
+                $imageUrl = $this->s3Model->upload($speciesCommonName, $image["name"], $image["tmp_name"]);
                 // Save image to img/projects
-                //$this->addToImagesFolder($image["name"], $image["tmp_name"]);
+                //$this->addToImagesFolder($speciesCommonName, $image["name"], $image["tmp_name"]);
+                $images[] = [
+                    "src"       => $speciesCommonName . "/" . $image["name"],
+                    "url"       => isset($imageUrl) ? $imageUrl : null,
+                ];
                 $i++;
             }
             // Add data to database
@@ -170,14 +171,17 @@ class Herbarium extends Controller {
     }
 
 
-    public function addToImagesFolder( string $imageName, string $imageTmpName ) : void {
+    public function addToImagesFolder( string $speciesCommonName, string $imageName, string $imageTmpName ) : void {
 
         // Get file info
         $fileName = basename($imageName);
         $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
-        $folder = "plantImg/{$fileName}";
-
-        if (file_exists($folder)) {
+        $folder = "plantImg/{$speciesCommonName}";
+        if (!is_dir($folder)) {
+            mkdir($folder);
+        }
+        $file = "$folder/$fileName";
+        if (file_exists($file)) {
             header("Location: " . siteUrl("herbarium/add-species?error=failed"));
             exit;
         }
@@ -185,11 +189,11 @@ class Herbarium extends Controller {
         // Allow certain file formats
         $allowTypes = array("jpg","png","jpeg");
         if (in_array(strtolower($fileType), $allowTypes)) {
-            if (!move_uploaded_file($imageTmpName, $folder)) {
+            if (!move_uploaded_file($imageTmpName, $file)) {
                 header("Location: " . siteUrl("herbarium/add-species?error=failed"));
                 exit;
             } else {
-                $this->createThumbnail($imageName, $fileType);
+                $this->createThumbnail($imageName, $speciesCommonName, $fileType);
             }
         } else {
             header("Location: " . siteUrl("herbarium/add-species?error=failed"));
@@ -198,9 +202,9 @@ class Herbarium extends Controller {
     }
 
 
-    public function createThumbnail( string $originalImage, string $fileType ) : void {
+    public function createThumbnail( string $originalImage, string $subfolder, string $fileType ) : void {
 
-        $originalPath = "plantImg/{$originalImage}";
+        $originalPath = "plantImg/{$subfolder}/{$originalImage}";
 
         // Get new dimensions
         list($width, $height) = getimagesize($originalPath);
@@ -226,11 +230,15 @@ class Herbarium extends Controller {
 
         // Save
         $fileName = pathinfo($originalImage, PATHINFO_FILENAME) . "-small." . pathinfo($originalImage, PATHINFO_EXTENSION);
-        $folder = "plantImg/thumbnails/{$fileName}";
+        $folder = "plantImg/thumbnails/{$subfolder}";
+        if (!is_dir($folder)) {
+            mkdir($folder);
+        }
+        $file = "$folder/$fileName";
         if ($fileType != "png") {
-            imagejpeg($imageTrueColour, $folder, 100);
+            imagejpeg($imageTrueColour, $file, 100);
         } else {
-            imagepng($imageTrueColour, $folder);
+            imagepng($imageTrueColour, $file);
         }
     }
 
@@ -271,10 +279,11 @@ class Herbarium extends Controller {
     public function deleteSpeciesImages( array $imageNames ) : void {
 
         foreach ($imageNames as $imageName) {
+            $folder = strstr($imageName, "/", true);
             $thumbnail = pathinfo($imageName, PATHINFO_FILENAME) . "-small." . pathinfo($imageName, PATHINFO_EXTENSION);
             if ((file_exists(realpath("plantImg/{$imageName}"))) && (file_exists(realpath("plantImg/thumbnails/{$thumbnail}")))) {
-                unlink(realpath("plantImg/{$imageName}"));
-                unlink(realpath("plantImg/thumbnails/{$thumbnail}"));
+                unlink(realpath("plantImg/{$folder}/{$imageName}"));
+                unlink(realpath("plantImg/thumbnails/{$folder}/{$thumbnail}"));
             } else {
                 header("Location: " . siteUrl("herbarium?error=failed"));
                 exit;
