@@ -5,7 +5,8 @@ namespace app\Controllers;
 use app\{
     Core\Controller,
     Core\Sessions,
-    Models\PlantsModel
+    Models\PlantsModel,
+    Models\S3Model
 };
 
 
@@ -13,12 +14,14 @@ class Herbarium extends Controller {
 
     public Sessions $session;
     public PlantsModel $plantsModel;
+    public S3Model $s3Model;
 
     public function __construct() {
 
         parent::__construct();
         $this->session = new Sessions();
         $this->plantsModel = new PlantsModel();
+        $this->s3Model = new S3Model();
     }
 
 
@@ -151,8 +154,11 @@ class Herbarium extends Controller {
                 $images[] = [
                     "src"      => $image["name"]
                 ];
+                // Save images to s3 bucket with plant common name prefix
+                $speciesCommonName = strstr($speciesName, ",", true);
+                $this->s3Model->upload($speciesCommonName, $image["name"], $image["tmp_name"]);
                 // Save image to img/projects
-                $this->addToImagesFolder($image["name"], $image["tmp_name"]);
+                //$this->addToImagesFolder($image["name"], $image["tmp_name"]);
                 $i++;
             }
             // Add data to database
