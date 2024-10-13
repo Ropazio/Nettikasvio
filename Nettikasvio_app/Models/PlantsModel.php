@@ -16,7 +16,7 @@ class PlantsModel extends DatabaseModel {
     public function applyAndGetPlants( ?string $searchString, ?int $colourId, ?int $typeId) : array {
 
         // Fetch plant name and type by joining plantsType - id with plants - type id.
-        $query =    "SELECT DISTINCT plants.name AS name, plants.info AS info, plants.images AS images, plants.id AS id
+        $query =    "SELECT DISTINCT plants.name AS name, plants.sciName AS sciName, plants.info AS info, plants.images AS images, plants.id AS id
                     FROM plants
                     LEFT JOIN plantsType ON plantsType.id = plants.typeId
                     LEFT JOIN plantsColour ON plantsColour.plantId = plants.id
@@ -79,6 +79,7 @@ class PlantsModel extends DatabaseModel {
             $plant = [
                 "id"        => $plant["id"],
                 "name"      => $plant["name"],
+                "sciName"   => $plant["sciName"],
                 "info"      => $plant["info"],
                 "images"    => json_decode($plant["images"], true)
             ];
@@ -172,13 +173,13 @@ class PlantsModel extends DatabaseModel {
     }
 
 
-    public function add( string $speciesName, ?string $speciesDesc, string $speciesType, array $speciesColour, array $images) : void {
+    public function add( string $speciesName, string $speciesSciName, ?string $speciesDesc, string $speciesType, array $speciesColour, array $images) : void {
 
         // Add project
         $images = json_encode($images);
         $ids = $this->convertFilterNameToId($speciesColour, $speciesType);
-        $query = "INSERT INTO plants (name, info, typeId, images) VALUES (?, ?, ?, ?)";
-        $this->pdo->prepare($query)->execute([$speciesName, $speciesDesc, $ids["typeId"], $images]);
+        $query = "INSERT INTO plants (name, sciName, info, typeId, images) VALUES (?, ?, ?, ?, ?)";
+        $this->pdo->prepare($query)->execute([$speciesName, $speciesSciName, $speciesDesc, $ids["typeId"], $images]);
 
         $query = "SELECT plants.id FROM plants WHERE plants.name = ?";
         $sth = $this->pdo->prepare($query);
@@ -222,7 +223,7 @@ class PlantsModel extends DatabaseModel {
     public function getSpeciesData( int $plantId ) : array {
 
         // Fetch all plant data except colour
-        $dataWithoutColourQuery =   "SELECT DISTINCT plants.name AS name, plants.info AS info, plants.images AS images, plantsType.typeName AS type
+        $dataWithoutColourQuery =   "SELECT DISTINCT plants.name AS name, plants.sciName AS sciName, plants.info AS info, plants.images AS images, plantsType.typeName AS type
                                     FROM plants
                                     LEFT JOIN plantsType ON plantsType.id = plants.typeId
                                     WHERE plants.id = ?";
@@ -257,6 +258,7 @@ class PlantsModel extends DatabaseModel {
         $speciesData = [
                 "id"        => $plantId,
                 "name"      => $dataWithoutColour["name"],
+                "sciName"   => $dataWithoutColour["sciName"],
                 "info"      => $dataWithoutColour["info"],
                 "type"      => $dataWithoutColour["type"],
                 "colours"   => $plantColours,
@@ -267,13 +269,13 @@ class PlantsModel extends DatabaseModel {
     }
 
 
-    public function update( int $speciesId, string $speciesName, ?string $speciesDesc, string $speciesType, array $speciesColour, array $imagesAfterUpdate) : void {
+    public function update( int $speciesId, string $speciesName, string $speciesSciName, ?string $speciesDesc, string $speciesType, array $speciesColour, array $imagesAfterUpdate) : void {
 
         // Add project
         $images = json_encode($imagesAfterUpdate);
         $ids = $this->convertFilterNameToId($speciesColour, $speciesType);
-        $query = "UPDATE plants SET name = ?, info = ?, typeId = ?, images = ? WHERE plants.id = ?";
-        $this->pdo->prepare($query)->execute([$speciesName, $speciesDesc, $ids["typeId"], $images, $speciesId]);
+        $query = "UPDATE plants SET name = ?, sciName = ?, info = ?, typeId = ?, images = ? WHERE plants.id = ?";
+        $this->pdo->prepare($query)->execute([$speciesName, $speciesSciName, $speciesDesc, $ids["typeId"], $images, $speciesId]);
 
         // Delete old links from the colours pivot table
         $this->pdo->prepare("DELETE FROM plantsColour WHERE plantId = ?")->execute([$speciesId]);

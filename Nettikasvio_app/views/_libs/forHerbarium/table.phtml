@@ -41,7 +41,7 @@ if (empty($plants)) {
         foreach ($plants as $plant) {
             echo    '<div class="gridPlantListAdmin">';
             echo        '<div class="plantListColumn1">';
-            echo            '<p>' . $plant['name'] . '</p>';
+            echo            '<p>' . $plant['name'] . ', ' . $plant['sciName'] . '</p>';
             echo        '</div>';
             echo        '<div class="plantListColumn2">';
             echo            '<p>' . $plant['info'] . '</p>';
@@ -84,7 +84,7 @@ if (empty($plants)) {
         foreach ($plants as $plant) {
             echo    '<div class="gridPlantList">';
             echo        '<div class="plantListColumn1">';
-            echo            '<p>' . $plant['name'] . '</p>';
+            echo            '<p>' . $plant['name'] . ', ' . $plant['sciName'] . '</p>';
             echo        '</div>';
             echo        '<div class="plantListColumn2">';
             echo            '<p>' . $plant['info'] . '</p>';

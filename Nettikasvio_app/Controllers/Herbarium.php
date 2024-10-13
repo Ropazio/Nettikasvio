@@ -145,7 +145,7 @@ class Herbarium extends Controller {
         if (isset($_POST["addSpeciesButton"])) {
             // Species info
             $speciesName = $_POST["speciesName"];
-            $speciesCommonName = strstr($speciesName, ",", true);
+            $speciesSciName = $_POST["speciesSciName"];
             $speciesDesc = $_POST["speciesDesc"];
             $speciesType = $_POST["speciesType"];
             $speciesColour = $_POST["speciesColour"];
@@ -163,17 +163,17 @@ class Herbarium extends Controller {
 
                 // Resize image
                 $standardSizeImage = $this->resizeImage($image["tmp_name"], $fileType, 2000);
-                $imageName = $this->serverStoreModel->saveResizedImage($standardSizeImage, false, $speciesCommonName, $fileName, $fileType);
+                $imageName = $this->serverStoreModel->saveResizedImage($standardSizeImage, false, $speciesName, $fileName, $fileType);
 
                 // Create thumbnail
                 $smallSizeImage = $this->resizeImage($image["tmp_name"], $fileType, 140);
-                $smallImageName = $this->serverStoreModel->saveResizedImage($smallSizeImage, true, $speciesCommonName, $fileName, $fileType);
+                $smallImageName = $this->serverStoreModel->saveResizedImage($smallSizeImage, true, $speciesName, $fileName, $fileType);
 
                 if (ENV_IMAGE_STORE == "s3") {
                     // Save images to s3 bucket with plant common name prefix
                     $tempPath = "plantImg/temp";
-                    $standardSizeImageUrl = $this->s3Model->upload($speciesCommonName, $imageName, $tempPath);
-                    $prefix = "thumbnails/{$speciesCommonName}";
+                    $standardSizeImageUrl = $this->s3Model->upload($speciesName, $imageName, $tempPath);
+                    $prefix = "thumbnails/$speciesName";
                     $smallSizeImageUrl = $this->s3Model->upload($prefix, $smallImageName, $tempPath);
                     $this->clearTemp();
                 }
@@ -193,7 +193,7 @@ class Herbarium extends Controller {
                 $i++;
             }
             // Add data to database
-            $this->plantsModel->add($speciesName, $speciesDesc, $speciesType, $speciesColour, $images);
+            $this->plantsModel->add($speciesName, $speciesSciName, $speciesDesc, $speciesType, $speciesColour, $images);
         }
 
         // Back to the add page
@@ -228,9 +228,9 @@ class Herbarium extends Controller {
     }
 
 
-//    public function addToImagesFolder( string $speciesCommonName, string $imageName, string $imageTmpName, string $filetype, bool $isThumbnail ) : void {
+//    public function addToImagesFolder( string $speciesName, string $imageName, string $imageTmpName, string $filetype, bool $isThumbnail ) : void {
 //
-//        $success = $this->serverStoreModel->saveToFolder($speciesCommonName, $imageName, $imageTmpName, $filetype, $isThumbnail);
+//        $success = $this->serverStoreModel->saveToFolder($speciesName, $imageName, $imageTmpName, $filetype, $isThumbnail);
 //        if (!$success) {
 //            header("Location: " . siteUrl("herbarium/add-species?error=failed"));
 //            exit;
@@ -314,6 +314,7 @@ class Herbarium extends Controller {
         if (isset($_POST["editSpeciesButton"])) {
             // Species info
             $speciesName = $_POST["speciesName"];
+            $speciesSciName = $_POST["speciesSciName"];
             $speciesDesc = $_POST["speciesDesc"];
             $speciesType = $_POST["speciesType"];
             $speciesColour = $_POST["speciesColour"];
@@ -352,7 +353,7 @@ class Herbarium extends Controller {
             }
 
             // Add data to database
-            $this->plantsModel->update($speciesId, $speciesName, $speciesDesc, $speciesType, $speciesColour, $speciesImages);
+            $this->plantsModel->update($speciesId, $speciesName, $speciesSciName, $speciesDesc, $speciesType, $speciesColour, $speciesImages);
         }
 
         // Back to the add page
