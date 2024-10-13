@@ -13,10 +13,10 @@ class S3 {
     
         // Configuration for herbarium images
         $s3Config = [
-            "region"            => "eu-north-1",
-            "accessKey"         => "",
-            "secretKey"         => "",
-            "bucket"            => "herbarium-images"
+            "region"            => AWS_REGION,
+            "accessKey"         => AWS_ACCESS_KEY,
+            "secretKey"         => AWS_SECRET,
+            "bucket"            => AWS_BUCKET
         ];
 
         $this->s3Client = new S3Client([
@@ -31,7 +31,7 @@ class S3 {
 
     public function getS3Bucket() : string {
 
-        return "herbarium-images";
+        return AWS_BUCKET;
     }
 
 

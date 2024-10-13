@@ -1,27 +1,5 @@
 <?php
 
-// Move to: require_once "site_config.php";
-// Then have a separate site_config.php for server (prod) and local (dev)
-
-define("ROOT", dirname(__DIR__));
-
-// The directory containing the back-end (only the directory name "app" etc., not full path!)
-define("APP_DIR", basename(dirname(__FILE__)));
-
-// Development (local)
-define("SITE_ROOT_URL", "Nettikasvio");
-
-// Production (server)
-//define("SITE_ROOT_URL", "");
-
-// If plant image store is on server
-//define("ENV_IMAGE_STORE", "server");
-
-// If plant image store is on Amazon s3
-define("ENV_IMAGE_STORE", "s3");
-
-//////////////////////////////////////////////////////////////////
-
 $folders = [
         "app"               => (ROOT . "/" . APP_DIR . "/"),
         "controllers"       => (ROOT . "/" . APP_DIR . "/" . "Controllers/"),

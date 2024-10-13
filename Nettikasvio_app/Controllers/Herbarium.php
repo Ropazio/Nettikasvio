@@ -145,6 +145,7 @@ class Herbarium extends Controller {
         if (isset($_POST["addSpeciesButton"])) {
             // Species info
             $speciesName = $_POST["speciesName"];
+            $speciesCommonName = strstr($speciesName, ",", true);
             $speciesDesc = $_POST["speciesDesc"];
             $speciesType = $_POST["speciesType"];
             $speciesColour = $_POST["speciesColour"];
@@ -155,7 +156,6 @@ class Herbarium extends Controller {
             $i = 0;
 
             foreach($files as $image) {
-                $speciesCommonName = strstr($speciesName, ",", true);
 
                 // Get file info
                 $fileName = basename($image["name"]);
@@ -179,10 +179,11 @@ class Herbarium extends Controller {
                 }
                 if (ENV_IMAGE_STORE == "server") {
                     // Save images to plantImg with plant common name prefix
-                    $standardSizeImagePath = $this->addToImagesFolder($speciesCommonName, $imageName, $image["tmp_name"], $fileType, false);
-                    $smallSizeImagePath = $this->addToImagesFolder($speciesCommonName, $smallImageName, $image["tmp_name"], $fileType, true);
+                    $standardSizeImagePath = $imageName;
+                    $smallSizeImagePath = $smallImageName;
                 }
 
+                // Image data locations (url or file source) to be saved to the database
                 $images[] = [
                     "srcImage"       => isset($standardSizeImagePath) ? $standardSizeImagePath : null,
                     "srcThumb"       => isset($smallSizeImagePath) ? $smallSizeImagePath : null,
@@ -227,14 +228,14 @@ class Herbarium extends Controller {
     }
 
 
-    public function addToImagesFolder( string $speciesCommonName, string $imageName, string $imageTmpName, string $filetype, bool $isThumbnail ) : void {
-
-        $success = $this->serverStoreModel->saveToFolder($speciesCommonName, $imageName, $imageTmpName, $filetype, $isThumbnail);
-        if (!$success) {
-            header("Location: " . siteUrl("herbarium/add-species?error=failed"));
-            exit;
-        }
-    }
+//    public function addToImagesFolder( string $speciesCommonName, string $imageName, string $imageTmpName, string $filetype, bool $isThumbnail ) : void {
+//
+//        $success = $this->serverStoreModel->saveToFolder($speciesCommonName, $imageName, $imageTmpName, $filetype, $isThumbnail);
+//        if (!$success) {
+//            header("Location: " . siteUrl("herbarium/add-species?error=failed"));
+//            exit;
+//        }
+//    }
 
 
     public function restructureImages( array $images ) : array {
