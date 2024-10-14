@@ -16,7 +16,10 @@ class PlantsModel extends DatabaseModel {
     public function applyAndGetPlants( ?string $searchString, ?int $colourId, ?int $typeId) : array {
 
         // Fetch plant name and type by joining plantsType - id with plants - type id.
-        $query =    "SELECT DISTINCT plants.name AS name, plants.sciName AS sciName, plants.info AS info, plants.images AS images, plants.id AS id
+        $query =    "SELECT DISTINCT    plants.name AS name, 
+                                        plants.sciName AS sciName, 
+                                        plants.info AS info, 
+                                        plants.id AS id
                     FROM plants
                     LEFT JOIN plantsType ON plantsType.id = plants.typeId
                     LEFT JOIN plantsColour ON plantsColour.plantId = plants.id
@@ -42,7 +45,7 @@ class PlantsModel extends DatabaseModel {
 
         // Apply name search.
         if (!empty($searchString)) {
-            array_push($filterSelections, "name LIKE :searchString");
+            array_push($filterSelections, "name LIKE :searchString OR sciName LIKE :searchString");
         }
     
         /*
@@ -81,10 +84,46 @@ class PlantsModel extends DatabaseModel {
                 "name"      => $plant["name"],
                 "sciName"   => $plant["sciName"],
                 "info"      => $plant["info"],
-                "images"    => json_decode($plant["images"], true)
+                "images"    => []
             ];
-
         }
+        $query =    "SELECT plantImages.plantId AS plantId, 
+                            plantImages.srcImage AS srcImage, 
+                            plantImages.srcThumb AS srcThumb, 
+                            plantImages.urlImage AS urlImage, 
+                            plantImages.urlThumb AS urlThumb
+                    FROM plantImages";
+
+        $sth = $this->pdo->prepare($query);
+        $sth->execute();
+        $plantImages = $sth->fetchAll(\PDO::FETCH_ASSOC);
+
+        if (ENV_IMAGE_STORE == "s3") {
+            foreach ($plants as $plant) {
+                foreach ($plantImages as $plantImage) {
+                    if ($plant["id"] == $plantImage["plantId"]) {
+                        array_push($plant["images"], [
+                            "image"     => $plantImage["urlImage"],
+                            "thumb"     => $plantImage["urlThumb"]
+                        ]);
+                    }
+                }
+            }
+        }
+
+        if (ENV_IMAGE_STORE == "server") {
+            foreach ($plants as $plant) {
+                foreach ($plantImages as $plantImage) {
+                    if ($plant["id"] == $plantImage["plantId"]) {
+                        array_push($plant["images"], [
+                            "image"     => siteUrl($plantImage["srcImage"]),
+                            "thumb"     => siteUrl($plantImage["srcThumb"])
+                        ]);
+                    }
+                }
+            }
+        }
+
 
         // Sort plants alphabetically by name
         $plantNames = array_column($plants, "name");
@@ -176,10 +215,9 @@ class PlantsModel extends DatabaseModel {
     public function add( string $speciesName, string $speciesSciName, ?string $speciesDesc, string $speciesType, array $speciesColour, array $images) : void {
 
         // Add project
-        $images = json_encode($images);
         $ids = $this->convertFilterNameToId($speciesColour, $speciesType);
-        $query = "INSERT INTO plants (name, sciName, info, typeId, images) VALUES (?, ?, ?, ?, ?)";
-        $this->pdo->prepare($query)->execute([$speciesName, $speciesSciName, $speciesDesc, $ids["typeId"], $images]);
+        $query = "INSERT INTO plants (name, sciName, info, typeId) VALUES (?, ?, ?, ?)";
+        $this->pdo->prepare($query)->execute([$speciesName, $speciesSciName, $speciesDesc, $ids["typeId"]]);
 
         $query = "SELECT plants.id FROM plants WHERE plants.name = ?";
         $sth = $this->pdo->prepare($query);
@@ -190,6 +228,10 @@ class PlantsModel extends DatabaseModel {
         foreach ($ids["colourId"] as $colour) {
             $this->pdo->prepare($query)->execute([$plantId, $colour]);
         }
+        $query = "INSERT INTO plantImages (plantId, srcImage, srcThumb, urlImage, urlThumb) VALUES (?, ?, ?, ?, ?)";
+        foreach ($images as $image) {
+            $this->pdo->prepare($query)->execute([$plantId, $image["srcImage"], $image["srcThumb"], $image["urlImage"], $image["urlThumb"]]);
+        }
     }
 
 
@@ -199,31 +241,71 @@ class PlantsModel extends DatabaseModel {
         $this->pdo->prepare("DELETE FROM plants WHERE plants.id = ?")->execute([$plantId]);
         // Remove colour links from the colours pivot table
         $this->pdo->prepare("DELETE FROM plantsColour WHERE plantId = ?")->execute([$plantId]);
+        // Remove image links from the plantImages pivot table
+        $this->pdo->prepare("DELETE FROM plantImages WHERE plantId = ?")->execute([$plantId]);
     }
 
 
-    public function getSpeciesImages( int $plantId ) : array {
+    public function getSpeciesImages( int $plantId, bool $getIds = false ) : array {
 
-        $sth = $this->pdo->prepare("SELECT images FROM plants WHERE plants.id = ?");
-        $sth->execute([$plantId]);
-
-        $images = $sth->fetch(\PDO::FETCH_COLUMN);
-
-        $images = json_decode($images, true);
-
-        $imageNames = [];
-        foreach ($images[0] as $image) {
-            array_push($imageNames, $image);
+        if ($getIds) {
+            $query =    "SELECT plantImages.id AS imageId,
+                                plantImages.srcImage AS srcImage, 
+                                plantImages.srcThumb AS srcThumb, 
+                                plantImages.urlImage AS urlImage, 
+                                plantImages.urlThumb AS urlThumb 
+                        FROM plantImages WHERE plantImages.plantId = ?";
+        } else {
+            $query =    "SELECT plantImages.srcImage AS srcImage, 
+                                plantImages.srcThumb AS srcThumb, 
+                                plantImages.urlImage AS urlImage, 
+                                plantImages.urlThumb AS urlThumb 
+                        FROM plantImages WHERE plantImages.plantId = ?";
         }
 
-        return $imageNames;
+        $sth = $this->pdo->prepare($query);
+        $sth->execute([$plantId]);
+
+        $images = $sth->fetchAll(\PDO::FETCH_ASSOC);
+
+        $imageNames = [];
+        $imageIds = [];
+        foreach ($images as $image) {
+            foreach ($image as $imageType => $value) {
+
+                if ($getIds) {
+                    if ($imageType == "imageId") {
+                        array_push($imageIds, $value);
+                        continue;
+                    }
+                }
+
+                if (!$value) {
+                    continue;
+                } else {
+                    array_push($imageNames, $value);
+                }
+            }
+        }
+
+        if ($getIds) {
+            // Return all image names, also thumbnail images, and image ids
+            $imageData = [
+                "imageNames"    =>  $imageNames,
+                "imageIds"      =>  $imageIds
+            ];
+            return $imageData;
+        } else {
+            // Return all image names, also thumbnail images
+            return $imageNames;
+        }
     }
 
 
     public function getSpeciesData( int $plantId ) : array {
 
         // Fetch all plant data except colour
-        $dataWithoutColourQuery =   "SELECT DISTINCT plants.name AS name, plants.sciName AS sciName, plants.info AS info, plants.images AS images, plantsType.typeName AS type
+        $dataWithoutColourQuery =   "SELECT DISTINCT plants.name AS name, plants.sciName AS sciName, plants.info AS info, plantsType.typeName AS type
                                     FROM plants
                                     LEFT JOIN plantsType ON plantsType.id = plants.typeId
                                     WHERE plants.id = ?";
@@ -232,13 +314,16 @@ class PlantsModel extends DatabaseModel {
         $sth->execute([$plantId]);
 
         $dataWithoutColour = $sth->fetch(\PDO::FETCH_ASSOC);
-
-        // Decode and add plant images to an array
-        $images = json_decode($dataWithoutColour["images"], true);
+        $images = $this->getSpeciesImages($plantId, true);
 
         $imageNames = [];
-        foreach ($images as $image) {
-            array_push($imageNames, $image["src"]);
+        foreach ($images["imageNames"] as $image) {
+            if (str_contains($image, "-small")) {
+                continue;
+            } else {
+                list($imageName) = array_reverse(explode("/", $image));
+                array_push($imageNames, $imageName);
+            }
         }
 
         // Fetch plant colour data
@@ -253,7 +338,6 @@ class PlantsModel extends DatabaseModel {
 
         $plantColours = $sth->fetchAll(\PDO::FETCH_COLUMN);
 
-
         // Add all plant data to an associative array
         $speciesData = [
                 "id"        => $plantId,
@@ -262,7 +346,8 @@ class PlantsModel extends DatabaseModel {
                 "info"      => $dataWithoutColour["info"],
                 "type"      => $dataWithoutColour["type"],
                 "colours"   => $plantColours,
-                "images"    => $imageNames
+                "images"    => $imageNames,
+                "imageIds"  => $images["imageIds"]
         ];
 
         return $speciesData;
@@ -272,10 +357,9 @@ class PlantsModel extends DatabaseModel {
     public function update( int $speciesId, string $speciesName, string $speciesSciName, ?string $speciesDesc, string $speciesType, array $speciesColour, array $imagesAfterUpdate) : void {
 
         // Add project
-        $images = json_encode($imagesAfterUpdate);
         $ids = $this->convertFilterNameToId($speciesColour, $speciesType);
-        $query = "UPDATE plants SET name = ?, sciName = ?, info = ?, typeId = ?, images = ? WHERE plants.id = ?";
-        $this->pdo->prepare($query)->execute([$speciesName, $speciesSciName, $speciesDesc, $ids["typeId"], $images, $speciesId]);
+        $query = "UPDATE plants SET name = ?, sciName = ?, info = ?, typeId = ? WHERE plants.id = ?";
+        $this->pdo->prepare($query)->execute([$speciesName, $speciesSciName, $speciesDesc, $ids["typeId"], $speciesId]);
 
         // Delete old links from the colours pivot table
         $this->pdo->prepare("DELETE FROM plantsColour WHERE plantId = ?")->execute([$speciesId]);
@@ -285,5 +369,52 @@ class PlantsModel extends DatabaseModel {
         foreach ($ids["colourId"] as $colour) {
             $this->pdo->prepare($query)->execute([$speciesId, $colour]);
         }
+
+        // Add new links to the plantImages pivot table
+        $query = "INSERT INTO plantImages (plantId, srcImage, srcThumb, urlImage, urlThumb) VALUES (?, ?, ?, ?, ?)";
+        foreach ($imagesAfterUpdate as $image) {
+            $this->pdo->prepare($query)->execute([$speciesId, $image["srcImage"], $image["srcThumb"], $image["urlImage"], $image["urlThumb"]]);
+        }
+    }
+
+
+    public function deleteImages( array $imageIds ) : void {
+
+        foreach ($imageIds as $id) {
+            // Remove image links from the plantImages pivot table
+            $this->pdo->prepare("DELETE FROM plantImages WHERE id = ?")->execute([$id]);
+        }
+    }
+
+
+    public function findImagesWithId( array $ids ) : array {
+
+        $query =    "SELECT plantImages.srcImage AS srcImage, 
+                            plantImages.srcThumb AS srcThumb, 
+                            plantImages.urlImage AS urlImage, 
+                            plantImages.urlThumb AS urlThumb 
+                    FROM plantImages WHERE plantImages.id = ?";
+
+        $images = [];
+        foreach ($ids as $id) {
+            $sth = $this->pdo->prepare($query);
+            $sth->execute([$id]);
+            $images = $sth->fetchAll(\PDO::FETCH_ASSOC);
+        }
+
+        $imageNames = [];
+        foreach ($images as $image) {
+            foreach ($image as $imageType => $value) {
+
+                if (!$value) {
+                    continue;
+                } else {
+                    array_push($imageNames, $value);
+                }
+            }
+        }
+
+        // Return all image names, also thumbnail images
+        return $imageNames;
     }
 }

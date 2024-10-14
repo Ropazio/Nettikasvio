@@ -21,7 +21,7 @@
         </div>
         <div>
             <label for="speciesName">Lajin tieteellinen nimi:</label>
-            <div><input type="text" id="speciesSciName" name="speciesSciName" required></div>
+            <div><input type="text" id="speciesSciName" name="speciesSciName" value="<?= $params["speciesData"]["sciName"] ?>" required></div>
         </div>
         <div>
             <label for="speciesDesc">Lajin tiedot:</label>
@@ -73,15 +73,15 @@
                 <p>Nykyään kasville löytyy seuraavan nimiset kuvatiedostot:</p>
                 <?php
                 echo '<div>';
-                foreach ($params["speciesData"]["images"] as $image) {
+                foreach ($params["speciesData"]["images"] as $i => $image) {
                     echo '<div>';
-                    echo    '<input type="checkbox" id="' . $image . '" name="speciesImages[]" value="' . $image . '" checked>';
+                    echo    '<input type="checkbox" id="' . $image . '" name="speciesImages[]" value="' . $params["speciesData"]["imageIds"][$i] . '">';
                     echo    '<label for="' . $image . '">' . $image . '</label>';
                     echo '</div>';
                 }
                 echo '</div>';
                 ?>
-                <p>Jos haluat säilyttää vanhat kuvat, pidä kuvatiedostot ruksittuna. Voit lisätä lisää kuvia alta. Kuvia on kuitenkin oltava ainakin yksi.</p>
+                <p>Jos haluat poistaa kuvan, ruksita kuva. Voit lisätä lisää kuvia alta. Kuvia on kuitenkin oltava ainakin yksi.</p>
             </div>
             <table id="imagesForm">
                 <thead>

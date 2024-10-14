@@ -47,7 +47,7 @@ class S3Model extends Model {
     }
 
 
-    public function delete( array $images ) {
+    public function deleteImagesFromBucket( array $images ) {
 
         $this->s3Client = $this->s3->getS3Client();
         $bucket = $this->s3->getS3Bucket();

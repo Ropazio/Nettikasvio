@@ -39,7 +39,6 @@ class Herbarium extends Controller {
         $this->view->view("herbarium/index", [
             "title"         => "Nettikasvio - kasvilista",
             "plants"        => $plants,
-            "env"           => (ENV_IMAGE_STORE == "s3") ? "url" : "src",
             "lib"           => "forHerbarium",
             "filterData"    => $filterData,
             "userParams"    => $userParams,
@@ -161,12 +160,12 @@ class Herbarium extends Controller {
                 $fileName = basename($image["name"]);
                 $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
 
-                // Resize image
+                // Resize image and create thumbnail
                 $standardSizeImage = $this->resizeImage($image["tmp_name"], $fileType, 2000);
-                $imageName = $this->serverStoreModel->saveResizedImage($standardSizeImage, false, $speciesName, $fileName, $fileType);
-
-                // Create thumbnail
                 $smallSizeImage = $this->resizeImage($image["tmp_name"], $fileType, 140);
+
+                // Save resized images to temp (s3) or plants folder (server)
+                $imageName = $this->serverStoreModel->saveResizedImage($standardSizeImage, false, $speciesName, $fileName, $fileType);
                 $smallImageName = $this->serverStoreModel->saveResizedImage($smallSizeImage, true, $speciesName, $fileName, $fileType);
 
                 if (ENV_IMAGE_STORE == "s3") {
@@ -228,16 +227,6 @@ class Herbarium extends Controller {
     }
 
 
-//    public function addToImagesFolder( string $speciesName, string $imageName, string $imageTmpName, string $filetype, bool $isThumbnail ) : void {
-//
-//        $success = $this->serverStoreModel->saveToFolder($speciesName, $imageName, $imageTmpName, $filetype, $isThumbnail);
-//        if (!$success) {
-//            header("Location: " . siteUrl("herbarium/add-species?error=failed"));
-//            exit;
-//        }
-//    }
-
-
     public function restructureImages( array $images ) : array {
 
         /*  This function restructures files array in the following manner:
@@ -265,7 +254,7 @@ class Herbarium extends Controller {
         $images = $this->plantsModel->getSpeciesImages($species);
 
         if (ENV_IMAGE_STORE == "s3") {
-            $this->s3Model->delete($images);
+            $this->s3Model->deleteImagesFromBucket($images);
         }
         if (ENV_IMAGE_STORE == "server") {
             $this->serverStoreModel->deleteImagesFromFolder($images);
@@ -318,9 +307,9 @@ class Herbarium extends Controller {
             $speciesDesc = $_POST["speciesDesc"];
             $speciesType = $_POST["speciesType"];
             $speciesColour = $_POST["speciesColour"];
-            $speciesSavedImages = $_POST["speciesImages"];
+            $speciesRemovableImagesIds = $_POST["speciesImages"];
 
-            if (!isset($speciesSavedImages)) {
+            if (!isset($speciesRemovableImagesIds)) {
                 header("Location: " . siteUrl("herbarium?error=failed"));
                 exit;
             }
@@ -331,29 +320,55 @@ class Herbarium extends Controller {
                 $files = $this->restructureImages($_FILES["images"]);
                 $i = 0;
 
+                $imageNames = [];
+                foreach ($files as $imageName) {
+
+                    array_push($imageNames, $imageName["name"]);
+                }
+
+                // Delete images from the folder that no longer need to be saved
+                $this->deleteDispensableImages($speciesRemovableImagesIds);
+
                 foreach ($files as $image) {
-                    $images[] = $image["name"];
-                    // Save image to img/projects
-                    $this->addToImagesFolder($image["name"], $image["tmp_name"]);
-                    $i++;
+
+                    // Get file info
+                    $fileName = basename($image["name"]);
+                    $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+
+                    // Resize image and create thumbnail
+                    $standardSizeImage = $this->resizeImage($image["tmp_name"], $fileType, 2000);
+                    $smallSizeImage = $this->resizeImage($image["tmp_name"], $fileType, 140);
+
+                    // Save resized images to temp (s3) or plants folder (server)
+                    $imageName = $this->serverStoreModel->saveResizedImage($standardSizeImage, false, $speciesName, $fileName, $fileType);
+                    $smallImageName = $this->serverStoreModel->saveResizedImage($smallSizeImage, true, $speciesName, $fileName, $fileType);
+
+                    if (ENV_IMAGE_STORE == "s3") {
+                        // Save images to s3 bucket with plant common name prefix
+                        $tempPath = "plantImg/temp";
+                        $prefix = "thumbnails/$speciesName";
+                        $standardSizeImageUrl = $this->s3Model->upload($speciesName, $imageName, $tempPath);
+                        $smallSizeImageUrl = $this->s3Model->upload($prefix, $smallImageName, $tempPath);
+                        $this->clearTemp();
+                    }
+                    if (ENV_IMAGE_STORE == "server") {
+                        // Images already in correct folder
+                        $standardSizeImagePath = $imageName;
+                        $smallSizeImagePath = $smallImageName;
+                    }
+
+                    // Image data locations (url or file source) to be saved to the database
+                    $images[] = [
+                        "srcImage"       => isset($standardSizeImagePath) ? $standardSizeImagePath : null,
+                        "srcThumb"       => isset($smallSizeImagePath) ? $smallSizeImagePath : null,
+                        "urlImage"       => isset($standardSizeImageUrl) ? $standardSizeImageUrl : null,
+                        "urlThumb"       => isset($smallSizeImageUrl) ? $smallSizeImageUrl : null,
+                    ];
                 }
             }
 
-            // Delete images from the folder that no longer need to be saved
-            $imagesAfterUpdate = array_merge($speciesSavedImages, $images);
-            $speciesId = (int)$speciesId;
-            $this->deleteOldImages($speciesId, $imagesAfterUpdate);
-
-            // Prepare species images in proper format
-            $speciesImages = [];
-            foreach ($imagesAfterUpdate as $speciesImage) {
-                $speciesImages[] = [
-                    "src"      => $speciesImage
-                ];
-            }
-
             // Add data to database
-            $this->plantsModel->update($speciesId, $speciesName, $speciesSciName, $speciesDesc, $speciesType, $speciesColour, $speciesImages);
+            $this->plantsModel->update($speciesId, $speciesName, $speciesSciName, $speciesDesc, $speciesType, $speciesColour, $images);
         }
 
         // Back to the add page
@@ -361,13 +376,17 @@ class Herbarium extends Controller {
     }
 
 
-    public function deleteOldImages( int $speciesId, array $images ) : void {
+    public function deleteDispensableImages( array $imageIds ) : void {
 
-        $previousImages = $this->plantsModel->getSpeciesImages($speciesId);
+        $dispensableImages = $this->plantsModel->findImagesWithId($imageIds);
+        $this->plantsModel->deleteImages($imageIds);
 
-        $deletableImages = array_diff($previousImages, $images);
-
-        $this->deleteSpeciesImages($deletableImages);
+        if (ENV_IMAGE_STORE == "s3") {
+            $this->s3Model->deleteImagesFromBucket($dispensableImages);
+        }
+        if (ENV_IMAGE_STORE == "server") {
+            $this->serverStoreModel->deleteImagesFromFolder($dispensableImages);
+        }
     }
 
 
@@ -380,4 +399,5 @@ class Herbarium extends Controller {
             }
         }
     }
+
 }
