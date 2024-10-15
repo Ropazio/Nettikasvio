@@ -64,7 +64,7 @@ class S3Model extends Model {
                     ]);
                     $this->s3Client->deleteObject([
                         "Bucket"        => $bucket,
-                        "Key"           => "thumbnails/" . $prefix . "/" . $fileName
+                        "Key"           => "_thumbnails/" . $prefix . "/" . $fileName
                     ]);
 
                 } catch (S3Exception $e) {

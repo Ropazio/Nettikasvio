@@ -9,7 +9,7 @@ class ServerStoreModel extends Model {
 //    public function saveToFolder( string $speciesName, string $fileName, string $fileTmpName, string $filetype, bool $isThumbnail ) : bool {
 //
 //        if ($isThumbnail) {
-//            $folder = "plantImg/thumbnails/{$speciesName}";
+//            $folder = "plantImg/_thumbnails/{$speciesName}";
 //        } else {
 //            $folder = "plantImg/{$speciesName}";
 //        }
@@ -50,7 +50,7 @@ class ServerStoreModel extends Model {
 
         if (ENV_IMAGE_STORE == "server") {
             if ($isThumbnail) {
-                $folder = "plantImg/thumbnails/{$speciesFolder}";
+                $folder = "plantImg/_thumbnails/{$speciesFolder}";
             } else {
                 $folder = "plantImg/{$speciesFolder}";
             }
@@ -87,7 +87,7 @@ class ServerStoreModel extends Model {
             } else {
                 list($fileName, $prefix) = array_reverse(explode("/", $imageName));
                 $folder = realpath("plantImg/$prefix");
-                $thumbnailsFolder = realpath("plantImg/thumbnails/$prefix");
+                $thumbnailsFolder = realpath("plantImg/_thumbnails/$prefix");
 
                 if (!$prefix) {
                     header("Location: " . siteUrl("herbarium?error=failed"));

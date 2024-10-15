@@ -403,7 +403,6 @@ class PlantsModel extends DatabaseModel {
         $imageNames = [];
         foreach ($images as $image) {
             foreach ($image as $imageType => $value) {
-
                 if (!$value) {
                     continue;
                 } else {
@@ -415,4 +414,24 @@ class PlantsModel extends DatabaseModel {
         // Return all image names, also thumbnail images
         return $imageNames;
     }
+
+
+//    public function toolImageUploader() {
+//
+//        $path = ("/Users/riina/Sites/Nettikasvio/public/plantImg_old");
+//        $folders = array_diff(scandir($path), array('..', '.', '.DS_Store', '_thumbnails'));
+//        foreach ($folders as $folder) {
+//            $files = array_diff(scandir($path . "/{$folder}"), array('..', '.', '.DS_Store'));
+//            foreach ($files as $file) {
+//                $image = "https://herbarium-images.s3.eu-north-1.amazonaws.com/" . "{$folder}/{$file}";
+//                $smallfile = pathinfo($file, PATHINFO_FILENAME) . "-small." . pathinfo($file, PATHINFO_EXTENSION);
+//                $thumbnail = "https://herbarium-images.s3.eu-north-1.amazonaws.com/_thumbnails/" . "{$folder}/{$smallfile}";
+//
+//                $query = "INSERT INTO plantImages (urlImage, urlThumb) VALUES (?, ?)";
+//                $sth = $this->pdo->prepare($query);
+//                $sth->execute([$image, $thumbnail]);
+//            }
+//        }
+//    }
+
 }

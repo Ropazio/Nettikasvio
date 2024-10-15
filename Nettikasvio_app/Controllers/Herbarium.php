@@ -159,6 +159,7 @@ class Herbarium extends Controller {
                 // Get file info
                 $fileName = basename($image["name"]);
                 $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+                $speciesName = $this->stripSpeciesName($speciesName);
 
                 // Resize image and create thumbnail
                 $standardSizeImage = $this->resizeImage($image["tmp_name"], $fileType, 2000);
@@ -172,7 +173,7 @@ class Herbarium extends Controller {
                     // Save images to s3 bucket with plant common name prefix
                     $tempPath = "plantImg/temp";
                     $standardSizeImageUrl = $this->s3Model->upload($speciesName, $imageName, $tempPath);
-                    $prefix = "thumbnails/$speciesName";
+                    $prefix = "_thumbnails/$speciesName";
                     $smallSizeImageUrl = $this->s3Model->upload($prefix, $smallImageName, $tempPath);
                     $this->clearTemp();
                 }
@@ -332,6 +333,7 @@ class Herbarium extends Controller {
                     // Get file info
                     $fileName = basename($image["name"]);
                     $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+                    $speciesName = $this->stripSpeciesName($speciesName);
 
                     // Resize image and create thumbnail
                     $standardSizeImage = $this->resizeImage($image["tmp_name"], $fileType, 2000);
@@ -344,7 +346,7 @@ class Herbarium extends Controller {
                     if (ENV_IMAGE_STORE == "s3") {
                         // Save images to s3 bucket with plant common name prefix
                         $tempPath = "plantImg/temp";
-                        $prefix = "thumbnails/$speciesName";
+                        $prefix = "_thumbnails/$speciesName";
                         $standardSizeImageUrl = $this->s3Model->upload($speciesName, $imageName, $tempPath);
                         $smallSizeImageUrl = $this->s3Model->upload($prefix, $smallImageName, $tempPath);
                         $this->clearTemp();
@@ -398,4 +400,18 @@ class Herbarium extends Controller {
         }
     }
 
+
+    public function stripSpeciesName( string $speciesName ) : string {
+
+        $speciesName = strtolower($speciesName);
+
+        if (str_contains($speciesFolder, "ä")) {
+            $speciesName = str_replace("ä", "a", $speciesFolder);
+        }
+        if (str_contains($speciesFolder, "ö")) {
+            $speciesName = str_replace("ö", "o", $speciesFolder);
+        }
+
+        return $speciesName;
+    }
 }
