@@ -75,18 +75,8 @@ class PlantsModel extends DatabaseModel {
         }
 
         $sth->execute();
-    
         $plants = $sth->fetchAll(\PDO::FETCH_ASSOC);
 
-        foreach ($plants as &$plant) {
-            $plant = [
-                "id"        => $plant["id"],
-                "name"      => $plant["name"],
-                "sciName"   => $plant["sciName"],
-                "info"      => $plant["info"],
-                "images"    => []
-            ];
-        }
         $query =    "SELECT plantImages.plantId AS plantId, 
                             plantImages.srcImage AS srcImage, 
                             plantImages.srcThumb AS srcThumb, 
@@ -99,7 +89,8 @@ class PlantsModel extends DatabaseModel {
         $plantImages = $sth->fetchAll(\PDO::FETCH_ASSOC);
 
         if (ENV_IMAGE_STORE == "s3") {
-            foreach ($plants as $plant) {
+            foreach ($plants as &$plant) {
+                $plant["images"] = [];
                 foreach ($plantImages as $plantImage) {
                     if ($plant["id"] == $plantImage["plantId"]) {
                         array_push($plant["images"], [
@@ -113,6 +104,7 @@ class PlantsModel extends DatabaseModel {
 
         if (ENV_IMAGE_STORE == "server") {
             foreach ($plants as $plant) {
+                $plant["images"] = [];
                 foreach ($plantImages as $plantImage) {
                     if ($plant["id"] == $plantImage["plantId"]) {
                         array_push($plant["images"], [

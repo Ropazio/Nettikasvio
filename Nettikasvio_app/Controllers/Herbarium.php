@@ -307,12 +307,7 @@ class Herbarium extends Controller {
             $speciesDesc = $_POST["speciesDesc"];
             $speciesType = $_POST["speciesType"];
             $speciesColour = $_POST["speciesColour"];
-            $speciesRemovableImagesIds = $_POST["speciesImages"];
-
-            if (!isset($speciesRemovableImagesIds)) {
-                header("Location: " . siteUrl("herbarium?error=failed"));
-                exit;
-            }
+            $speciesRemovableImagesIds = !isset($_POST["speciesImages"]) ? false : $_POST["speciesImages"];
 
             // Species images
             $images = [];
@@ -327,7 +322,9 @@ class Herbarium extends Controller {
                 }
 
                 // Delete images from the folder that no longer need to be saved
-                $this->deleteDispensableImages($speciesRemovableImagesIds);
+                if ($speciesRemovableImagesIds) {
+                    $this->deleteDispensableImages($speciesRemovableImagesIds);
+                }
 
                 foreach ($files as $image) {
 
