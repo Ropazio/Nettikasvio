@@ -257,7 +257,7 @@ class Herbarium extends Controller {
             $this->s3Model->deleteImagesFromBucket($images);
         }
         if (ENV_IMAGE_STORE == "server") {
-            $this->serverStoreModel->deleteImagesFromFolder($images);
+            $this->serverStoreModel->deleteImagesFromFolder($images, true);
         }
         $this->plantsModel->delete($species);
 
@@ -309,8 +309,14 @@ class Herbarium extends Controller {
             $speciesColour = $_POST["speciesColour"];
             $speciesRemovableImagesIds = !isset($_POST["speciesImages"]) ? false : $_POST["speciesImages"];
 
+            // Delete images from the folder that no longer need to be saved
+            if ($speciesRemovableImagesIds) {
+                $this->deleteDispensableImages($speciesRemovableImagesIds);
+            }
+
             // Species images
             $images = [];
+            // If no errors, upload files (if no errors and file uploaded, "error" is 0)
             if (!array_sum($_FILES['images']['error']) > 0) {
                 $files = $this->restructureImages($_FILES["images"]);
                 $i = 0;
@@ -319,11 +325,6 @@ class Herbarium extends Controller {
                 foreach ($files as $imageName) {
 
                     array_push($imageNames, $imageName["name"]);
-                }
-
-                // Delete images from the folder that no longer need to be saved
-                if ($speciesRemovableImagesIds) {
-                    $this->deleteDispensableImages($speciesRemovableImagesIds);
                 }
 
                 foreach ($files as $image) {

@@ -93,6 +93,9 @@ class PlantsModel extends DatabaseModel {
                 $plant["images"] = [];
                 foreach ($plantImages as $plantImage) {
                     if ($plant["id"] == $plantImage["plantId"]) {
+                        if (!$plantImage["urlImage"] || !$plantImage["urlThumb"]) {
+                            continue;
+                        }
                         array_push($plant["images"], [
                             "image"     => $plantImage["urlImage"],
                             "thumb"     => $plantImage["urlThumb"]
@@ -103,13 +106,16 @@ class PlantsModel extends DatabaseModel {
         }
 
         if (ENV_IMAGE_STORE == "server") {
-            foreach ($plants as $plant) {
+            foreach ($plants as &$plant) {
                 $plant["images"] = [];
                 foreach ($plantImages as $plantImage) {
                     if ($plant["id"] == $plantImage["plantId"]) {
+                        if (!$plantImage["srcImage"] || !$plantImage["srcImage"]) {
+                            continue;
+                        }
                         array_push($plant["images"], [
-                            "image"     => siteUrl($plantImage["srcImage"]),
-                            "thumb"     => siteUrl($plantImage["srcThumb"])
+                            "image"     => $plantImage["srcImage"],
+                            "thumb"     => $plantImage["srcThumb"]
                         ]);
                     }
                 }

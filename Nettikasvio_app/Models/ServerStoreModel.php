@@ -79,7 +79,7 @@ class ServerStoreModel extends Model {
     }
 
 
-    public function deleteImagesFromFolder( array $imageNames ) : void {
+    public function deleteImagesFromFolder( array $imageNames, bool $deleteAll=false ) : void {
 
         foreach ($imageNames as $imageName) {
             if (!$imageName) {
@@ -96,17 +96,21 @@ class ServerStoreModel extends Model {
                     header("Location: " . siteUrl("herbarium?error=failed"));
                     exit;
                 } else {
-                    array_map("unlink", glob("$folder/*"));
-                    array_map("unlink", glob("$thumbnailsFolder/*"));
-                    rmdir($folder);
-                    rmdir($thumbnailsFolder);
-                    if (!is_dir($folder) && (!is_dir($thumbnailsFolder))) {
-                        return;
+                    if ($deleteAll) {
+                        array_map("unlink", glob("$folder/*"));
+                        array_map("unlink", glob("$thumbnailsFolder/*"));
+                        rmdir($folder);
+                        rmdir($thumbnailsFolder);
+                        if (!is_dir($folder) && (!is_dir($thumbnailsFolder))) {
+                            return;
+                        } else {
+                            header("Location: " . siteUrl("herbarium?error=failed"));
+                            exit;
+                        }
                     } else {
-                        header("Location: " . siteUrl("herbarium?error=failed"));
-                        exit;
+                        array_map("unlink", glob("$folder/$imageName"));
+                        array_map("unlink", glob("$thumbnailsFolder/$imageName"));
                     }
-                    
                 }
             }
         }
