@@ -429,7 +429,7 @@ footer {
     }
 }
 
-.rightScrollIcon, .leftScrollIcon {
+.rightScrollIcon, .leftScrollIcon, #rightScrollIconEnlargedView, #leftScrollIconEnlargedView {
     position: absolute;
     align-content: center;
     height: 250px;
@@ -457,6 +457,32 @@ footer {
         height: 30px;
         width: 30px;
         display: none;
+    }
+}
+
+#rightScrollIconEnlargedView {
+    right: 26%;
+    display: visible;
+
+    button {
+        opacity: 0.8;
+        border-radius: 20px;
+        border: none;
+        height: 40px;
+        width: 40px;
+    }
+}
+
+#leftScrollIconEnlargedView {
+    left: 26%;
+    display: visible;
+
+    button {
+        opacity: 0.8;
+        border-radius: 20px;
+        border: none;
+        height: 40px;
+        width: 40px;
     }
 }
 

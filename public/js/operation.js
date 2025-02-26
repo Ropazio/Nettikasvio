@@ -1,6 +1,7 @@
 function closeImage() {
     var enlagedImageView = document.getElementById("enlargedImageView");
     enlargedImageView.style.display = "none";
+    removeScrollIconsEnlargedView();
 }
 
 function enlargeImage(imageSrc) {
@@ -8,6 +9,7 @@ function enlargeImage(imageSrc) {
     bg.style.display = "block";
     let img = document.getElementById("enlargedImage");
     img.src = imageSrc;
+    addScrollIconsEnglargedView();
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -29,6 +31,18 @@ function addScrollIcons() {
     }
 }
 
+function addScrollIconsEnglargedView() {
+    var html = `<div id="rightScrollIconEnlargedView">
+                    <button onclick="rightScrollEnlargedView.call(this)">></button>
+                </div>
+                <div id="leftScrollIconEnlargedView">
+                    <button onclick="leftScrollEnlargedView.call(this)"><</button>
+                </div>
+                `;
+    var container = document.getElementById("enlargedImageContainer");
+    container.insertAdjacentHTML("beforeend", html);
+}
+
 const scrollLength = 300;
 var scrolled = 0;
 
@@ -38,12 +52,26 @@ var rightScroll = function () {
     this.parentNode.nextElementSibling.childNodes[1].style.display = "block";
 }
 
+var rightScrollEnlargedView = function () {
+//    this.parentNode.parentNode.querySelector('.gallery').scrollLeft += scrollLength;
+//    scrolled += scrollLength;
+//    this.parentNode.nextElementSibling.childNodes[1].style.display = "block";
+}
+
 var leftScroll = function () {
     this.parentNode.parentNode.childNodes[0].scrollLeft -= scrollLength;
     scrolled -= scrollLength;
     if (scrolled == 0) {
         this.style.display = "none";
     }
+}
+
+var leftScrollEnlargedView = function () {
+//    this.parentNode.parentNode.childNodes[0].scrollLeft -= scrollLength;
+//    scrolled -= scrollLength;
+//    if (scrolled == 0) {
+//        this.style.display = "none";
+//    }
 }
 
 var removeRightScroll = function () {
@@ -55,6 +83,13 @@ var removeRightScroll = function () {
             this.parentNode.parentNode.querySelector('.rightScrollIcon').style.visibility = "visible";
         }
     }
+}
+
+function removeScrollIconsEnlargedView() {
+    let rightScroll = document.getElementById('rightScrollIconEnlargedView');
+    let leftScroll = document.getElementById('leftScrollIconEnlargedView');
+    rightScroll.style.display = "hidden";
+    leftScroll.style.display = "hidden";
 }
 
 /////////////////////////////////////////////////////////////////////
