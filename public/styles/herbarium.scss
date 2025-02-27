@@ -31,8 +31,8 @@ body {
     /* colours */
     --blackColour:#1A1A1A;
     --grayColour:#4a5047;
-    --lightGreenColour:#c2d98d;
-    --greenColour:#579c1e;
+    --darkerGrayColour:#d2d2cb;
+    --greenColour:#36ae15;
     --naturalWhiteColour:#ededea;
     --lightGrayColour:#e1e1dc;
     --lightSandColour:#c8beb1;
@@ -304,7 +304,7 @@ footer {
 
 #searchButton {
     border: 1px solid var(--lightGrayColour);
-    background-color: var(--lightGreenColour);
+    background-color: var(--darkerGrayColour);
     width: 100%;
     height: 100%;
     padding: 4px;
@@ -322,7 +322,7 @@ footer {
 
 .adminFunctionalityButton {
     border: 1px solid var(--lightGrayColour);
-    background-color: var(--lightGreenColour);
+    background-color: var(--darkerGrayColour);
     margin-bottom: 10px;
     width: 100%;
 }
@@ -343,14 +343,14 @@ footer {
     display: grid;
     grid-template-columns: 25% 30% 45%;
     justify-content: center;
-    background-color: var(--lightGreenColour);
+    background-color: var(--darkerGrayColour);
 }
 
 .plantListHeadlinesAdmin {
     display: grid;
     grid-template-columns: 20% 25% 40% 15%;
     justify-content: center;
-    background-color: var(--lightGreenColour);
+    background-color: var(--darkerGrayColour);
 }
 
 .gridPlantList {
@@ -461,7 +461,8 @@ footer {
 }
 
 #rightScrollIconEnlargedView {
-    right: 26%;
+    z-index: 100;
+    right: 32%;
     display: visible;
 
     button {
@@ -474,7 +475,8 @@ footer {
 }
 
 #leftScrollIconEnlargedView {
-    left: 26%;
+    z-index: 100;
+    left: 32%;
     display: visible;
 
     button {
@@ -557,7 +559,7 @@ footer {
 
 .imageButton, #addSpeciesButton, #editSpeciesButton {
     border: 1px solid var(--lightGrayColour);
-    background-color: var(--lightGreenColour);
+    background-color: var(--darkerGrayColour);
     padding: 6px;
 }
 
@@ -595,7 +597,7 @@ footer {
 
 #loginButton {
     border: 1px solid var(--lightGrayColour);
-    background-color: var(--lightGreenColour);
+    background-color: var(--darkerGrayColour);
 }
 
 .loginContainer div div {
@@ -690,11 +692,20 @@ footer {
 
 /*** Tablet ***/
 @media (max-width: 1200px) {
+
     /* Herbarium */
 
     .rightScrollIcon, .leftScrollIcon {
         display: none;
         max-height: 150px;
+    }
+
+    #rightScrollIconEnlargedView {
+        right: 28%;
+    }
+
+    #leftScrollIconEnlargedView {
+        left: 28%;
     }
 
     .gallery::after {
@@ -763,8 +774,9 @@ footer {
     }
 }
 
-/*** Phone ***/
+/*** Phone or tablet ***/
 @media (max-width: 992px) {
+
     /* General, containing page main headline, navi and general layout */
 
     body {
@@ -871,6 +883,14 @@ footer {
     .gallery img {
         max-width: 80px;
         max-height: 150px;
+    }
+
+    #rightScrollIconEnlargedView {
+        right: 20%;
+    }
+
+    #leftScrollIconEnlargedView {
+        left: 20%;
     }
 
     /* Identification */
