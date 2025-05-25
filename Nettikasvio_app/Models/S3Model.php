@@ -26,23 +26,30 @@ class S3Model extends Model {
 
         $this->s3Client = $this->s3->getS3Client();
 
-        try {
-            $result = $this->s3Client->putObject([
-                "Bucket"        => $this->s3->getS3Bucket(),
-                "Key"           => $prefix . "/" . $fileName,
-                "SourceFile"    => $tempFilePath . "/" . $fileName
-            ]);
-            $resultArray = $result->toArray();
+        $bucket = $this->s3->getS3Bucket();
+        $key = $prefix . "/" . $fileName;
 
-            if (!empty($resultArray["ObjectURL"])) {
-                return $resultArray["ObjectURL"];
+        if (!$this->s3Client->doesObjectExistV2($bucket, $key)) {
+            try {
+                $result = $this->s3Client->putObject([
+                    "Bucket"        => $bucket,
+                    "Key"           => $key,
+                    "SourceFile"    => $tempFilePath . "/" . $fileName
+                ]);
+                $resultArray = $result->toArray();
+
+                if (!empty($resultArray["ObjectURL"])) {
+                    return $resultArray["ObjectURL"];
+                }
+            } catch (S3Exception $e) {
+                $error = $e->getMessage();
             }
-        } catch (S3Exception $e) {
-            $error = $e->getMessage();
-        }
 
-        if (!empty($error)) {
-            echo "Error occurred while uploading files: " . $error;
+            if (!empty($error)) {
+                echo "Error occurred while uploading files: " . $error;
+            }
+        } else {
+            die("A file with same filename already exists.");
         }
     }
 
