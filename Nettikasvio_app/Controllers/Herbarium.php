@@ -193,6 +193,7 @@ class Herbarium extends Controller {
                 $i++;
             }
             // Add data to database
+            $speciesName = ucfirst($speciesName);
             $this->plantsModel->add($speciesName, $speciesSciName, $speciesDesc, $speciesType, $speciesColour, $images);
         }
 
