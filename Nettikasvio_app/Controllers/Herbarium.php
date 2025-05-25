@@ -143,8 +143,8 @@ class Herbarium extends Controller {
 
         if (isset($_POST["addSpeciesButton"])) {
             // Species info
-            $speciesName = $_POST["speciesName"];
-            $speciesSciName = $_POST["speciesSciName"];
+            $speciesName = ucfirst(strtolower($_POST["speciesName"]));
+            $speciesSciName = ucfirst(strtolower($_POST["speciesSciName"]));
             $speciesDesc = $_POST["speciesDesc"];
             $speciesType = $_POST["speciesType"];
             $speciesColour = $_POST["speciesColour"];
@@ -159,21 +159,21 @@ class Herbarium extends Controller {
                 // Get file info
                 $fileName = basename($image["name"]);
                 $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
-                $speciesName = $this->stripSpeciesName($speciesName);
+                $speciesNameStripped = $this->stripSpeciesName($speciesName);
 
                 // Resize image and create thumbnail
                 $standardSizeImage = $this->resizeImage($image["tmp_name"], $fileType, 2000);
                 $smallSizeImage = $this->resizeImage($image["tmp_name"], $fileType, 140);
 
                 // Save resized images to temp (s3) or plants folder (server)
-                $imageName = $this->serverStoreModel->saveResizedImage($standardSizeImage, false, $speciesName, $fileName, $fileType);
-                $smallImageName = $this->serverStoreModel->saveResizedImage($smallSizeImage, true, $speciesName, $fileName, $fileType);
+                $imageName = $this->serverStoreModel->saveResizedImage($standardSizeImage, false, $speciesNameStripped, $fileName, $fileType);
+                $smallImageName = $this->serverStoreModel->saveResizedImage($smallSizeImage, true, $speciesNameStripped, $fileName, $fileType);
 
                 if (ENV_IMAGE_STORE == "s3") {
                     // Save images to s3 bucket with plant common name prefix
                     $tempPath = "plantImg/temp";
-                    $standardSizeImageUrl = $this->s3Model->upload($speciesName, $imageName, $tempPath);
-                    $prefix = "_thumbnails/$speciesName";
+                    $standardSizeImageUrl = $this->s3Model->upload($speciesNameStripped, $imageName, $tempPath);
+                    $prefix = "_thumbnails/$speciesNameStripped";
                     $smallSizeImageUrl = $this->s3Model->upload($prefix, $smallImageName, $tempPath);
                     $this->clearTemp();
                 }
@@ -193,7 +193,6 @@ class Herbarium extends Controller {
                 $i++;
             }
             // Add data to database
-            $speciesName = ucfirst($speciesName);
             $this->plantsModel->add($speciesName, $speciesSciName, $speciesDesc, $speciesType, $speciesColour, $images);
         }
 
@@ -304,8 +303,8 @@ class Herbarium extends Controller {
 
         if (isset($_POST["editSpeciesButton"])) {
             // Species info
-            $speciesName = $_POST["speciesName"];
-            $speciesSciName = $_POST["speciesSciName"];
+            $speciesName = ucfirst(strtolower($_POST["speciesName"]));
+            $speciesSciName = ucfirst(strtolower($_POST["speciesSciName"]));
             $speciesDesc = $_POST["speciesDesc"];
             $speciesType = $_POST["speciesType"];
             $speciesColour = $_POST["speciesColour"];
@@ -334,21 +333,21 @@ class Herbarium extends Controller {
                     // Get file info
                     $fileName = basename($image["name"]);
                     $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
-                    $speciesName = $this->stripSpeciesName($speciesName);
+                    $speciesNameStripped = $this->stripSpeciesName($speciesName);
 
                     // Resize image and create thumbnail
                     $standardSizeImage = $this->resizeImage($image["tmp_name"], $fileType, 2000);
                     $smallSizeImage = $this->resizeImage($image["tmp_name"], $fileType, 140);
 
                     // Save resized images to temp (s3) or plants folder (server)
-                    $imageName = $this->serverStoreModel->saveResizedImage($standardSizeImage, false, $speciesName, $fileName, $fileType);
-                    $smallImageName = $this->serverStoreModel->saveResizedImage($smallSizeImage, true, $speciesName, $fileName, $fileType);
+                    $imageName = $this->serverStoreModel->saveResizedImage($standardSizeImage, false, $speciesNameStripped, $fileName, $fileType);
+                    $smallImageName = $this->serverStoreModel->saveResizedImage($smallSizeImage, true, $speciesNameStripped, $fileName, $fileType);
 
                     if (ENV_IMAGE_STORE == "s3") {
                         // Save images to s3 bucket with plant common name prefix
                         $tempPath = "plantImg/temp";
-                        $prefix = "_thumbnails/$speciesName";
-                        $standardSizeImageUrl = $this->s3Model->upload($speciesName, $imageName, $tempPath);
+                        $prefix = "_thumbnails/$speciesNameStripped";
+                        $standardSizeImageUrl = $this->s3Model->upload($speciesNameStripped, $imageName, $tempPath);
                         $smallSizeImageUrl = $this->s3Model->upload($prefix, $smallImageName, $tempPath);
                         $this->clearTemp();
                     }
@@ -406,11 +405,11 @@ class Herbarium extends Controller {
 
         $speciesName = strtolower($speciesName);
 
-        if (str_contains($speciesFolder, "ä")) {
-            $speciesName = str_replace("ä", "a", $speciesFolder);
+        if (str_contains($speciesName, "ä")) {
+            $speciesName = str_replace("ä", "a", $speciesName);
         }
-        if (str_contains($speciesFolder, "ö")) {
-            $speciesName = str_replace("ö", "o", $speciesFolder);
+        if (str_contains($speciesName, "ö")) {
+            $speciesName = str_replace("ö", "o", $speciesName);
         }
 
         return $speciesName;
